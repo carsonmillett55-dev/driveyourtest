@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive Your Test - Driver's Education & Permit Practice</title>
+  <meta name="description" content="Master your permit test and driving exam with interactive flashcards and practice tests.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --radius: 0.75rem;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+    body { font-family: var(--font-sans); background: linear-gradient(to bottom right, #f8fafc, #ffffff, #f1f5f9); min-height: 100vh; color: #1e293b; line-height: 1.5; }
+    .header { position: sticky; top: 0; z-index: 50; background: linear-gradient(to right, #1e293b, #334155, #1e293b); color: white; box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); border-bottom: 1px solid rgb(51 65 85 / 0.5); }
+    .header-content { max-width: 72rem; margin: 0 auto; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; font-size: 1rem; }
+    .logo:hover { opacity: 0.9; }
+    .logo-icon { font-size: 1.5rem; transition: transform 0.2s; }
+    .logo:hover .logo-icon { transform: scale(1.1); }
+    .logo-text { font-size: 1.25rem; font-weight: 700; background: linear-gradient(to right, #60a5fa, #c084fc, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .header-btn { padding: 0.5rem; background: transparent; border: none; border-radius: 9999px; cursor: pointer; color: white; transition: background 0.2s; }
+    .header-btn:hover { background: rgb(255 255 255 / 0.1); }
+    .main { padding-bottom: 2rem; }
+    .container { max-width: 72rem; margin: 0 auto; padding: 0 1rem; }
+    .hero { text-align: center; padding: 2rem 0; }
+    .hero-title { font-size: 2.5rem; font-weight: 700; background: linear-gradient(to right, #1e293b, #475569, #1e293b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; }
+    .hero-subtitle { color: #64748b; font-size: 1.125rem; }
+    .card { background: white; border-radius: var(--radius); border: 1px solid #e2e8f0; box-shadow: var(--shadow-xl); overflow: hidden; }
+    .card-header { padding: 1.5rem; }
+    .card-title { font-size: 1.125rem; font-weight: 600; color: #1e293b; display: flex; align-items: center; gap: 0.5rem; }
+    .card-content { padding: 0 1.5rem 1.5rem; }
+    .card-footer { padding: 1.5rem; border-top: 1px solid #f1f5f9; }
+    .progress-card { background: linear-gradient(to bottom right, #f8fafc, #f1f5f9); }
+    .progress-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    @media (min-width: 768px) { .progress-grid { grid-template-columns: repeat(5, 1fr); } }
+    .progress-item { text-align: center; }
+    .progress-value { font-size: 1.875rem; font-weight: 700; }
+    .progress-label { font-size: 0.875rem; color: #64748b; }
+    .gradient-emerald { background: linear-gradient(to right, #059669, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gradient-blue { background: linear-gradient(to right, #2563eb, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gradient-purple { background: linear-gradient(to right, #9333ea, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .modes-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .modes-grid { grid-template-columns: repeat(3, 1fr); } }
+    .mode-card { cursor: pointer; transition: all 0.5s; border: 2px solid transparent; position: relative; }
+    .mode-card:hover { box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); border-color: rgb(100 116 139 / 0.3); }
+    .mode-card-emerald:hover { border-color: rgb(52 211 153 / 0.5); }
+    .mode-card-blue:hover { border-color: rgb(96 165 250 / 0.5); }
+    .mode-card-purple:hover { border-color: rgb(192 132 252 / 0.5); }
+    .mode-card-bar { height: 4px; transition: height 0.2s; }
+    .mode-card:hover .mode-card-bar { height: 8px; }
+    .bar-emerald { background: linear-gradient(to right, #34d399, #2dd4bf); }
+    .bar-blue { background: linear-gradient(to right, #60a5fa, #22d3ee); }
+    .bar-purple { background: linear-gradient(to right, #c084fc, #f472b6); }
+    .mode-card-bg-emerald { background: linear-gradient(to bottom right, white, rgb(236 253 245 / 0.3)); }
+    .mode-card-bg-blue { background: linear-gradient(to bottom right, white, rgb(239 246 255 / 0.3)); }
+    .mode-card-bg-purple { background: linear-gradient(to bottom right, white, rgb(250 245 255 / 0.3)); }
+    .mode-icon { font-size: 3rem; margin-bottom: 0.75rem; transition: transform 0.2s; }
+    .mode-card:hover .mode-icon { transform: scale(1.1); }
+    .mode-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .mode-title { font-weight: 600; font-size: 1.25rem; }
+    .title-emerald { background: linear-gradient(to right, #047857, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .title-blue { background: linear-gradient(to right, #1d4ed8, #0891b2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .title-purple { background: linear-gradient(to right, #7c3aed, #be185d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .mode-desc { font-size: 0.875rem; color: #64748b; }
+    .badge { display: inline-flex; align-items: center; justify-content: center; border-radius: 0.375rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; font-weight: 500; }
+    .badge-emerald { background: linear-gradient(to right, #059669, #0d9488); color: white; box-shadow: var(--shadow-lg); }
+    .badge-blue { background: linear-gradient(to right, #2563eb, #06b6d4); color: white; box-shadow: var(--shadow-lg); }
+    .badge-purple { background: linear-gradient(to right, #9333ea, #ec4899); color: white; box-shadow: var(--shadow-lg); }
+    .badge-outline-blue { border: 1px solid #93c5fd; color: #1d4ed8; font-size: 0.75rem; }
+    .badge-outline-purple { border: 1px solid #d8b4fe; color: #7c3aed; font-size: 0.75rem; }
+    .progress-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; margin-bottom: 1rem; }
+    .progress-fill { height: 100%; border-radius: 9999px; transition: width 0.3s; }
+    .progress-fill-emerald { background: linear-gradient(to right, #059669, #0d9488); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.25rem; font-size: 0.75rem; color: #64748b; }
+    .tag { padding: 0.25rem 0.5rem; background: rgb(236 253 245); border-radius: 0.25rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; border-radius: 0.375rem; border: none; cursor: pointer; transition: all 0.2s; width: 100%; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-emerald { background: linear-gradient(to right, #059669, #0d9488); color: white; box-shadow: var(--shadow-lg); }
+    .btn-emerald:hover:not(:disabled) { background: linear-gradient(to right, #047857, #0f766e); }
+    .btn-blue { background: linear-gradient(to right, #2563eb, #06b6d4); color: white; box-shadow: var(--shadow-lg); }
+    .btn-blue:hover:not(:disabled) { background: linear-gradient(to right, #1d4ed8, #0891b2); }
+    .btn-purple { background: linear-gradient(to right, #9333ea, #ec4899); color: white; box-shadow: var(--shadow-lg); }
+    .btn-purple:hover:not(:disabled) { background: linear-gradient(to right, #7c3aed, #be185d); }
+    .btn-outline { background: white; border: 1px solid #e2e8f0; color: #475569; }
+    .btn-outline:hover:not(:disabled) { background: #f8fafc; }
+    .btn-red { color: #dc2626; border-color: #fca5a5; }
+    .btn-red:hover:not(:disabled) { background: #fef2f2; }
+    .btn-sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; width: auto; }
+    .view-container { display: none; }
+    .view-container.active { display: block; }
+    .back-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .back-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; font-size: 0.875rem; color: #475569; transition: all 0.2s; }
+    .back-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .view-title { font-size: 1.5rem; font-weight: 700; }
+    .category-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .category-btn { padding: 0.5rem 1rem; font-size: 0.875rem; border-radius: 9999px; border: 1px solid #e2e8f0; background: white; cursor: pointer; transition: all 0.2s; }
+    .category-btn:hover { background: #f8fafc; }
+    .category-btn.active { background: #1e293b; color: white; border-color: #1e293b; }
+    .flashcard-container { perspective: 1000px; margin-bottom: 1.5rem; }
+    .flashcard { position: relative; width: 100%; height: 300px; cursor: pointer; transition: transform 0.6s; transform-style: preserve-3d; }
+    .flashcard.flipped { transform: rotateY(180deg); }
+    .flashcard-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; border-radius: var(--radius); text-align: center; }
+    .flashcard-front { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; box-shadow: var(--shadow-xl); }
+    .flashcard-back { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; transform: rotateY(180deg); box-shadow: var(--shadow-xl); }
+    .flashcard-category { font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.5rem; }
+    .flashcard-text { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
+    .flashcard-hint { position: absolute; bottom: 1rem; font-size: 0.75rem; opacity: 0.7; }
+    .card-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .card-counter { font-size: 0.875rem; color: #64748b; }
+    .nav-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #e2e8f0; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .nav-btn:hover:not(:disabled) { background: #f8fafc; border-color: #cbd5e1; }
+    .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .rating-buttons { display: flex; gap: 0.5rem; justify-content: center; }
+    .rating-btn { padding: 0.5rem 1rem; border-radius: 0.5rem; border: none; cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; }
+    .rating-know { background: #dcfce7; color: #166534; }
+    .rating-know:hover { background: #bbf7d0; }
+    .rating-practice { background: #fef3c7; color: #92400e; }
+    .rating-practice:hover { background: #fde68a; }
+    .test-progress { margin-bottom: 1.5rem; }
+    .test-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .test-timer { font-size: 1.25rem; font-weight: 600; color: #1e293b; }
+    .test-timer.warning { color: #dc2626; }
+    .question-counter { font-size: 0.875rem; color: #64748b; }
+    .question-card { background: white; border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); }
+    .question-category { display: inline-block; padding: 0.25rem 0.75rem; background: #f1f5f9; border-radius: 9999px; font-size: 0.75rem; color: #64748b; margin-bottom: 1rem; }
+    .question-text { font-size: 1.125rem; font-weight: 500; color: #1e293b; margin-bottom: 1.5rem; }
+    .options-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .option-item { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .option-item:hover { border-color: #cbd5e1; background: #f8fafc; }
+    .option-item.selected { border-color: #3b82f6; background: #eff6ff; }
+    .option-item.correct { border-color: #22c55e; background: #f0fdf4; }
+    .option-item.incorrect { border-color: #ef4444; background: #fef2f2; }
+    .option-item.disabled { cursor: not-allowed; }
+    .option-item.disabled:hover { background: inherit; border-color: inherit; }
+    .option-radio { width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .option-item.selected .option-radio { border-color: #3b82f6; }
+    .option-item.selected .option-radio::after { content: ''; width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; }
+    .option-item.correct .option-radio { border-color: #22c55e; background: #22c55e; }
+    .option-item.correct .option-radio::after { content: '✓'; color: white; font-size: 12px; }
+    .option-item.incorrect .option-radio { border-color: #ef4444; background: #ef4444; }
+    .option-item.incorrect .option-radio::after { content: '✗'; color: white; font-size: 12px; }
+    .option-text { font-size: 0.9375rem; color: #334155; }
+    .explanation { margin-top: 1rem; padding: 1rem; background: #f0f9ff; border-radius: 0.5rem; border-left: 4px solid #3b82f6; }
+    .explanation-title { font-weight: 600; color: #1e40af; margin-bottom: 0.25rem; }
+    .explanation-text { font-size: 0.875rem; color: #1e40af; }
+    .test-actions { display: flex; gap: 1rem; justify-content: center; }
+    .test-actions .btn { width: auto; min-width: 120px; }
+    .results-card { text-align: center; padding: 2rem; }
+    .results-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .results-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .results-score { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+    .results-score.pass { color: #22c55e; }
+    .results-score.fail { color: #ef4444; }
+    .results-stats { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
+    .stat-item { text-align: center; }
+    .stat-value { font-size: 1.5rem; font-weight: 600; }
+    .stat-label { font-size: 0.75rem; color: #64748b; }
+    .results-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .resume-banner { background: linear-gradient(to right, #fef3c7, #fde68a); border: 1px solid #fcd34d; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .resume-text { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; color: #92400e; }
+    .resume-actions { display: flex; gap: 0.5rem; }
+    .scenario-card { background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .scenario-topic { display: inline-block; padding: 0.25rem 0.75rem; background: #7c3aed; color: white; border-radius: 9999px; font-size: 0.75rem; margin-bottom: 0.75rem; }
+    .scenario-text { font-size: 1rem; color: #334155; font-style: italic; margin-bottom: 1rem; }
+    .difficulty-badge { display: inline-block; padding: 0.125rem 0.5rem; border-radius: 0.25rem; font-size: 0.625rem; text-transform: uppercase; font-weight: 600; margin-left: 0.5rem; }
+    .difficulty-easy { background: #dcfce7; color: #166534; }
+    .difficulty-medium { background: #fef3c7; color: #92400e; }
+    .difficulty-hard { background: #fee2e2; color: #991b1b; }
+    .analytics-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .analytics-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card { padding: 1.5rem; }
+    .stat-card-title { font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem; }
+    .stat-card-value { font-size: 2rem; font-weight: 700; color: #1e293b; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <button class="logo" onclick="goHome()">
+        <span class="logo-icon">🚗</span>
+        <span class="logo-text">driveyourtest.com</span>
+      </button>
+      <button class="header-btn" onclick="showView('analytics')" title="View Analytics">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <!-- Home View -->
+      <div id="home-view" class="view-container active">
+        <div class="hero">
+          <h1 class="hero-title">Drive Your Test Results</h1>
+          <p class="hero-subtitle">Master your permit test and driving exam with interactive study tools.</p>
+        </div>
+
+        <div id="resume-banner" class="resume-banner hidden">
+          <span class="resume-text">📋 You have a session in progress</span>
+          <div class="resume-actions">
+            <button class="btn btn-sm btn-outline" onclick="clearSessionAndRefresh()">Start Fresh</button>
+          </div>
+        </div>
+
+        <div class="card progress-card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <div class="card-title"><span>📊</span> Your Progress</div>
+          </div>
+          <div class="card-content">
+            <div class="progress-grid">
+              <div class="progress-item">
+                <div class="progress-value gradient-emerald" id="flashcard-progress">0%</div>
+                <div class="progress-label">Flashcards</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-value gradient-blue" id="permit-tests">0</div>
+                <div class="progress-label">Permit Tests</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-value gradient-blue" id="best-score">-</div>
+                <div class="progress-label">Best Score</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-value gradient-purple" id="scenario-tests">0</div>
+                <div class="progress-label">Scenario Tests</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-value gradient-purple" id="scenario-best">-</div>
+                <div class="progress-label">Scenario Best</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modes-grid">
+          <!-- Flashcards -->
+          <div class="card mode-card mode-card-emerald mode-card-bg-emerald" onclick="startFlashcards()">
+            <div class="mode-card-bar bar-emerald"></div>
+            <div class="card-header">
+              <div class="mode-header">
+                <div class="mode-icon">📚</div>
+                <span class="badge badge-emerald" id="flashcard-badge">0%</span>
+              </div>
+              <div class="mode-title title-emerald">Permit Flash Cards</div>
+              <div class="mode-desc">100 flashcards covering all test topics.</div>
+            </div>
+            <div class="card-content">
+              <div class="progress-bar">
+                <div class="progress-fill progress-fill-emerald" id="flashcard-bar" style="width: 0%"></div>
+              </div>
+              <div class="tags">
+                <span class="tag">Road Signs</span>
+                <span class="tag">Traffic Laws</span>
+                <span class="tag">Right-of-Way</span>
+                <span class="tag">Safe Driving</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-emerald">Start Learning</button>
+            </div>
+          </div>
+
+          <!-- Permit Test -->
+          <div class="card mode-card mode-card-blue mode-card-bg-blue" onclick="startPermitTest()">
+            <div class="mode-card-bar bar-blue"></div>
+            <div class="card-header">
+              <div class="mode-header">
+                <div class="mode-icon">📝</div>
+                <span class="badge badge-blue">Ready</span>
+              </div>
+              <div class="mode-title title-blue">Permit Practice Test</div>
+              <div class="mode-desc">40 questions • 45 minutes • Timed</div>
+            </div>
+            <div class="card-content">
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="badge badge-outline-blue">Timed</span>
+                <span class="badge badge-outline-blue">Instant Feedback</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-blue">Take Test</button>
+            </div>
+          </div>
+
+          <!-- Driving Scenarios -->
+          <div class="card mode-card mode-card-purple mode-card-bg-purple" onclick="startScenarios()">
+            <div class="mode-card-bar bar-purple"></div>
+            <div class="card-header">
+              <div class="mode-header">
+                <div class="mode-icon">🚙</div>
+                <span class="badge badge-purple">Ready</span>
+              </div>
+              <div class="mode-title title-purple">Driving Scenarios</div>
+              <div class="mode-desc">20 scenarios • No time limit</div>
+            </div>
+            <div class="card-content">
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="badge badge-outline-purple">No Timer</span>
+                <span class="badge badge-outline-purple">Explanations</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-purple">Start Test</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flashcards View -->
+      <div id="flashcards-view" class="view-container">
+        <div class="back-header">
+          <button class="back-btn" onclick="goHome()">← Back</button>
+          <h2 class="view-title">Permit Flash Cards</h2>
+        </div>
+
+        <div class="category-selector">
+          <button class="category-btn active" data-category="all" onclick="selectCategory('all')">All (100)</button>
+          <button class="category-btn" data-category="Road Signs" onclick="selectCategory('Road Signs')">Road Signs (25)</button>
+          <button class="category-btn" data-category="Traffic Laws" onclick="selectCategory('Traffic Laws')">Traffic Laws (30)</button>
+          <button class="category-btn" data-category="Right-of-Way" onclick="selectCategory('Right-of-Way')">Right-of-Way (20)</button>
+          <button class="category-btn" data-category="Safe Driving" onclick="selectCategory('Safe Driving')">Safe Driving (25)</button>
+        </div>
+
+        <div class="flashcard-container">
+          <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="flashcard-face flashcard-front">
+              <div class="flashcard-category" id="card-category">Category</div>
+              <div class="flashcard-text" id="card-front">Question</div>
+              <div class="flashcard-hint">Click to flip</div>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <div class="flashcard-text" id="card-back">Answer</div>
+              <div class="flashcard-hint">Click to flip back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-nav">
+          <button class="nav-btn" id="prev-btn" onclick="prevCard()">←</button>
+          <span class="card-counter"><span id="card-index">1</span> / <span id="card-total">100</span></span>
+          <button class="nav-btn" id="next-btn" onclick="nextCard()">→</button>
+        </div>
+
+        <div class="rating-buttons" id="rating-buttons">
+          <button class="rating-btn rating-know" onclick="rateCard('known')">✓ I Know This</button>
+          <button class="rating-btn rating-practice" onclick="rateCard('practice')">→ Needs Practice</button>
+        </div>
+      </div>
+
+      <!-- Permit Test View -->
+      <div id="permit-test-view" class="view-container">
+        <div class="back-header">
+          <button class="back-btn" onclick="confirmExit()">← Exit Test</button>
+          <h2 class="view-title">Permit Practice Test</h2>
+        </div>
+
+        <div class="test-progress">
+          <div class="test-header">
+            <span class="test-timer" id="test-timer">45:00</span>
+            <span class="question-counter">Question <span id="test-index">1</span> of <span id="test-total">40</span></span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="test-progress-bar" style="width: 0%; background: linear-gradient(to right, #2563eb, #06b6d4);"></div>
+          </div>
+        </div>
+
+        <div class="question-card" id="test-question-card">
+          <span class="question-category" id="test-category">Category</span>
+          <div class="question-text" id="test-question">Question text</div>
+          <div class="options-list" id="test-options"></div>
+        </div>
+
+        <div class="test-actions" id="test-actions">
+          <button class="btn btn-outline" id="submit-btn" onclick="submitTestAnswer()" disabled>Submit Answer</button>
+          <button class="btn btn-blue hidden" id="next-question-btn" onclick="nextTestQuestion()">Next Question →</button>
+        </div>
+
+        <div class="results-card card hidden" id="test-results">
+          <div class="results-icon" id="results-icon">🎉</div>
+          <div class="results-title" id="results-title">Test Complete!</div>
+          <div class="results-score" id="results-score">85%</div>
+          <div class="results-stats">
+            <div class="stat-item">
+              <div class="stat-value" id="correct-count">34</div>
+              <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="incorrect-count">6</div>
+              <div class="stat-label">Incorrect</div>
+            </div>
+          </div>
+          <div class="results-actions">
+            <button class="btn btn-outline" onclick="goHome()">Back to Home</button>
+            <button class="btn btn-blue" onclick="startPermitTest()">Retake Test</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenarios View -->
+      <div id="scenarios-view" class="view-container">
+        <div class="back-header">
+          <button class="back-btn" onclick="confirmExit()">← Exit Test</button>
+          <h2 class="view-title">Driving Scenarios</h2>
+        </div>
+
+        <div class="test-progress">
+          <div class="test-header">
+            <span class="test-timer" style="color: #7c3aed;">No Time Limit</span>
+            <span class="question-counter">Scenario <span id="scenario-index">1</span> of <span id="scenario-total">20</span></span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="scenario-progress-bar" style="width: 0%; background: linear-gradient(to right, #9333ea, #ec4899);"></div>
+          </div>
+        </div>
+
+        <div class="scenario-card" id="scenario-card">
+          <span class="scenario-topic" id="scenario-topic">Topic</span>
+          <span class="difficulty-badge difficulty-medium" id="scenario-difficulty">Medium</span>
+          <div class="scenario-text" id="scenario-text">Scenario description</div>
+        </div>
+
+        <div class="question-card" id="scenario-question-card">
+          <div class="question-text" id="scenario-question">Question text</div>
+          <div class="options-list" id="scenario-options"></div>
+        </div>
+
+        <div class="test-actions" id="scenario-actions">
+          <button class="btn btn-outline" id="scenario-submit-btn" onclick="submitScenarioAnswer()" disabled>Submit Answer</button>
+          <button class="btn btn-purple hidden" id="next-scenario-btn" onclick="nextScenario()">Next Scenario →</button>
+        </div>
+
+        <div class="results-card card hidden" id="scenario-results">
+          <div class="results-icon" id="scenario-results-icon">🎉</div>
+          <div class="results-title" id="scenario-results-title">Scenarios Complete!</div>
+          <div class="results-score" id="scenario-results-score">85%</div>
+          <div class="results-stats">
+            <div class="stat-item">
+              <div class="stat-value" id="scenario-correct-count">17</div>
+              <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="scenario-incorrect-count">3</div>
+              <div class="stat-label">Incorrect</div>
+            </div>
+          </div>
+          <div class="results-actions">
+            <button class="btn btn-outline" onclick="goHome()">Back to Home</button>
+            <button class="btn btn-purple" onclick="startScenarios()">Retake Test</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics View -->
+      <div id="analytics-view" class="view-container">
+        <div class="back-header">
+          <button class="back-btn" onclick="goHome()">← Back</button>
+          <h2 class="view-title">Your Analytics</h2>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="card stat-card">
+            <div class="stat-card-title">Total Flashcards Seen</div>
+            <div class="stat-card-value" id="stat-flashcards-seen">0</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-title">Flashcards Known</div>
+            <div class="stat-card-value" id="stat-flashcards-known">0</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-title">Average Test Score</div>
+            <div class="stat-card-value" id="stat-avg-score">-</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-title">Tests Passed</div>
+            <div class="stat-card-value" id="stat-tests-passed">0</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+          <button class="btn btn-outline btn-red" onclick="resetAllProgress()">Reset All Progress</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+// ==================== DATA ====================
+const permitFlashcards = [
+  // ROAD SIGNS (25 cards)
+  { id: 'pf1', category: 'Road Signs', front: '🛑 What does a red octagonal sign mean?', back: 'STOP - You must come to a complete stop behind the stop line or crosswalk, then proceed when safe.', difficulty: 'easy' },
+  { id: 'pf2', category: 'Road Signs', front: '⚠️ What does a yellow diamond-shaped sign indicate?', back: 'Warning sign - alerts drivers to potential hazards, curves, intersections, or road conditions ahead.', difficulty: 'easy' },
+  { id: 'pf3', category: 'Road Signs', front: '🚸 What does a pentagon-shaped sign indicate?', back: 'School zone or school crossing - watch for children and reduce speed during school hours.', difficulty: 'easy' },
+  { id: 'pf4', category: 'Road Signs', front: 'What does a circular sign mean?', back: 'Railroad crossing ahead - be prepared to stop if a train is approaching.', difficulty: 'medium' },
+  { id: 'pf5', category: 'Road Signs', front: '🅿️ What does a blue rectangular sign with a white "P" mean?', back: 'Parking is permitted in this area - check for time restrictions or payment requirements.', difficulty: 'easy' },
+  { id: 'pf6', category: 'Road Signs', front: '⛔ What does a red circle with a white horizontal bar mean?', back: 'DO NOT ENTER - this road is closed to traffic in your direction.', difficulty: 'easy' },
+  { id: 'pf7', category: 'Road Signs', front: 'What does a "No Passing Zone" pennant sign look like?', back: 'A yellow triangle pointing right, placed on the left side of the road at the beginning of no-passing zones.', difficulty: 'medium' },
+  { id: 'pf8', category: 'Road Signs', front: 'What does an orange diamond-shaped sign indicate?', back: 'Construction or maintenance zone ahead - slow down and watch for workers.', difficulty: 'easy' },
+  { id: 'pf9', category: 'Road Signs', front: 'What does a red X above a lane mean?', back: 'Lane is closed - do not drive in this lane. Move to an open lane.', difficulty: 'medium' },
+  { id: 'pf10', category: 'Road Signs', front: 'What does a green arrow above a lane mean?', back: 'Lane is open for travel - you may proceed in this lane.', difficulty: 'easy' },
+  { id: 'pf11', category: 'Road Signs', front: 'What does a yellow X above a lane mean?', back: 'Lane is closing ahead - merge safely into an open lane.', difficulty: 'medium' },
+  { id: 'pf12', category: 'Road Signs', front: 'What does a flashing yellow arrow mean?', back: 'Yield to oncoming traffic and pedestrians before turning in the direction of the arrow.', difficulty: 'hard' },
+  { id: 'pf13', category: 'Road Signs', front: 'What does a steady red X above a highway lane mean?', back: 'The lane is closed. You must exit the lane immediately and safely.', difficulty: 'medium' },
+  { id: 'pf14', category: 'Road Signs', front: 'What does a white rectangular sign typically indicate?', back: 'Regulatory information - traffic laws and rules you must follow, such as speed limits.', difficulty: 'easy' },
+  { id: 'pf15', category: 'Road Signs', front: 'What does a yellow rectangular sign typically indicate?', back: 'Warning or guidance - alerts about upcoming conditions, detours, or directions.', difficulty: 'medium' },
+  { id: 'pf16', category: 'Road Signs', front: 'What does a red circle with a slash through a symbol mean?', back: 'The action shown by the symbol is prohibited - do NOT do what the symbol shows.', difficulty: 'easy' },
+  { id: 'pf17', category: 'Road Signs', front: 'What does a green sign with white text indicate?', back: 'Guide sign - provides directions, distances, and information about destinations.', difficulty: 'easy' },
+  { id: 'pf18', category: 'Road Signs', front: 'What does a brown sign with white text indicate?', back: 'Recreational or cultural interest - points to parks, historical sites, and attractions.', difficulty: 'easy' },
+  { id: 'pf19', category: 'Road Signs', front: 'What does a blue sign with white text/symbols indicate?', back: 'Service information - gas, food, lodging, hospitals, and other services.', difficulty: 'easy' },
+  { id: 'pf20', category: 'Road Signs', front: 'What does a sign showing two arrows pointing in opposite directions mean?', back: 'Two-way traffic ahead - the road changes from one-way to two-way.', difficulty: 'medium' },
+  { id: 'pf21', category: 'Road Signs', front: 'What does a sign with a truck going downhill mean?', back: 'Steep grade ahead - truck drivers should use lower gear; all drivers should be cautious.', difficulty: 'medium' },
+  { id: 'pf22', category: 'Road Signs', front: 'What does a sign with a winding road symbol mean?', back: 'Winding road ahead - there are three or more curves in succession.', difficulty: 'easy' },
+  { id: 'pf23', category: 'Road Signs', front: 'What does a sign showing a car with wavy lines behind it mean?', back: 'Slippery when wet - road surface is slippery when wet, reduce speed.', difficulty: 'easy' },
+  { id: 'pf24', category: 'Road Signs', front: 'What does a sign with a person digging mean?', back: 'Construction/work zone ahead - watch for workers and equipment.', difficulty: 'easy' },
+  { id: 'pf25', category: 'Road Signs', front: 'What does a sign showing a deer mean?', back: 'Deer crossing area - watch for deer, especially at dawn and dusk.', difficulty: 'easy' },
+  
+  // TRAFFIC LAWS (30 cards)
+  { id: 'pf26', category: 'Traffic Laws', front: 'What is the legal blood alcohol concentration (BAC) limit for drivers 21 and over?', back: '0.08% in most states. For commercial drivers, it\'s 0.04%. For drivers under 21, any detectable amount is illegal.', difficulty: 'easy' },
+  { id: 'pf27', category: 'Traffic Laws', front: 'How far should you stop from a railroad crossing?', back: 'At least 15 feet but no more than 50 feet from the nearest rail.', difficulty: 'medium' },
+  { id: 'pf28', category: 'Traffic Laws', front: 'What is the speed limit in a school zone?', back: 'Usually 15-25 mph when children are present or during school hours. Always check posted signs.', difficulty: 'easy' },
+  { id: 'pf29', category: 'Traffic Laws', front: 'When must you use your turn signal?', back: 'At least 100 feet before turning or changing lanes in most states (200 feet in some states).', difficulty: 'easy' },
+  { id: 'pf30', category: 'Traffic Laws', front: 'What is the "Move Over" law?', back: 'You must move over one lane or slow down significantly when passing emergency vehicles, tow trucks, or construction vehicles with flashing lights.', difficulty: 'medium' },
+  { id: 'pf31', category: 'Traffic Laws', front: 'What is the speed limit in a business or residential district unless posted?', back: 'Usually 25 mph, but always check for posted speed limit signs.', difficulty: 'easy' },
+  { id: 'pf32', category: 'Traffic Laws', front: 'What is the speed limit in an alley unless posted?', back: 'Usually 15 mph unless otherwise posted.', difficulty: 'medium' },
+  { id: 'pf33', category: 'Traffic Laws', front: 'How far must you stop from a school bus with flashing red lights?', back: 'At least 20 feet from the bus on undivided roads, in both directions.', difficulty: 'easy' },
+  { id: 'pf34', category: 'Traffic Laws', front: 'When are you required to wear a seatbelt?', back: 'At all times when the vehicle is in motion, for all occupants in most states.', difficulty: 'easy' },
+  { id: 'pf35', category: 'Traffic Laws', front: 'When must you yield to emergency vehicles?', back: 'Always yield when they have sirens and/or flashing lights. Pull over to the right and stop.', difficulty: 'easy' },
+  { id: 'pf36', category: 'Traffic Laws', front: 'What is the minimum following distance behind a fire truck?', back: 'At least 500 feet behind a fire truck responding to an emergency.', difficulty: 'medium' },
+  { id: 'pf37', category: 'Traffic Laws', front: 'When is it legal to pass on the right?', back: 'When a vehicle ahead is turning left and there\'s room, or on one-way roads with multiple lanes.', difficulty: 'medium' },
+  { id: 'pf38', category: 'Traffic Laws', front: 'When making a right turn on red, what must you do first?', back: 'Come to a complete stop, then yield to all traffic and pedestrians before turning.', difficulty: 'easy' },
+  { id: 'pf39', category: 'Traffic Laws', front: 'When are U-turns generally legal?', back: 'Where posted as permitted, or where you can see 500 feet in each direction with no prohibitions.', difficulty: 'medium' },
+  { id: 'pf40', category: 'Traffic Laws', front: 'What does a yellow curb mean?', back: 'Stop only long enough to load or unload passengers or freight.', difficulty: 'medium' },
+  { id: 'pf41', category: 'Traffic Laws', front: 'What does a white curb mean?', back: 'Stop only long enough to pick up or drop off passengers.', difficulty: 'medium' },
+  { id: 'pf42', category: 'Traffic Laws', front: 'What does a green curb mean?', back: 'Parking is permitted for a limited time - check signs for time restrictions.', difficulty: 'medium' },
+  { id: 'pf43', category: 'Traffic Laws', front: 'What does a blue curb mean?', back: 'Parking is reserved for disabled persons with a valid disabled parking permit.', difficulty: 'easy' },
+  { id: 'pf44', category: 'Traffic Laws', front: 'What does a red curb mean?', back: 'No stopping, standing, or parking at any time.', difficulty: 'easy' },
+  { id: 'pf45', category: 'Traffic Laws', front: 'When are headlights required?', back: 'From 30 minutes after sunset until 30 minutes before sunrise, and when visibility is less than 1000 feet.', difficulty: 'medium' },
+  { id: 'pf46', category: 'Traffic Laws', front: 'What is the purpose of HOV (diamond) lanes?', back: 'Reserved for vehicles with a minimum number of occupants, typically 2 or more people.', difficulty: 'easy' },
+  { id: 'pf47', category: 'Traffic Laws', front: 'What is the minimum age for a learner\'s permit in most states?', back: 'Usually 15-16 years old, with requirements varying by state.', difficulty: 'easy' },
+  { id: 'pf48', category: 'Traffic Laws', front: 'What documents must you carry when driving?', back: 'Valid driver\'s license, vehicle registration, and proof of insurance.', difficulty: 'easy' },
+  { id: 'pf49', category: 'Traffic Laws', front: 'What is the implied consent law?', back: 'By driving, you agree to submit to chemical testing if suspected of DUI. Refusal can result in license suspension.', difficulty: 'hard' },
+  { id: 'pf50', category: 'Traffic Laws', front: 'What is the minimum liability insurance required in most states?', back: 'Varies by state, but typically covers bodily injury and property damage you cause to others.', difficulty: 'medium' },
+  { id: 'pf51', category: 'Traffic Laws', front: 'What should you do if you miss your exit on a freeway?', back: 'Continue to the next exit - never back up or make a U-turn on a freeway.', difficulty: 'easy' },
+  { id: 'pf52', category: 'Traffic Laws', front: 'What is the fine for not stopping for a school bus?', back: 'Varies by state but typically $250-$500+ and possible license suspension.', difficulty: 'medium' },
+  { id: 'pf53', category: 'Traffic Laws', front: 'When can you drive in a bike lane?', back: 'Only when making a turn, entering or leaving a roadway, or parking where permitted.', difficulty: 'medium' },
+  { id: 'pf54', category: 'Traffic Laws', front: 'What is the speed limit on most rural interstates?', back: 'Usually 70-75 mph, but varies by state. Always check posted speed limits.', difficulty: 'easy' },
+  { id: 'pf55', category: 'Traffic Laws', front: 'What does a flashing red light mean?', back: 'Treat it like a stop sign - come to a complete stop, then proceed when safe.', difficulty: 'easy' },
+  
+  // RIGHT-OF-WAY (20 cards)
+  { id: 'pf56', category: 'Right-of-Way', front: 'At a four-way stop, who goes first?', back: 'The first vehicle to arrive and stop goes first. If tied, the vehicle on the right goes first.', difficulty: 'medium' },
+  { id: 'pf57', category: 'Right-of-Way', front: 'Who has right-of-way at an uncontrolled intersection?', back: 'The vehicle on the right when two vehicles arrive at the same time.', difficulty: 'medium' },
+  { id: 'pf58', category: 'Right-of-Way', front: 'When must you yield to pedestrians?', back: 'Always, especially in crosswalks, school zones, and when pedestrians have a walk signal.', difficulty: 'easy' },
+  { id: 'pf59', category: 'Right-of-Way', front: 'When entering a roundabout, who must yield?', back: 'Vehicles entering must yield to traffic already circulating in the roundabout.', difficulty: 'medium' },
+  { id: 'pf60', category: 'Right-of-Way', front: 'When making a left turn, when must you yield?', back: 'You must yield to oncoming traffic and pedestrians. Turn only when there\'s a safe gap.', difficulty: 'easy' },
+  { id: 'pf61', category: 'Right-of-Way', front: 'Who has right-of-way when merging onto a highway?', back: 'Vehicles already on the highway have right-of-way. Entering traffic must merge safely.', difficulty: 'medium' },
+  { id: 'pf62', category: 'Right-of-Way', front: 'At a T-intersection with no signs, who has right-of-way?', back: 'Traffic on the through road (the top of the T) has right-of-way.', difficulty: 'medium' },
+  { id: 'pf63', category: 'Right-of-Way', front: 'When should you yield to funeral processions?', back: 'Always yield to funeral processions - it\'s illegal to interrupt or pass them in most states.', difficulty: 'easy' },
+  { id: 'pf64', category: 'Right-of-Way', front: 'Who has right-of-way at a crosswalk with no traffic signal?', back: 'Pedestrians always have right-of-way in crosswalks. Stop and let them cross.', difficulty: 'easy' },
+  { id: 'pf65', category: 'Right-of-Way', front: 'When two vehicles arrive at opposite sides of an intersection, who goes first?', back: 'If both are going straight, they can proceed simultaneously. If one is turning, that driver yields.', difficulty: 'hard' },
+  { id: 'pf66', category: 'Right-of-Way', front: 'Who has right-of-way on a narrow mountain road?', back: 'The vehicle going downhill must yield by backing up to a wider space.', difficulty: 'hard' },
+  { id: 'pf67', category: 'Right-of-Way', front: 'At a malfunctioning traffic signal, what should you do?', back: 'Treat the intersection as a four-way stop. First to arrive goes first.', difficulty: 'medium' },
+  { id: 'pf68', category: 'Right-of-Way', front: 'When entering traffic from a private driveway, who must you yield to?', back: 'Yield to all traffic and pedestrians on the roadway.', difficulty: 'easy' },
+  { id: 'pf69', category: 'Right-of-Way', front: 'Who has right-of-way at a yield sign?', back: 'Cross traffic and oncoming traffic have right-of-way. Slow down and prepare to stop.', difficulty: 'easy' },
+  { id: 'pf70', category: 'Right-of-Way', front: 'When parallel parking, who has right-of-way?', back: 'Passing traffic has right-of-way. Wait for a safe gap before backing in.', difficulty: 'medium' },
+  { id: 'pf71', category: 'Right-of-Way', front: 'When backing out of a driveway, who must you yield to?', back: 'All traffic and pedestrians on the sidewalk and roadway.', difficulty: 'easy' },
+  { id: 'pf72', category: 'Right-of-Way', front: 'Who has right-of-way at an intersection with a green arrow?', back: 'You have right-of-way in the direction of the arrow. Oncoming traffic has a red light.', difficulty: 'easy' },
+  { id: 'pf73', category: 'Right-of-Way', front: 'When two cars arrive at a four-way stop at the exact same time, who goes?', back: 'The car on the right goes first. If directly across, proceed if going straight.', difficulty: 'medium' },
+  { id: 'pf74', category: 'Right-of-Way', front: 'At a crosswalk with a crossing guard, who has right-of-way?', back: 'Pedestrians and the crossing guard\'s directions take precedence.', difficulty: 'easy' },
+  { id: 'pf75', category: 'Right-of-Way', front: 'Who has right-of-way when a lane is ending?', back: 'Traffic in the continuing lane has right-of-way. Merging vehicles must yield.', difficulty: 'medium' },
+  
+  // SAFE DRIVING (25 cards)
+  { id: 'pf76', category: 'Safe Driving', front: 'What is the proper following distance in normal conditions?', back: 'The 3-second rule - pick a fixed object and count at least 3 seconds after the car ahead passes it.', difficulty: 'easy' },
+  { id: 'pf77', category: 'Safe Driving', front: 'What should you do if your car starts to hydroplane?', back: 'Ease off the gas pedal, don\'t brake suddenly, and steer straight until tires regain traction.', difficulty: 'hard' },
+  { id: 'pf78', category: 'Safe Driving', front: 'When driving at night, how should you use your headlights?', back: 'Use low beams within 500 feet of oncoming traffic and 300 feet when following another vehicle.', difficulty: 'medium' },
+  { id: 'pf79', category: 'Safe Driving', front: 'What is the proper hand position on the steering wheel?', back: '9 and 3 o\'clock positions (or 8 and 4). This provides optimal control and keeps hands away from airbags.', difficulty: 'easy' },
+  { id: 'pf80', category: 'Safe Driving', front: 'How do you recover from a skid?', back: 'Take your foot off the gas, don\'t brake, steer in the direction you want to go, and look where you want to go.', difficulty: 'hard' },
+  { id: 'pf81', category: 'Safe Driving', front: 'What is distracted driving?', back: 'Any activity diverting attention from driving - texting, eating, adjusting controls. It significantly increases crash risk.', difficulty: 'easy' },
+  { id: 'pf82', category: 'Safe Driving', front: 'When should you increase your following distance?', back: 'When following motorcycles, in bad weather, when towing, behind large vehicles, or at night.', difficulty: 'easy' },
+  { id: 'pf83', category: 'Safe Driving', front: 'What should you do in heavy rain?', back: 'Reduce speed, increase following distance, use low beams, and watch for hydroplaning.', difficulty: 'easy' },
+  { id: 'pf84', category: 'Safe Driving', front: 'What should you do if your brakes fail?', back: 'Pump the brake pedal, gradually apply the parking brake, downshift to lower gear, and look for a safe stopping area.', difficulty: 'hard' },
+  { id: 'pf85', category: 'Safe Driving', front: 'What should you do if your gas pedal sticks?', back: 'Shift to neutral, apply steady brake pressure, and pull off the road safely. Don\'t turn off ignition while moving.', difficulty: 'hard' },
+  { id: 'pf86', category: 'Safe Driving', front: 'When backing up, what should you do?', back: 'Turn your head and look behind you, go slowly, check mirrors and blind spots, and be prepared to stop.', difficulty: 'easy' },
+  { id: 'pf87', category: 'Safe Driving', front: 'How do you properly enter a freeway?', back: 'Use the acceleration lane to match freeway speed, then merge smoothly into traffic when there\'s a safe gap.', difficulty: 'medium' },
+  { id: 'pf88', category: 'Safe Driving', front: 'What is defensive driving?', back: 'Being aware of your surroundings, anticipating hazards, and being prepared to react to other drivers\' mistakes.', difficulty: 'easy' },
+  { id: 'pf89', category: 'Safe Driving', front: 'When should you use hazard lights?', back: 'When stopped on the roadside, in an emergency, or when driving slowly could create a hazard.', difficulty: 'easy' },
+  { id: 'pf90', category: 'Safe Driving', front: 'What should you do if you have a tire blowout?', back: 'Grip the steering wheel firmly, ease off the gas, don\'t brake hard, and steer to a safe area before stopping.', difficulty: 'hard' },
+  { id: 'pf91', category: 'Safe Driving', front: 'How do you drive safely through a curve?', back: 'Slow down before entering the curve, then accelerate gently as you exit.', difficulty: 'medium' },
+  { id: 'pf92', category: 'Safe Driving', front: 'What is the proper response to an aggressive driver?', back: 'Avoid eye contact, don\'t respond to gestures, let them pass, and report dangerous behavior if necessary.', difficulty: 'easy' },
+  { id: 'pf93', category: 'Safe Driving', front: 'When should you check your blind spot?', back: 'Before changing lanes, merging, turning, or backing up. Look over your shoulder to check.', difficulty: 'easy' },
+  { id: 'pf94', category: 'Safe Driving', front: 'What should you do in fog?', back: 'Slow down, use low beam headlights (never high beams), use fog lights if available, and use road lines as guides.', difficulty: 'medium' },
+  { id: 'pf95', category: 'Safe Driving', front: 'When driving near large trucks, what should you avoid?', back: 'Avoid their blind spots (no-zones), don\'t cut them off, and don\'t linger beside them.', difficulty: 'medium' },
+  { id: 'pf96', category: 'Safe Driving', front: 'What is the proper way to make a turn?', back: 'Signal 100+ feet before, slow down before the turn, turn into the nearest lane, then accelerate after completing the turn.', difficulty: 'easy' },
+  { id: 'pf97', category: 'Safe Driving', front: 'What should you do when approaching a construction zone?', back: 'Slow down, expect the unexpected, watch for workers and flaggers, and follow temporary signs.', difficulty: 'easy' },
+  { id: 'pf98', category: 'Safe Driving', front: 'How do you safely pass another vehicle?', back: 'Check mirrors and blind spots, signal, accelerate to pass, and return to lane only when you can see both headlights.', difficulty: 'medium' },
+  { id: 'pf99', category: 'Safe Driving', front: 'What should you do before driving in winter conditions?', back: 'Clear snow and ice from all windows, lights, and mirrors. Check tire tread and pressure.', difficulty: 'easy' },
+  { id: 'pf100', category: 'Safe Driving', front: 'When should you use your mirrors?', back: 'Constantly - check mirrors every 5-8 seconds and before any change in speed or direction.', difficulty: 'easy' },
+];
+
+const permitTestQuestions = [
+  { id: 'pt1', question: 'What should you do when you see a school bus with flashing red lights?', options: ['Slow down and proceed with caution', 'Stop at least 20 feet away from the bus', 'Honk to alert children', 'Pass on the left side only'], correctIndex: 1, explanation: 'You must stop at least 20 feet away from a school bus with flashing red lights on undivided roads.', category: 'Traffic Laws' },
+  { id: 'pt2', question: 'What does a solid yellow line on your side of the road mean?', options: ['Passing is allowed', 'No passing zone', 'Two-way traffic ahead', 'Lane ends ahead'], correctIndex: 1, explanation: 'A solid yellow line on your side means no passing is allowed.', category: 'Road Signs' },
+  { id: 'pt3', question: 'When parallel parking, your vehicle should be how far from the curb?', options: ['Touching the curb', '6-18 inches', '24-36 inches', 'Within 3 feet'], correctIndex: 1, explanation: 'When parallel parking, your vehicle should be 6-18 inches from the curb.', category: 'Safe Driving' },
+  { id: 'pt4', question: 'What is the speed limit on most rural interstates?', options: ['55 mph', '65 mph', '70-75 mph', '80 mph'], correctIndex: 2, explanation: 'Most rural interstates have speed limits of 70-75 mph, though this varies by state.', category: 'Traffic Laws' },
+  { id: 'pt5', question: 'Before changing lanes, you should:', options: ['Signal and immediately move over', 'Check mirrors, signal, check blind spot, then change lanes', 'Speed up and merge quickly', 'Wait for someone to let you in'], correctIndex: 1, explanation: 'Proper lane change: Check mirrors, signal, check blind spot, then change lanes when safe.', category: 'Safe Driving' },
+  { id: 'pt6', question: 'What does a flashing yellow traffic light mean?', options: ['Stop and proceed when safe', 'Proceed with caution', 'Prepare to stop', 'Yield to all traffic'], correctIndex: 1, explanation: 'A flashing yellow light means proceed with caution. Slow down and be prepared to stop if necessary.', category: 'Road Signs' },
+  { id: 'pt7', question: 'How many feet before a turn should you signal?', options: ['50 feet', '100 feet', '150 feet', '200 feet'], correctIndex: 1, explanation: 'You should signal at least 100 feet before turning.', category: 'Traffic Laws' },
+  { id: 'pt8', question: 'When should you use your low beam headlights?', options: ['Only when it\'s raining', 'When following within 300 feet of another vehicle', 'Only in fog', 'During daytime only'], correctIndex: 1, explanation: 'Use low beams when following within 300 feet of another vehicle or within 500 feet of oncoming traffic.', category: 'Safe Driving' },
+  { id: 'pt9', question: 'What should you do if your brakes fail while driving?', options: ['Turn off the engine immediately', 'Pump the brake pedal, use parking brake gradually, shift to lower gear', 'Steer into oncoming traffic to stop', 'Jump out of the vehicle'], correctIndex: 1, explanation: 'If brakes fail: Pump the brake pedal, gradually apply parking brake, downshift, and look for a safe area to stop.', category: 'Safe Driving' },
+  { id: 'pt10', question: 'What is the proper action at a yield sign?', options: ['Stop completely', 'Proceed without slowing', 'Slow down and give right-of-way to cross traffic', 'Speed up to merge quickly'], correctIndex: 2, explanation: 'At a yield sign, slow down and be prepared to stop. Give right-of-way to vehicles in or approaching the intersection.', category: 'Road Signs' },
+  { id: 'pt11', question: 'When driving in fog, you should use:', options: ['High beam headlights', 'Low beam headlights', 'Parking lights only', 'No lights'], correctIndex: 1, explanation: 'Use low beam headlights in fog. High beams reflect off the fog and create glare that reduces visibility.', category: 'Safe Driving' },
+  { id: 'pt12', question: 'What does a white rectangular sign typically indicate?', options: ['Warning', 'Regulatory information', 'Construction zone', 'Tourist information'], correctIndex: 1, explanation: 'White rectangular signs are regulatory signs indicating traffic laws you must follow.', category: 'Road Signs' },
+  { id: 'pt13', question: 'The minimum insurance coverage most states require is:', options: ['Collision only', 'Liability coverage', 'Comprehensive only', 'Full coverage'], correctIndex: 1, explanation: 'Most states require minimum liability coverage to pay for injuries and damage you cause to others.', category: 'Traffic Laws' },
+  { id: 'pt14', question: 'When should you increase your following distance?', options: ['In good weather only', 'When following a motorcycle, in bad weather, or when towing', 'Only at night', 'Never - maintain the same distance'], correctIndex: 1, explanation: 'Increase following distance when following motorcycles, in bad weather, when towing, or behind large vehicles.', category: 'Safe Driving' },
+  { id: 'pt15', question: 'What is the proper way to enter a freeway?', options: ['Stop at the end of the ramp', 'Match freeway speed and merge smoothly', 'Enter slowly and speed up on the freeway', 'Wait for a gap then accelerate quickly'], correctIndex: 1, explanation: 'Use the acceleration lane to match freeway speed, then merge smoothly when a safe gap appears.', category: 'Safe Driving' },
+  { id: 'pt16', question: 'A red arrow traffic signal means:', options: ['Proceed with caution', 'Stop and remain stopped until a green light or arrow appears', 'Yield to oncoming traffic', 'The signal is broken'], correctIndex: 1, explanation: 'A red arrow means you must stop and remain stopped until a green arrow or light appears.', category: 'Road Signs' },
+  { id: 'pt17', question: 'When parking uphill with a curb, you should turn your wheels:', options: ['Toward the curb', 'Away from the curb', 'Keep wheels straight', 'Does not matter'], correctIndex: 1, explanation: 'When parking uphill with a curb, turn wheels away from the curb so if the car rolls, it rolls into the curb.', category: 'Safe Driving' },
+  { id: 'pt18', question: 'What is the "two-second rule" used for?', options: ['Determining speed', 'Maintaining safe following distance', 'Changing lanes', 'Passing another vehicle'], correctIndex: 1, explanation: 'The two-second rule helps maintain a safe following distance.', category: 'Safe Driving' },
+  { id: 'pt19', question: 'When must you stop your vehicle?', options: ['At a green light', 'At a flashing yellow light', 'At a solid red light or stop sign', 'Only when police direct you'], correctIndex: 2, explanation: 'You must stop at solid red lights, stop signs, when directed by police, at railroad crossings with signals, and for school buses with flashing red lights.', category: 'Traffic Laws' },
+  { id: 'pt20', question: 'What should you do when approaching a construction zone?', options: ['Speed up to get through quickly', 'Slow down and watch for workers and flaggers', 'Maintain normal speed', 'Use the shoulder to pass'], correctIndex: 1, explanation: 'Slow down in construction zones, watch for workers and flaggers, follow temporary signs.', category: 'Safe Driving' },
+  { id: 'pt21', question: 'What does a green arrow signal mean?', options: ['Yield to oncoming traffic', 'Proceed in the arrow direction - you have the right of way', 'Stop first, then proceed', 'Prepare to stop'], correctIndex: 1, explanation: 'A green arrow means you have the right-of-way in the direction shown.', category: 'Road Signs' },
+  { id: 'pt22', question: 'When is it legal to pass on the right?', options: ['Never', 'When a vehicle is turning left and there is room on the right', 'Anytime you want', 'Only on one-way streets'], correctIndex: 1, explanation: 'You may pass on the right when a vehicle ahead is turning left and there is sufficient space.', category: 'Traffic Laws' },
+  { id: 'pt23', question: 'What should you do if an oncoming vehicle crosses into your lane?', options: ['Speed up to pass quickly', 'Steer right, slow down, and sound horn', 'Flash your high beams', 'Stay in your lane and brace for impact'], correctIndex: 1, explanation: 'Steer to the right, slow down, sound your horn, and if necessary, drive off the road to avoid a collision.', category: 'Safe Driving' },
+  { id: 'pt24', question: 'When parking downhill with a curb, you should turn your wheels:', options: ['Away from the curb', 'Toward the curb', 'Keep wheels straight', 'Does not matter'], correctIndex: 1, explanation: 'When parking downhill with a curb, turn wheels toward the curb so if the car rolls, it rolls into the curb.', category: 'Safe Driving' },
+  { id: 'pt25', question: 'What is the speed limit in a business or residential district unless otherwise posted?', options: ['15 mph', '25 mph', '35 mph', '45 mph'], correctIndex: 1, explanation: 'The default speed limit in business and residential districts is typically 25 mph unless otherwise posted.', category: 'Traffic Laws' },
+  { id: 'pt26', question: 'What does a flashing red traffic light mean?', options: ['Proceed with caution', 'Stop completely, then proceed when safe', 'Yield to cross traffic', 'Prepare to stop'], correctIndex: 1, explanation: 'A flashing red light is treated like a stop sign. Come to a complete stop, yield, then proceed when safe.', category: 'Road Signs' },
+  { id: 'pt27', question: 'When making a right turn on red (where permitted), you must:', options: ['Proceed without stopping', 'Stop completely first, then yield to traffic and pedestrians', 'Only yield to vehicles', 'Wait for a green light'], correctIndex: 1, explanation: 'Even where right turn on red is permitted, you must come to a complete stop first, then yield to all traffic and pedestrians.', category: 'Traffic Laws' },
+  { id: 'pt28', question: 'What is the proper response to an aggressive driver?', options: ['Speed up to get away', 'Make eye contact and gesture', 'Avoid eye contact, don\'t respond, let them pass', 'Follow them closely'], correctIndex: 2, explanation: 'Avoid engaging with aggressive drivers. Don\'t make eye contact or gestures, allow them to pass.', category: 'Safe Driving' },
+  { id: 'pt29', question: 'How far should you stop from a school bus that has stopped to load or unload children?', options: ['5 feet', '10 feet', '20 feet', '50 feet'], correctIndex: 2, explanation: 'You must stop at least 20 feet from a stopped school bus on undivided roads.', category: 'Traffic Laws' },
+  { id: 'pt30', question: 'What does a "No Passing Zone" sign look like?', options: ['Yellow circle with black "P"', 'Pennant-shaped sign on the left side of road', 'White rectangle with text', 'Yellow diamond with arrows'], correctIndex: 1, explanation: 'A "No Passing Zone" sign is a pennant-shaped yellow sign placed on the left side of the road.', category: 'Road Signs' },
+  { id: 'pt31', question: 'When are you required to wear a seatbelt?', options: ['Only on highways', 'Only for long trips', 'At all times when the vehicle is in motion', 'Only for front seat passengers'], correctIndex: 2, explanation: 'All occupants must wear seatbelts at all times when the vehicle is in motion.', category: 'Traffic Laws' },
+  { id: 'pt32', question: 'What should you do at an intersection with a malfunctioning traffic signal?', options: ['Treat it as a green light', 'Treat it as a four-way stop', 'Speed through quickly', 'Wait for police'], correctIndex: 1, explanation: 'If a traffic signal is not working, treat the intersection as a four-way stop.', category: 'Traffic Laws' },
+  { id: 'pt33', question: 'What is the purpose of a diamond lane (HOV lane)?', options: ['For emergency vehicles only', 'For vehicles with two or more occupants', 'For passing slower traffic', 'For motorcycles only'], correctIndex: 1, explanation: 'HOV (High Occupancy Vehicle) lanes are reserved for vehicles with a minimum number of occupants, typically 2 or more.', category: 'Traffic Laws' },
+  { id: 'pt34', question: 'What should you do when you hear a siren but cannot see the emergency vehicle?', options: ['Speed up to clear the area', 'Pull over and stop until you can determine where it is', 'Continue normally', 'Stop immediately where you are'], correctIndex: 1, explanation: 'Pull over to the right and stop until you can determine where the emergency vehicle is coming from.', category: 'Safe Driving' },
+  { id: 'pt35', question: 'What does a red X above a lane mean?', options: ['Lane is ending', 'Lane is closed - do not drive in this lane', 'Merge left', 'Construction ahead'], correctIndex: 1, explanation: 'A red X means the lane is closed and you should not drive in it.', category: 'Road Signs' },
+  { id: 'pt36', question: 'When backing up, you should:', options: ['Rely only on your mirrors', 'Turn your head and look behind you', 'Back up quickly to avoid blocking traffic', 'Keep the steering wheel straight'], correctIndex: 1, explanation: 'Turn your head and look behind you when backing up. Don\'t rely solely on mirrors.', category: 'Safe Driving' },
+  { id: 'pt37', question: 'What is the meaning of a yellow painted curb?', options: ['Stop only long enough to load or unload', 'No stopping, standing, or parking', 'Parking permitted for limited time', 'Handicapped parking only'], correctIndex: 0, explanation: 'A yellow curb means stop only long enough to load or unload passengers or freight.', category: 'Traffic Laws' },
+  { id: 'pt38', question: 'What should you do if you miss your exit on a freeway?', options: ['Back up to the exit', 'Make a U-turn on the shoulder', 'Go to the next exit', 'Stop and ask for directions'], correctIndex: 2, explanation: 'Never back up on a freeway. Go to the next exit and turn around.', category: 'Safe Driving' },
+  { id: 'pt39', question: 'When driving through a curve, you should:', options: ['Accelerate through the curve', 'Brake during the curve', 'Slow down before entering the curve', 'Maintain your current speed'], correctIndex: 2, explanation: 'Slow down before entering a curve, then accelerate gently as you come out of it.', category: 'Safe Driving' },
+  { id: 'pt40', question: 'What is the legal limit for following distance behind a fire truck?', options: ['100 feet', '200 feet', '300 feet', '500 feet'], correctIndex: 3, explanation: 'You must stay at least 500 feet behind a fire truck responding to an emergency.', category: 'Traffic Laws' },
+];
+
+const scenarioQuestions = [
+  { id: 'sq1', topic: 'Parallel Parking', scenario: 'You need to parallel park between two cars on a busy street. There\'s about 1.5 car lengths of space.', question: 'What is your first step after stopping beside the front car?', options: ['Turn wheel sharply right and reverse immediately', 'Align your rear bumper with the front car\'s rear bumper, then reverse slowly', 'Signal and drive forward to find a bigger space', 'Wait for traffic to clear before starting'], correctIndex: 1, explanation: 'Align your rear bumper with the front car\'s rear bumper, about 2-3 feet away from it, before beginning to reverse.', difficulty: 'medium' },
+  { id: 'sq2', topic: 'Parallel Parking', scenario: 'During parallel parking, you\'ve backed in but are 24 inches from the curb - too far.', question: 'What should you do?', options: ['Start over from the beginning', 'Pull forward slightly while turning right, then reverse while turning left to adjust', 'Open your door to check the distance', 'Accept the parking job as is'], correctIndex: 1, explanation: 'You can adjust by pulling forward slightly while turning toward the curb, then reversing while turning away from it.', difficulty: 'medium' },
+  { id: 'sq3', topic: 'Parallel Parking', scenario: 'There\'s a car waiting behind you while you try to parallel park.', question: 'What should you do?', options: ['Rush to finish quickly', 'Take your time and park correctly', 'Give up and drive away', 'Wave them to go around you'], correctIndex: 1, explanation: 'Don\'t let pressure rush you. Take the time you need to park correctly. Use hazard lights if needed.', difficulty: 'easy' },
+  { id: 'sq4', topic: 'Parallel Parking', scenario: 'You accidentally hit the curb while parallel parking. Your tire is touching the curb.', question: 'Is this an automatic fail on a driving test?', options: ['Yes, any curb contact is an automatic fail', 'No, but you should correct it before finishing', 'Only if you hit the curb hard', 'It depends on the examiner'], correctIndex: 1, explanation: 'Light curb contact isn\'t always an automatic fail, but you should correct it. Rolling up onto the curb would likely fail you.', difficulty: 'medium' },
+  { id: 'sq5', topic: 'Highway Driving', scenario: 'You\'re merging onto a highway and the acceleration lane is ending. Traffic is moving at 65 mph.', question: 'What should you do?', options: ['Stop at the end of the ramp and wait for a gap', 'Accelerate to match traffic speed and merge smoothly', 'Drive on the shoulder until you find a gap', 'Slow down and let traffic pass before merging'], correctIndex: 1, explanation: 'Use the acceleration lane to reach highway speed, then merge when safe. Stopping is dangerous and illegal in most places.', difficulty: 'easy' },
+  { id: 'sq6', topic: 'Highway Driving', scenario: 'You\'re in the right lane of a highway and see a car merging ahead from an on-ramp.', question: 'What should you do?', options: ['Maintain your speed and make them adjust', 'Change lanes if safe, or adjust your speed to create a gap', 'Speed up to pass them quickly', 'Slow down significantly'], correctIndex: 1, explanation: 'Change lanes if possible, or adjust speed to create space. Be courteous and predictable.', difficulty: 'easy' },
+  { id: 'sq7', topic: 'Highway Driving', scenario: 'You miss your exit on the highway. There\'s an emergency turnaround nearby.', question: 'What should you do?', options: ['Use the emergency turnaround', 'Back up carefully on the shoulder', 'Continue to the next exit', 'Make a U-turn at the next crossover'], correctIndex: 2, explanation: 'Never use emergency turnarounds or back up on highways. Continue to the next exit.', difficulty: 'easy' },
+  { id: 'sq8', topic: 'Highway Driving', scenario: 'You\'re driving in heavy highway traffic and need to exit in 2 miles. You\'re in the left lane.', question: 'When should you move to the right lane?', options: ['Stay in the left lane until the last moment', 'Move right as soon as it\'s safe', 'Only move right when you see your exit', 'It doesn\'t matter as long as you exit in time'], correctIndex: 1, explanation: 'Move to the right lane well before your exit. This gives you time to react and is safer in heavy traffic.', difficulty: 'easy' },
+  { id: 'sq9', topic: 'Adverse Conditions', scenario: 'It\'s raining heavily and water is pooling on the road. Your car starts to hydroplane.', question: 'What should you do?', options: ['Brake hard to slow down', 'Steer sharply toward the shoulder', 'Ease off the gas and steer straight', 'Accelerate to push through the water'], correctIndex: 2, explanation: 'Ease off the gas, don\'t brake, and steer straight. Sudden movements can cause loss of control.', difficulty: 'hard' },
+  { id: 'sq10', topic: 'Adverse Conditions', scenario: 'You\'re driving in dense fog and visibility is less than 200 feet.', question: 'What should you do?', options: ['Use high beams to see further', 'Use low beams and reduce speed significantly', 'Follow the taillights of the car ahead closely', 'Pull over and stop immediately'], correctIndex: 1, explanation: 'Use low beams (high beams reflect off fog), slow down, and use road lines as guides. If too dense, find a safe place to stop.', difficulty: 'medium' },
+  { id: 'sq11', topic: 'Adverse Conditions', scenario: 'You encounter black ice on a curve and your car starts to skid.', question: 'What should you do?', options: ['Brake firmly to stop the skid', 'Steer in the opposite direction of the skid', 'Take your foot off the gas and steer in the direction you want to go', 'Accelerate to regain traction'], correctIndex: 2, explanation: 'Take your foot off the gas, don\'t brake, and steer gently in the direction you want the car to go.', difficulty: 'hard' },
+  { id: 'sq12', topic: 'Adverse Conditions', scenario: 'It\'s night and raining. An oncoming vehicle has their high beams on, blinding you.', question: 'What should you do?', options: ['Flash your high beams back at them', 'Look toward the right edge of the road', 'Close your eyes momentarily', 'Speed up to pass them quickly'], correctIndex: 1, explanation: 'Look toward the right edge of your lane to avoid the glare. Use the road edge or line as a guide.', difficulty: 'medium' },
+  { id: 'sq13', topic: 'Intersections', scenario: 'You arrive at a four-way stop at the same time as a car on your right and a car across from you.', question: 'Who goes first?', options: ['You go first since you arrived at the same time', 'The car on your right goes first', 'The car across from you goes first', 'Everyone goes at once'], correctIndex: 1, explanation: 'At a four-way stop, the car on the right has right-of-way when vehicles arrive simultaneously.', difficulty: 'medium' },
+  { id: 'sq14', topic: 'Intersections', scenario: 'You\'re waiting to turn left at a green light. The light turns yellow, then red. There are still cars in the intersection.', question: 'What should you do?', options: ['Complete your turn quickly before cross traffic starts', 'Wait until the intersection is clear, then turn', 'Back up to the stop line', 'Wait for the next green light'], correctIndex: 1, explanation: 'Complete your turn only when the intersection is clear. You legally entered on green, so finish your turn safely.', difficulty: 'medium' },
+  { id: 'sq15', topic: 'Intersections', scenario: 'The traffic light is not working at a busy intersection. There are no police directing traffic.', question: 'How should you proceed?', options: ['Drive through without stopping', 'Treat it as a four-way stop', 'Yield only to vehicles on your left', 'Wait for someone to direct traffic'], correctIndex: 1, explanation: 'Treat a malfunctioning traffic signal as a four-way stop. First to arrive, first to go.', difficulty: 'easy' },
+  { id: 'sq16', topic: 'Intersections', scenario: 'You\'re turning right on red after stopping. A pedestrian is waiting to cross your path.', question: 'What should you do?', options: ['Turn quickly before they enter the crosswalk', 'Wait for the pedestrian to cross', 'Honk to alert them you\'re turning', 'Edge forward to show you\'re turning'], correctIndex: 1, explanation: 'Always yield to pedestrians. Wait until they have safely crossed before turning.', difficulty: 'easy' },
+  { id: 'sq17', topic: 'Emergency Vehicles', scenario: 'You hear a siren approaching from behind but can\'t see the emergency vehicle yet.', question: 'What should you do?', options: ['Continue at your current speed', 'Pull over to the right and stop immediately', 'Speed up to get out of the way', 'Stop in your current lane'], correctIndex: 1, explanation: 'Pull over to the right and stop. Wait until you can determine where the vehicle is coming from.', difficulty: 'easy' },
+  { id: 'sq18', topic: 'Emergency Vehicles', scenario: 'An ambulance is stopped with lights flashing in the lane next to you on a two-lane road.', question: 'What should you do?', options: ['Continue at normal speed', 'Slow down and pass carefully', 'Move over a lane if possible, or slow down significantly', 'Stop and wait for them to leave'], correctIndex: 2, explanation: 'Move over law requires you to change lanes if possible, or slow down significantly when passing emergency vehicles.', difficulty: 'easy' },
+  { id: 'sq19', topic: 'School Zones', scenario: 'You approach a school zone with flashing yellow lights and children are present.', question: 'What should you do?', options: ['Continue at the normal speed limit', 'Reduce speed to the posted school zone limit', 'Only slow down if children are in the road', 'Speed up to pass through quickly'], correctIndex: 1, explanation: 'Always reduce speed to the posted limit when school zone lights are flashing and children are present.', difficulty: 'easy' },
+  { id: 'sq20', topic: 'School Zones', scenario: 'A school bus has stopped with red lights flashing on the opposite side of a divided highway with a median.', question: 'Do you need to stop?', options: ['Yes, always stop for school buses', 'No, you can proceed with caution', 'Only stop if children are crossing', 'Stop only if the bus driver signals you'], correctIndex: 1, explanation: 'On a divided highway with a median, you don\'t need to stop, but proceed with caution.', difficulty: 'medium' },
+];
+
+// ==================== STATE ====================
+let progress = {
+  permitFlashcards: { seen: [], known: [], needsPractice: [] },
+  permitTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
+  scenarioTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
+  totalStudyTime: 0,
+  lastSession: new Date().toISOString()
+};
+
+let session = {
+  permitTest: null,
+  scenarioTest: null,
+  permitFlashcards: null
+};
+
+// Flashcard state
+let currentDeck = [...permitFlashcards];
+let currentCardIndex = 0;
+let isFlipped = false;
+let currentCategory = 'all';
+
+// Test state
+let testQuestions = [];
+let testIndex = 0;
+let testAnswers = [];
+let testTime = 45 * 60;
+let testTimer = null;
+let selectedTestAnswer = null;
+let testFinished = false;
+
+// Scenario state
+let scenarioIndex = 0;
+let scenarioAnswers = [];
+let selectedScenarioAnswer = null;
+let scenarioFinished = false;
+
+// ==================== INITIALIZATION ====================
+document.addEventListener('DOMContentLoaded', () => {
+  loadProgress();
+  loadSession();
+  updateHomeProgress();
+  checkResumeSession();
+});
+
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem('driveyourtest_progress');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      progress = {
+        permitFlashcards: parsed.permitFlashcards || { seen: [], known: [], needsPractice: [] },
+        permitTest: parsed.permitTest || { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
+        scenarioTest: parsed.scenarioTest || { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
+        totalStudyTime: parsed.totalStudyTime || 0,
+        lastSession: parsed.lastSession || new Date().toISOString()
+      };
+    }
+  } catch (e) {
+    console.log('Could not load progress');
+  }
+}
+
+function saveProgress() {
+  try {
+    progress.lastSession = new Date().toISOString();
+    localStorage.setItem('driveyourtest_progress', JSON.stringify(progress));
+  } catch (e) {
+    console.log('Could not save progress');
+  }
+}
+
+function loadSession() {
+  try {
+    const saved = localStorage.getItem('driveyourtest_session');
+    if (saved) {
+      session = JSON.parse(saved);
+    }
+  } catch (e) {
+    console.log('Could not load session');
+  }
+}
+
+function saveSession() {
+  try {
+    localStorage.setItem('driveyourtest_session', JSON.stringify(session));
+  } catch (e) {
+    console.log('Could not save session');
+  }
+}
+
+function clearSession() {
+  session = { permitTest: null, scenarioTest: null, permitFlashcards: null };
+  localStorage.removeItem('driveyourtest_session');
+}
+
+// ==================== NAVIGATION ====================
+function showView(viewId) {
+  document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+  document.getElementById(viewId + '-view').classList.add('active');
+}
+
+function goHome() {
+  if (testTimer) clearInterval(testTimer);
+  showView('home');
+  updateHomeProgress();
+}
+
+function confirmExit() {
+  if (confirm('Are you sure you want to exit? Your progress will be saved.')) {
+    goHome();
+  }
+}
+
+// ==================== HOME PROGRESS ====================
+function updateHomeProgress() {
+  const seenCount = progress.permitFlashcards.seen.length;
+  const knownCount = progress.permitFlashcards.known.length;
+  const flashcardPct = Math.round((knownCount / 100) * 100);
+  
+  document.getElementById('flashcard-progress').textContent = flashcardPct + '%';
+  document.getElementById('flashcard-badge').textContent = flashcardPct + '%';
+  document.getElementById('flashcard-bar').style.width = flashcardPct + '%';
+  
+  document.getElementById('permit-tests').textContent = progress.permitTest.testsTaken;
+  document.getElementById('best-score').textContent = progress.permitTest.highScore > 0 ? progress.permitTest.highScore + '%' : '-';
+  
+  document.getElementById('scenario-tests').textContent = progress.scenarioTest.testsTaken;
+  document.getElementById('scenario-best').textContent = progress.scenarioTest.highScore > 0 ? progress.scenarioTest.highScore + '%' : '-';
+  
+  // Analytics
+  document.getElementById('stat-flashcards-seen').textContent = seenCount;
+  document.getElementById('stat-flashcards-known').textContent = knownCount;
+  document.getElementById('stat-avg-score').textContent = progress.permitTest.averageScore > 0 ? Math.round(progress.permitTest.averageScore) + '%' : '-';
+  document.getElementById('stat-tests-passed').textContent = progress.permitTest.passedTests;
+}
+
+function checkResumeSession() {
+  const hasSession = session.permitTest?.active || session.scenarioTest?.active || session.permitFlashcards;
+  document.getElementById('resume-banner').classList.toggle('hidden', !hasSession);
+}
+
+function clearSessionAndRefresh() {
+  if (confirm('Clear your in-progress session and start fresh?')) {
+    clearSession();
+    checkResumeSession();
+  }
+}
+
+// ==================== FLASHCARDS ====================
+function startFlashcards() {
+  // Check for existing session
+  if (session.permitFlashcards) {
+    currentDeck = session.permitFlashcards.deck;
+    currentCardIndex = session.permitFlashcards.index;
+    currentCategory = session.permitFlashcards.category;
+  } else {
+    selectCategory('all');
+  }
+  
+  showView('flashcards');
+  updateCardDisplay();
+}
+
+function selectCategory(category) {
+  currentCategory = category;
+  currentCardIndex = 0;
+  isFlipped = false;
+  
+  if (category === 'all') {
+    currentDeck = [...permitFlashcards];
+  } else {
+    currentDeck = permitFlashcards.filter(c => c.category === category);
+  }
+  
+  // Update category buttons
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === category);
+  });
+  
+  document.getElementById('card-total').textContent = currentDeck.length;
+  updateCardDisplay();
+  saveFlashcardSession();
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+}
+
+function updateCardDisplay() {
+  if (currentDeck.length === 0) return;
+  
+  const card = currentDeck[currentCardIndex];
+  document.getElementById('card-category').textContent = card.category;
+  document.getElementById('card-front').textContent = card.front;
+  document.getElementById('card-back').textContent = card.back;
+  document.getElementById('card-index').textContent = currentCardIndex + 1;
+  
+  // Reset flip state
+  isFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  
+  // Update nav buttons
+  document.getElementById('prev-btn').disabled = currentCardIndex === 0;
+  document.getElementById('next-btn').disabled = currentCardIndex === currentDeck.length - 1;
+}
+
+function prevCard() {
+  if (currentCardIndex > 0) {
+    currentCardIndex--;
+    updateCardDisplay();
+    saveFlashcardSession();
+  }
+}
+
+function nextCard() {
+  if (currentCardIndex < currentDeck.length - 1) {
+    currentCardIndex++;
+    updateCardDisplay();
+    saveFlashcardSession();
+  }
+}
+
+function rateCard(rating) {
+  const card = currentDeck[currentCardIndex];
+  
+  // Add to seen
+  if (!progress.permitFlashcards.seen.includes(card.id)) {
+    progress.permitFlashcards.seen.push(card.id);
+  }
+  
+  // Update rating
+  if (rating === 'known') {
+    if (!progress.permitFlashcards.known.includes(card.id)) {
+      progress.permitFlashcards.known.push(card.id);
+    }
+    progress.permitFlashcards.needsPractice = progress.permitFlashcards.needsPractice.filter(id => id !== card.id);
+  } else {
+    if (!progress.permitFlashcards.needsPractice.includes(card.id)) {
+      progress.permitFlashcards.needsPractice.push(card.id);
+    }
+    progress.permitFlashcards.known = progress.permitFlashcards.known.filter(id => id !== card.id);
+  }
+  
+  saveProgress();
+  
+  // Move to next card
+  if (currentCardIndex < currentDeck.length - 1) {
+    currentCardIndex++;
+    updateCardDisplay();
+    saveFlashcardSession();
+  }
+}
+
+function saveFlashcardSession() {
+  session.permitFlashcards = {
+    deck: currentDeck,
+    index: currentCardIndex,
+    category: currentCategory
+  };
+  saveSession();
+}
+
+// ==================== PERMIT TEST ====================
+function startPermitTest() {
+  // Check for existing session
+  if (session.permitTest?.active) {
+    testQuestions = session.permitTest.questions;
+    testIndex = session.permitTest.index;
+    testAnswers = session.permitTest.answers;
+    testTime = session.permitTest.time;
+    selectedTestAnswer = session.permitTest.selectedAnswer;
+  } else {
+    testQuestions = shuffleArray([...permitTestQuestions]).slice(0, 40);
+    testIndex = 0;
+    testAnswers = new Array(testQuestions.length).fill(null);
+    testTime = 45 * 60;
+    selectedTestAnswer = null;
+  }
+  
+  testFinished = false;
+  
+  showView('permit-test');
+  document.getElementById('test-results').classList.add('hidden');
+  document.getElementById('test-question-card').classList.remove('hidden');
+  document.getElementById('test-actions').classList.remove('hidden');
+  
+  document.getElementById('test-total').textContent = testQuestions.length;
+  
+  displayTestQuestion();
+  startTimer();
+  saveTestSession();
+}
+
+function displayTestQuestion() {
+  const q = testQuestions[testIndex];
+  
+  document.getElementById('test-category').textContent = q.category;
+  document.getElementById('test-question').textContent = q.question;
+  document.getElementById('test-index').textContent = testIndex + 1;
+  
+  // Update progress bar
+  const pct = ((testIndex + 1) / testQuestions.length) * 100;
+  document.getElementById('test-progress-bar').style.width = pct + '%';
+  
+  // Display options
+  const optionsContainer = document.getElementById('test-options');
+  optionsContainer.innerHTML = '';
+  
+  const isAnswered = testAnswers[testIndex] !== null;
+  
+  q.options.forEach((opt, i) => {
+    const item = document.createElement('div');
+    item.className = 'option-item';
+    
+    if (isAnswered) {
+      item.classList.add('disabled');
+      if (i === q.correctIndex) item.classList.add('correct');
+      else if (i === testAnswers[testIndex]) item.classList.add('incorrect');
+    } else if (selectedTestAnswer === i) {
+      item.classList.add('selected');
+    }
+    
+    item.innerHTML = `
+      <div class="option-radio"></div>
+      <span class="option-text">${opt}</span>
+    `;
+    
+    if (!isAnswered) {
+      item.onclick = () => selectTestOption(i);
+    }
+    
+    optionsContainer.appendChild(item);
+  });
+  
+  // Show explanation if answered
+  let explanation = optionsContainer.querySelector('.explanation');
+  if (isAnswered) {
+    if (!explanation) {
+      explanation = document.createElement('div');
+      explanation.className = 'explanation';
+      optionsContainer.appendChild(explanation);
+    }
+    explanation.innerHTML = `<div class="explanation-title">Explanation</div><div class="explanation-text">${q.explanation}</div>`;
+  }
+  
+  // Update buttons
+  document.getElementById('submit-btn').classList.toggle('hidden', isAnswered);
+  document.getElementById('submit-btn').disabled = selectedTestAnswer === null && !isAnswered;
+  document.getElementById('next-question-btn').classList.toggle('hidden', !isAnswered);
+  
+  if (testIndex === testQuestions.length - 1 && isAnswered) {
+    document.getElementById('next-question-btn').textContent = 'See Results →';
+  } else {
+    document.getElementById('next-question-btn').textContent = 'Next Question →';
+  }
+}
+
+function selectTestOption(index) {
+  if (testAnswers[testIndex] !== null) return;
+  
+  selectedTestAnswer = index;
+  displayTestQuestion();
+  saveTestSession();
+}
+
+function submitTestAnswer() {
+  if (selectedTestAnswer === null) return;
+  
+  testAnswers[testIndex] = selectedTestAnswer;
+  displayTestQuestion();
+  saveTestSession();
+}
+
+function nextTestQuestion() {
+  if (testIndex < testQuestions.length - 1) {
+    testIndex++;
+    selectedTestAnswer = testAnswers[testIndex];
+    displayTestQuestion();
+    saveTestSession();
+  } else {
+    finishTest();
+  }
+}
+
+function startTimer() {
+  if (testTimer) clearInterval(testTimer);
+  
+  testTimer = setInterval(() => {
+    testTime--;
+    updateTimerDisplay();
+    
+    if (testTime <= 0) {
+      clearInterval(testTimer);
+      finishTest();
+    }
+  }, 1000);
+  
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const mins = Math.floor(testTime / 60);
+  const secs = testTime % 60;
+  const timerEl = document.getElementById('test-timer');
+  timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+  timerEl.classList.toggle('warning', testTime < 300);
+}
+
+function finishTest() {
+  if (testTimer) clearInterval(testTimer);
+  testFinished = true;
+  
+  // Calculate score
+  const correct = testAnswers.filter((a, i) => a === testQuestions[i].correctIndex).length;
+  const score = Math.round((correct / testQuestions.length) * 100);
+  const passed = score >= 80;
+  
+  // Update progress
+  progress.permitTest.testsTaken++;
+  if (passed) progress.permitTest.passedTests++;
+  progress.permitTest.averageScore = ((progress.permitTest.averageScore * (progress.permitTest.testsTaken - 1)) + score) / progress.permitTest.testsTaken;
+  progress.permitTest.highScore = Math.max(progress.permitTest.highScore, score);
+  
+  saveProgress();
+  
+  // Clear session
+  session.permitTest = null;
+  saveSession();
+  
+  // Show results
+  document.getElementById('test-question-card').classList.add('hidden');
+  document.getElementById('test-actions').classList.add('hidden');
+  document.getElementById('test-results').classList.remove('hidden');
+  
+  document.getElementById('results-icon').textContent = passed ? '🎉' : '📚';
+  document.getElementById('results-title').textContent = passed ? 'Congratulations!' : 'Keep Practicing!';
+  document.getElementById('results-score').textContent = score + '%';
+  document.getElementById('results-score').className = 'results-score ' + (passed ? 'pass' : 'fail');
+  document.getElementById('correct-count').textContent = correct;
+  document.getElementById('incorrect-count').textContent = testQuestions.length - correct;
+}
+
+function saveTestSession() {
+  session.permitTest = {
+    active: !testFinished,
+    questions: testQuestions,
+    index: testIndex,
+    answers: testAnswers,
+    time: testTime,
+    selectedAnswer: selectedTestAnswer
+  };
+  saveSession();
+}
+
+// ==================== SCENARIOS ====================
+function startScenarios() {
+  // Check for existing session
+  if (session.scenarioTest?.active) {
+    scenarioIndex = session.scenarioTest.index;
+    scenarioAnswers = session.scenarioTest.answers;
+    selectedScenarioAnswer = session.scenarioTest.selectedAnswer;
+  } else {
+    scenarioIndex = 0;
+    scenarioAnswers = new Array(scenarioQuestions.length).fill(null);
+    selectedScenarioAnswer = null;
+  }
+  
+  scenarioFinished = false;
+  
+  showView('scenarios');
+  document.getElementById('scenario-results').classList.add('hidden');
+  document.getElementById('scenario-card').classList.remove('hidden');
+  document.getElementById('scenario-question-card').classList.remove('hidden');
+  document.getElementById('scenario-actions').classList.remove('hidden');
+  
+  document.getElementById('scenario-total').textContent = scenarioQuestions.length;
+  
+  displayScenarioQuestion();
+  saveScenarioSession();
+}
+
+function displayScenarioQuestion() {
+  const s = scenarioQuestions[scenarioIndex];
+  
+  document.getElementById('scenario-topic').textContent = s.topic;
+  document.getElementById('scenario-difficulty').textContent = s.difficulty;
+  document.getElementById('scenario-difficulty').className = 'difficulty-badge difficulty-' + s.difficulty;
+  document.getElementById('scenario-text').textContent = s.scenario;
+  document.getElementById('scenario-question').textContent = s.question;
+  document.getElementById('scenario-index').textContent = scenarioIndex + 1;
+  
+  // Update progress bar
+  const pct = ((scenarioIndex + 1) / scenarioQuestions.length) * 100;
+  document.getElementById('scenario-progress-bar').style.width = pct + '%';
+  
+  // Display options
+  const optionsContainer = document.getElementById('scenario-options');
+  optionsContainer.innerHTML = '';
+  
+  const isAnswered = scenarioAnswers[scenarioIndex] !== null;
+  
+  s.options.forEach((opt, i) => {
+    const item = document.createElement('div');
+    item.className = 'option-item';
+    
+    if (isAnswered) {
+      item.classList.add('disabled');
+      if (i === s.correctIndex) item.classList.add('correct');
+      else if (i === scenarioAnswers[scenarioIndex]) item.classList.add('incorrect');
+    } else if (selectedScenarioAnswer === i) {
+      item.classList.add('selected');
+    }
+    
+    item.innerHTML = `
+      <div class="option-radio"></div>
+      <span class="option-text">${opt}</span>
+    `;
+    
+    if (!isAnswered) {
+      item.onclick = () => selectScenarioOption(i);
+    }
+    
+    optionsContainer.appendChild(item);
+  });
+  
+  // Show explanation if answered
+  let explanation = optionsContainer.querySelector('.explanation');
+  if (isAnswered) {
+    if (!explanation) {
+      explanation = document.createElement('div');
+      explanation.className = 'explanation';
+      optionsContainer.appendChild(explanation);
+    }
+    explanation.innerHTML = `<div class="explanation-title">Explanation</div><div class="explanation-text">${s.explanation}</div>`;
+  }
+  
+  // Update buttons
+  document.getElementById('scenario-submit-btn').classList.toggle('hidden', isAnswered);
+  document.getElementById('scenario-submit-btn').disabled = selectedScenarioAnswer === null && !isAnswered;
+  document.getElementById('next-scenario-btn').classList.toggle('hidden', !isAnswered);
+  
+  if (scenarioIndex === scenarioQuestions.length - 1 && isAnswered) {
+    document.getElementById('next-scenario-btn').textContent = 'See Results →';
+  } else {
+    document.getElementById('next-scenario-btn').textContent = 'Next Scenario →';
+  }
+}
+
+function selectScenarioOption(index) {
+  if (scenarioAnswers[scenarioIndex] !== null) return;
+  
+  selectedScenarioAnswer = index;
+  displayScenarioQuestion();
+  saveScenarioSession();
+}
+
+function submitScenarioAnswer() {
+  if (selectedScenarioAnswer === null) return;
+  
+  scenarioAnswers[scenarioIndex] = selectedScenarioAnswer;
+  displayScenarioQuestion();
+  saveScenarioSession();
+}
+
+function nextScenario() {
+  if (scenarioIndex < scenarioQuestions.length - 1) {
+    scenarioIndex++;
+    selectedScenarioAnswer = scenarioAnswers[scenarioIndex];
+    displayScenarioQuestion();
+    saveScenarioSession();
+  } else {
+    finishScenarios();
+  }
+}
+
+function finishScenarios() {
+  scenarioFinished = true;
+  
+  // Calculate score
+  const correct = scenarioAnswers.filter((a, i) => a === scenarioQuestions[i].correctIndex).length;
+  const score = Math.round((correct / scenarioQuestions.length) * 100);
+  const passed = score >= 80;
+  
+  // Update progress
+  progress.scenarioTest.testsTaken++;
+  if (passed) progress.scenarioTest.passedTests++;
+  progress.scenarioTest.averageScore = ((progress.scenarioTest.averageScore * (progress.scenarioTest.testsTaken - 1)) + score) / progress.scenarioTest.testsTaken;
+  progress.scenarioTest.highScore = Math.max(progress.scenarioTest.highScore, score);
+  
+  saveProgress();
+  
+  // Clear session
+  session.scenarioTest = null;
+  saveSession();
+  
+  // Show results
+  document.getElementById('scenario-card').classList.add('hidden');
+  document.getElementById('scenario-question-card').classList.add('hidden');
+  document.getElementById('scenario-actions').classList.add('hidden');
+  document.getElementById('scenario-results').classList.remove('hidden');
+  
+  document.getElementById('scenario-results-icon').textContent = passed ? '🎉' : '📚';
+  document.getElementById('scenario-results-title').textContent = passed ? 'Great Job!' : 'Keep Learning!';
+  document.getElementById('scenario-results-score').textContent = score + '%';
+  document.getElementById('scenario-results-score').className = 'results-score ' + (passed ? 'pass' : 'fail');
+  document.getElementById('scenario-correct-count').textContent = correct;
+  document.getElementById('scenario-incorrect-count').textContent = scenarioQuestions.length - correct;
+}
+
+function saveScenarioSession() {
+  session.scenarioTest = {
+    active: !scenarioFinished,
+    index: scenarioIndex,
+    answers: scenarioAnswers,
+    selectedAnswer: selectedScenarioAnswer
+  };
+  saveSession();
+}
+
+// ==================== UTILITIES ====================
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function resetAllProgress() {
+  if (confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) {
+    progress = {
+      permitFlashcards: { seen: [], known: [], needsPractice: [] },
+      permitTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
+      scenarioTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
+      totalStudyTime: 0,
+      lastSession: new Date().toISOString()
+    };
+    clearSession();
+    saveProgress();
+    updateHomeProgress();
+    checkResumeSession();
+    goHome();
+  }
+}
+  </script>
+</body>
+</html>
