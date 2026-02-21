@@ -28,6 +28,60 @@
     .header-btn:hover { background: rgb(255 255 255 / 0.1); }
     .main { padding-bottom: 2rem; }
     .container { max-width: 72rem; margin: 0 auto; padding: 0 1rem; }
+    
+    /* Layout with sidebar */
+    .page-layout { display: flex; gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .main-content { flex: 1; min-width: 0; }
+    .sidebar { width: 160px; flex-shrink: 0; display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    
+    /* Ad Styles */
+    .ad-container { 
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+      border: 2px dashed #cbd5e1; 
+      border-radius: 0.75rem; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      position: relative;
+      overflow: hidden;
+    }
+    .ad-container::before {
+      content: 'Advertisement';
+      position: absolute;
+      top: 4px;
+      left: 8px;
+      font-size: 0.625rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .ad-placeholder {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      text-align: center;
+      padding: 0.5rem;
+    }
+    .ad-placeholder span {
+      display: block;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    
+    /* Ad Sizes */
+    .ad-banner { width: 100%; height: 90px; margin-bottom: 1.5rem; }
+    .ad-banner-large { width: 100%; height: 100px; margin: 1.5rem 0; }
+    .ad-sidebar { width: 160px; height: 600px; position: sticky; top: 80px; }
+    .ad-inline { width: 100%; max-width: 300px; height: 250px; margin: 1rem auto; }
+    .ad-mobile-banner { width: 100%; height: 60px; margin: 1rem 0; }
+    .ad-footer { width: 100%; height: 80px; margin-top: 2rem; }
+    .ad-between-cards { width: 100%; height: 70px; margin: 1rem 0; }
+    
+    @media (max-width: 768px) {
+      .ad-banner { height: 60px; }
+      .ad-sidebar { display: none; }
+    }
+    
     .hero { text-align: center; padding: 2rem 0; }
     .hero-title { font-size: 2.5rem; font-weight: 700; background: linear-gradient(to right, #1e293b, #475569, #1e293b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; }
     .hero-subtitle { color: #64748b; font-size: 1.125rem; }
@@ -178,6 +232,12 @@
     .stat-card-title { font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem; }
     .stat-card-value { font-size: 2rem; font-weight: 700; color: #1e293b; }
     .hidden { display: none !important; }
+    
+    /* Ad test view layout */
+    .test-layout { display: flex; gap: 1rem; align-items: flex-start; }
+    .test-main { flex: 1; min-width: 0; }
+    .test-sidebar-ad { width: 160px; flex-shrink: 0; display: none; }
+    @media (min-width: 1100px) { .test-sidebar-ad { display: block; } }
   </style>
 </head>
 <body>
@@ -196,127 +256,165 @@
   </header>
 
   <main class="main">
-    <div class="container">
-      <!-- Home View -->
-      <div id="home-view" class="view-container active">
-        <div class="hero">
-          <h1 class="hero-title">Drive Your Test Results</h1>
-          <p class="hero-subtitle">Master your permit test and driving exam with interactive study tools.</p>
-        </div>
-
-        <div id="resume-banner" class="resume-banner hidden">
-          <span class="resume-text">📋 You have a session in progress</span>
-          <div class="resume-actions">
-            <button class="btn btn-sm btn-outline" onclick="clearSessionAndRefresh()">Start Fresh</button>
-          </div>
-        </div>
-
-        <div class="card progress-card" style="margin-bottom: 1.5rem;">
-          <div class="card-header">
-            <div class="card-title"><span>📊</span> Your Progress</div>
-          </div>
-          <div class="card-content">
-            <div class="progress-grid">
-              <div class="progress-item">
-                <div class="progress-value gradient-emerald" id="flashcard-progress">0%</div>
-                <div class="progress-label">Flashcards</div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-value gradient-blue" id="permit-tests">0</div>
-                <div class="progress-label">Permit Tests</div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-value gradient-blue" id="best-score">-</div>
-                <div class="progress-label">Best Score</div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-value gradient-purple" id="scenario-tests">0</div>
-                <div class="progress-label">Scenario Tests</div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-value gradient-purple" id="scenario-best">-</div>
-                <div class="progress-label">Scenario Best</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modes-grid">
-          <!-- Flashcards -->
-          <div class="card mode-card mode-card-emerald mode-card-bg-emerald" onclick="startFlashcards()">
-            <div class="mode-card-bar bar-emerald"></div>
-            <div class="card-header">
-              <div class="mode-header">
-                <div class="mode-icon">📚</div>
-                <span class="badge badge-emerald" id="flashcard-badge">0%</span>
-              </div>
-              <div class="mode-title title-emerald">Permit Flash Cards</div>
-              <div class="mode-desc">100 flashcards covering all test topics.</div>
-            </div>
-            <div class="card-content">
-              <div class="progress-bar">
-                <div class="progress-fill progress-fill-emerald" id="flashcard-bar" style="width: 0%"></div>
-              </div>
-              <div class="tags">
-                <span class="tag">Road Signs</span>
-                <span class="tag">Traffic Laws</span>
-                <span class="tag">Right-of-Way</span>
-                <span class="tag">Safe Driving</span>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-emerald">Start Learning</button>
-            </div>
-          </div>
-
-          <!-- Permit Test -->
-          <div class="card mode-card mode-card-blue mode-card-bg-blue" onclick="startPermitTest()">
-            <div class="mode-card-bar bar-blue"></div>
-            <div class="card-header">
-              <div class="mode-header">
-                <div class="mode-icon">📝</div>
-                <span class="badge badge-blue">Ready</span>
-              </div>
-              <div class="mode-title title-blue">Permit Practice Test</div>
-              <div class="mode-desc">40 questions • 45 minutes • Timed</div>
-            </div>
-            <div class="card-content">
-              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                <span class="badge badge-outline-blue">Timed</span>
-                <span class="badge badge-outline-blue">Instant Feedback</span>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-blue">Take Test</button>
-            </div>
-          </div>
-
-          <!-- Driving Scenarios -->
-          <div class="card mode-card mode-card-purple mode-card-bg-purple" onclick="startScenarios()">
-            <div class="mode-card-bar bar-purple"></div>
-            <div class="card-header">
-              <div class="mode-header">
-                <div class="mode-icon">🚙</div>
-                <span class="badge badge-purple">Ready</span>
-              </div>
-              <div class="mode-title title-purple">Driving Scenarios</div>
-              <div class="mode-desc">20 scenarios • No time limit</div>
-            </div>
-            <div class="card-content">
-              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                <span class="badge badge-outline-purple">No Timer</span>
-                <span class="badge badge-outline-purple">Explanations</span>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-purple">Start Test</button>
-            </div>
-          </div>
+    <!-- Home View -->
+    <div id="home-view" class="view-container active">
+      <!-- Top Banner Ad -->
+      <div class="container" style="padding-top: 1rem;">
+        <div class="ad-container ad-banner">
+          <div class="ad-placeholder">728 x 90<span>Leaderboard Ad</span></div>
         </div>
       </div>
 
-      <!-- Flashcards View -->
-      <div id="flashcards-view" class="view-container">
+      <div class="page-layout">
+        <div class="main-content">
+          <div class="hero">
+            <h1 class="hero-title">Drive Your Test Results</h1>
+            <p class="hero-subtitle">Master your permit test and driving exam with interactive study tools.</p>
+          </div>
+
+          <div id="resume-banner" class="resume-banner hidden">
+            <span class="resume-text">📋 You have a session in progress</span>
+            <div class="resume-actions">
+              <button class="btn btn-sm btn-outline" onclick="clearSessionAndRefresh()">Start Fresh</button>
+            </div>
+          </div>
+
+          <div class="card progress-card" style="margin-bottom: 1.5rem;">
+            <div class="card-header">
+              <div class="card-title"><span>📊</span> Your Progress</div>
+            </div>
+            <div class="card-content">
+              <div class="progress-grid">
+                <div class="progress-item">
+                  <div class="progress-value gradient-emerald" id="flashcard-progress">0%</div>
+                  <div class="progress-label">Flashcards</div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-value gradient-blue" id="permit-tests">0</div>
+                  <div class="progress-label">Permit Tests</div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-value gradient-blue" id="best-score">-</div>
+                  <div class="progress-label">Best Score</div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-value gradient-purple" id="scenario-tests">0</div>
+                  <div class="progress-label">Scenario Tests</div>
+                </div>
+                <div class="progress-item">
+                  <div class="progress-value gradient-purple" id="scenario-best">-</div>
+                  <div class="progress-label">Scenario Best</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- In-content Ad -->
+          <div class="ad-container ad-between-cards">
+            <div class="ad-placeholder">Responsive Ad<span>Between Sections</span></div>
+          </div>
+
+          <div class="modes-grid">
+            <!-- Flashcards -->
+            <div class="card mode-card mode-card-emerald mode-card-bg-emerald" onclick="startFlashcards()">
+              <div class="mode-card-bar bar-emerald"></div>
+              <div class="card-header">
+                <div class="mode-header">
+                  <div class="mode-icon">📚</div>
+                  <span class="badge badge-emerald" id="flashcard-badge">0%</span>
+                </div>
+                <div class="mode-title title-emerald">Permit Flash Cards</div>
+                <div class="mode-desc">100 flashcards covering all test topics.</div>
+              </div>
+              <div class="card-content">
+                <div class="progress-bar">
+                  <div class="progress-fill progress-fill-emerald" id="flashcard-bar" style="width: 0%"></div>
+                </div>
+                <div class="tags">
+                  <span class="tag">Road Signs</span>
+                  <span class="tag">Traffic Laws</span>
+                  <span class="tag">Right-of-Way</span>
+                  <span class="tag">Safe Driving</span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-emerald">Start Learning</button>
+              </div>
+            </div>
+
+            <!-- Permit Test -->
+            <div class="card mode-card mode-card-blue mode-card-bg-blue" onclick="startPermitTest()">
+              <div class="mode-card-bar bar-blue"></div>
+              <div class="card-header">
+                <div class="mode-header">
+                  <div class="mode-icon">📝</div>
+                  <span class="badge badge-blue">Ready</span>
+                </div>
+                <div class="mode-title title-blue">Permit Practice Test</div>
+                <div class="mode-desc">40 questions • 45 minutes • Timed</div>
+              </div>
+              <div class="card-content">
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                  <span class="badge badge-outline-blue">Timed</span>
+                  <span class="badge badge-outline-blue">Instant Feedback</span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-blue">Take Test</button>
+              </div>
+            </div>
+
+            <!-- Driving Scenarios -->
+            <div class="card mode-card mode-card-purple mode-card-bg-purple" onclick="startScenarios()">
+              <div class="mode-card-bar bar-purple"></div>
+              <div class="card-header">
+                <div class="mode-header">
+                  <div class="mode-icon">🚙</div>
+                  <span class="badge badge-purple">Ready</span>
+                </div>
+                <div class="mode-title title-purple">Driving Scenarios</div>
+                <div class="mode-desc">20 scenarios • No time limit</div>
+              </div>
+              <div class="card-content">
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                  <span class="badge badge-outline-purple">No Timer</span>
+                  <span class="badge badge-outline-purple">Explanations</span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-purple">Start Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Ad Banner -->
+          <div class="ad-container ad-mobile-banner" style="margin-top: 1.5rem;">
+            <div class="ad-placeholder">320 x 50<span>Mobile Banner</span></div>
+          </div>
+
+          <!-- Footer Ad -->
+          <div class="ad-container ad-footer">
+            <div class="ad-placeholder">728 x 80<span>Footer Ad Space</span></div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar Ad -->
+        <aside class="sidebar">
+          <div class="ad-container ad-sidebar">
+            <div class="ad-placeholder">160 x 600<span>Skyscraper Ad</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Flashcards View -->
+    <div id="flashcards-view" class="view-container">
+      <div class="container">
+        <!-- Top Banner Ad -->
+        <div class="ad-container ad-banner" style="margin-top: 1rem;">
+          <div class="ad-placeholder">728 x 90<span>Leaderboard Ad</span></div>
+        </div>
+
         <div class="back-header">
           <button class="back-btn" onclick="goHome()">← Back</button>
           <h2 class="view-title">Permit Flash Cards</h2>
@@ -330,167 +428,280 @@
           <button class="category-btn" data-category="Safe Driving" onclick="selectCategory('Safe Driving')">Safe Driving (25)</button>
         </div>
 
-        <div class="flashcard-container">
-          <div class="flashcard" id="flashcard" onclick="flipCard()">
-            <div class="flashcard-face flashcard-front">
-              <div class="flashcard-category" id="card-category">Category</div>
-              <div class="flashcard-text" id="card-front">Question</div>
-              <div class="flashcard-hint">Click to flip</div>
+        <div class="page-layout">
+          <div class="main-content">
+            <div class="flashcard-container">
+              <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="flashcard-face flashcard-front">
+                  <div class="flashcard-category" id="card-category">Category</div>
+                  <div class="flashcard-text" id="card-front">Question</div>
+                  <div class="flashcard-hint">Click to flip</div>
+                </div>
+                <div class="flashcard-face flashcard-back">
+                  <div class="flashcard-text" id="card-back">Answer</div>
+                  <div class="flashcard-hint">Click to flip back</div>
+                </div>
+              </div>
             </div>
-            <div class="flashcard-face flashcard-back">
-              <div class="flashcard-text" id="card-back">Answer</div>
-              <div class="flashcard-hint">Click to flip back</div>
+
+            <div class="card-nav">
+              <button class="nav-btn" id="prev-btn" onclick="prevCard()">←</button>
+              <span class="card-counter"><span id="card-index">1</span> / <span id="card-total">100</span></span>
+              <button class="nav-btn" id="next-btn" onclick="nextCard()">→</button>
+            </div>
+
+            <div class="rating-buttons" id="rating-buttons">
+              <button class="rating-btn rating-know" onclick="rateCard('known')">✓ I Know This</button>
+              <button class="rating-btn rating-practice" onclick="rateCard('practice')">→ Needs Practice</button>
+            </div>
+
+            <!-- Ad below flashcards -->
+            <div class="ad-container ad-inline">
+              <div class="ad-placeholder">300 x 250<span>Medium Rectangle</span></div>
             </div>
           </div>
-        </div>
 
-        <div class="card-nav">
-          <button class="nav-btn" id="prev-btn" onclick="prevCard()">←</button>
-          <span class="card-counter"><span id="card-index">1</span> / <span id="card-total">100</span></span>
-          <button class="nav-btn" id="next-btn" onclick="nextCard()">→</button>
-        </div>
-
-        <div class="rating-buttons" id="rating-buttons">
-          <button class="rating-btn rating-know" onclick="rateCard('known')">✓ I Know This</button>
-          <button class="rating-btn rating-practice" onclick="rateCard('practice')">→ Needs Practice</button>
+          <aside class="sidebar">
+            <div class="ad-container ad-sidebar">
+              <div class="ad-placeholder">160 x 600<span>Skyscraper Ad</span></div>
+            </div>
+          </aside>
         </div>
       </div>
+    </div>
 
-      <!-- Permit Test View -->
-      <div id="permit-test-view" class="view-container">
+    <!-- Permit Test View -->
+    <div id="permit-test-view" class="view-container">
+      <div class="container">
+        <!-- Top Banner Ad -->
+        <div class="ad-container ad-banner" style="margin-top: 1rem;">
+          <div class="ad-placeholder">728 x 90<span>Leaderboard Ad</span></div>
+        </div>
+
         <div class="back-header">
           <button class="back-btn" onclick="confirmExit()">← Exit Test</button>
           <h2 class="view-title">Permit Practice Test</h2>
         </div>
 
-        <div class="test-progress">
-          <div class="test-header">
-            <span class="test-timer" id="test-timer">45:00</span>
-            <span class="question-counter">Question <span id="test-index">1</span> of <span id="test-total">40</span></span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="test-progress-bar" style="width: 0%; background: linear-gradient(to right, #2563eb, #06b6d4);"></div>
-          </div>
-        </div>
-
-        <div class="question-card" id="test-question-card">
-          <span class="question-category" id="test-category">Category</span>
-          <div class="question-text" id="test-question">Question text</div>
-          <div class="options-list" id="test-options"></div>
-        </div>
-
-        <div class="test-actions" id="test-actions">
-          <button class="btn btn-outline" id="submit-btn" onclick="submitTestAnswer()" disabled>Submit Answer</button>
-          <button class="btn btn-blue hidden" id="next-question-btn" onclick="nextTestQuestion()">Next Question →</button>
-        </div>
-
-        <div class="results-card card hidden" id="test-results">
-          <div class="results-icon" id="results-icon">🎉</div>
-          <div class="results-title" id="results-title">Test Complete!</div>
-          <div class="results-score" id="results-score">85%</div>
-          <div class="results-stats">
-            <div class="stat-item">
-              <div class="stat-value" id="correct-count">34</div>
-              <div class="stat-label">Correct</div>
+        <div class="page-layout">
+          <div class="main-content">
+            <div class="test-progress">
+              <div class="test-header">
+                <span class="test-timer" id="test-timer">45:00</span>
+                <span class="question-counter">Question <span id="test-index">1</span> of <span id="test-total">40</span></span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="test-progress-bar" style="width: 0%; background: linear-gradient(to right, #2563eb, #06b6d4);"></div>
+              </div>
             </div>
-            <div class="stat-item">
-              <div class="stat-value" id="incorrect-count">6</div>
-              <div class="stat-label">Incorrect</div>
+
+            <div class="question-card" id="test-question-card">
+              <span class="question-category" id="test-category">Category</span>
+              <div class="question-text" id="test-question">Question text</div>
+              <div class="options-list" id="test-options"></div>
+            </div>
+
+            <div class="test-actions" id="test-actions">
+              <button class="btn btn-outline" id="submit-btn" onclick="submitTestAnswer()" disabled>Submit Answer</button>
+              <button class="btn btn-blue hidden" id="next-question-btn" onclick="nextTestQuestion()">Next Question →</button>
+            </div>
+
+            <div class="results-card card hidden" id="test-results">
+              <div class="results-icon" id="results-icon">🎉</div>
+              <div class="results-title" id="results-title">Test Complete!</div>
+              <div class="results-score" id="results-score">85%</div>
+              <div class="results-stats">
+                <div class="stat-item">
+                  <div class="stat-value" id="correct-count">34</div>
+                  <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value" id="incorrect-count">6</div>
+                  <div class="stat-label">Incorrect</div>
+                </div>
+              </div>
+              <div class="results-actions">
+                <button class="btn btn-outline" onclick="goHome()">Back to Home</button>
+                <button class="btn btn-blue" onclick="startPermitTest()">Retake Test</button>
+              </div>
+            </div>
+
+            <!-- Ad after test -->
+            <div class="ad-container ad-inline" id="test-end-ad" style="display: none;">
+              <div class="ad-placeholder">300 x 250<span>Medium Rectangle</span></div>
             </div>
           </div>
-          <div class="results-actions">
-            <button class="btn btn-outline" onclick="goHome()">Back to Home</button>
-            <button class="btn btn-blue" onclick="startPermitTest()">Retake Test</button>
-          </div>
+
+          <aside class="sidebar">
+            <div class="ad-container ad-sidebar">
+              <div class="ad-placeholder">160 x 600<span>Skyscraper Ad</span></div>
+            </div>
+          </aside>
         </div>
       </div>
+    </div>
 
-      <!-- Scenarios View -->
-      <div id="scenarios-view" class="view-container">
+    <!-- Scenarios View -->
+    <div id="scenarios-view" class="view-container">
+      <div class="container">
+        <!-- Top Banner Ad -->
+        <div class="ad-container ad-banner" style="margin-top: 1rem;">
+          <div class="ad-placeholder">728 x 90<span>Leaderboard Ad</span></div>
+        </div>
+
         <div class="back-header">
           <button class="back-btn" onclick="confirmExit()">← Exit Test</button>
           <h2 class="view-title">Driving Scenarios</h2>
         </div>
 
-        <div class="test-progress">
-          <div class="test-header">
-            <span class="test-timer" style="color: #7c3aed;">No Time Limit</span>
-            <span class="question-counter">Scenario <span id="scenario-index">1</span> of <span id="scenario-total">20</span></span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="scenario-progress-bar" style="width: 0%; background: linear-gradient(to right, #9333ea, #ec4899);"></div>
-          </div>
-        </div>
-
-        <div class="scenario-card" id="scenario-card">
-          <span class="scenario-topic" id="scenario-topic">Topic</span>
-          <span class="difficulty-badge difficulty-medium" id="scenario-difficulty">Medium</span>
-          <div class="scenario-text" id="scenario-text">Scenario description</div>
-        </div>
-
-        <div class="question-card" id="scenario-question-card">
-          <div class="question-text" id="scenario-question">Question text</div>
-          <div class="options-list" id="scenario-options"></div>
-        </div>
-
-        <div class="test-actions" id="scenario-actions">
-          <button class="btn btn-outline" id="scenario-submit-btn" onclick="submitScenarioAnswer()" disabled>Submit Answer</button>
-          <button class="btn btn-purple hidden" id="next-scenario-btn" onclick="nextScenario()">Next Scenario →</button>
-        </div>
-
-        <div class="results-card card hidden" id="scenario-results">
-          <div class="results-icon" id="scenario-results-icon">🎉</div>
-          <div class="results-title" id="scenario-results-title">Scenarios Complete!</div>
-          <div class="results-score" id="scenario-results-score">85%</div>
-          <div class="results-stats">
-            <div class="stat-item">
-              <div class="stat-value" id="scenario-correct-count">17</div>
-              <div class="stat-label">Correct</div>
+        <div class="page-layout">
+          <div class="main-content">
+            <div class="test-progress">
+              <div class="test-header">
+                <span class="test-timer" style="color: #7c3aed;">No Time Limit</span>
+                <span class="question-counter">Scenario <span id="scenario-index">1</span> of <span id="scenario-total">20</span></span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="scenario-progress-bar" style="width: 0%; background: linear-gradient(to right, #9333ea, #ec4899);"></div>
+              </div>
             </div>
-            <div class="stat-item">
-              <div class="stat-value" id="scenario-incorrect-count">3</div>
-              <div class="stat-label">Incorrect</div>
+
+            <div class="scenario-card" id="scenario-card">
+              <span class="scenario-topic" id="scenario-topic">Topic</span>
+              <span class="difficulty-badge difficulty-medium" id="scenario-difficulty">Medium</span>
+              <div class="scenario-text" id="scenario-text">Scenario description</div>
+            </div>
+
+            <div class="question-card" id="scenario-question-card">
+              <div class="question-text" id="scenario-question">Question text</div>
+              <div class="options-list" id="scenario-options"></div>
+            </div>
+
+            <div class="test-actions" id="scenario-actions">
+              <button class="btn btn-outline" id="scenario-submit-btn" onclick="submitScenarioAnswer()" disabled>Submit Answer</button>
+              <button class="btn btn-purple hidden" id="next-scenario-btn" onclick="nextScenario()">Next Scenario →</button>
+            </div>
+
+            <div class="results-card card hidden" id="scenario-results">
+              <div class="results-icon" id="scenario-results-icon">🎉</div>
+              <div class="results-title" id="scenario-results-title">Scenarios Complete!</div>
+              <div class="results-score" id="scenario-results-score">85%</div>
+              <div class="results-stats">
+                <div class="stat-item">
+                  <div class="stat-value" id="scenario-correct-count">17</div>
+                  <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value" id="scenario-incorrect-count">3</div>
+                  <div class="stat-label">Incorrect</div>
+                </div>
+              </div>
+              <div class="results-actions">
+                <button class="btn btn-outline" onclick="goHome()">Back to Home</button>
+                <button class="btn btn-purple" onclick="startScenarios()">Retake Test</button>
+              </div>
+            </div>
+
+            <!-- Ad after scenarios -->
+            <div class="ad-container ad-inline" id="scenario-end-ad" style="display: none;">
+              <div class="ad-placeholder">300 x 250<span>Medium Rectangle</span></div>
             </div>
           </div>
-          <div class="results-actions">
-            <button class="btn btn-outline" onclick="goHome()">Back to Home</button>
-            <button class="btn btn-purple" onclick="startScenarios()">Retake Test</button>
-          </div>
+
+          <aside class="sidebar">
+            <div class="ad-container ad-sidebar">
+              <div class="ad-placeholder">160 x 600<span>Skyscraper Ad</span></div>
+            </div>
+          </aside>
         </div>
       </div>
+    </div>
 
-      <!-- Analytics View -->
-      <div id="analytics-view" class="view-container">
+    <!-- Analytics View -->
+    <div id="analytics-view" class="view-container">
+      <div class="container">
+        <!-- Top Banner Ad -->
+        <div class="ad-container ad-banner" style="margin-top: 1rem;">
+          <div class="ad-placeholder">728 x 90<span>Leaderboard Ad</span></div>
+        </div>
+
         <div class="back-header">
           <button class="back-btn" onclick="goHome()">← Back</button>
           <h2 class="view-title">Your Analytics</h2>
         </div>
 
-        <div class="analytics-grid">
-          <div class="card stat-card">
-            <div class="stat-card-title">Total Flashcards Seen</div>
-            <div class="stat-card-value" id="stat-flashcards-seen">0</div>
-          </div>
-          <div class="card stat-card">
-            <div class="stat-card-title">Flashcards Known</div>
-            <div class="stat-card-value" id="stat-flashcards-known">0</div>
-          </div>
-          <div class="card stat-card">
-            <div class="stat-card-title">Average Test Score</div>
-            <div class="stat-card-value" id="stat-avg-score">-</div>
-          </div>
-          <div class="card stat-card">
-            <div class="stat-card-title">Tests Passed</div>
-            <div class="stat-card-value" id="stat-tests-passed">0</div>
-          </div>
-        </div>
+        <div class="page-layout">
+          <div class="main-content">
+            <div class="analytics-grid">
+              <div class="card stat-card">
+                <div class="stat-card-title">Total Flashcards Seen</div>
+                <div class="stat-card-value" id="stat-flashcards-seen">0</div>
+              </div>
+              <div class="card stat-card">
+                <div class="stat-card-title">Flashcards Known</div>
+                <div class="stat-card-value" id="stat-flashcards-known">0</div>
+              </div>
+              <div class="card stat-card">
+                <div class="stat-card-title">Average Test Score</div>
+                <div class="stat-card-value" id="stat-avg-score">-</div>
+              </div>
+              <div class="card stat-card">
+                <div class="stat-card-title">Tests Passed</div>
+                <div class="stat-card-value" id="stat-tests-passed">0</div>
+              </div>
+            </div>
 
-        <div style="text-align: center; margin-top: 2rem;">
-          <button class="btn btn-outline btn-red" onclick="resetAllProgress()">Reset All Progress</button>
+            <div style="text-align: center; margin-top: 2rem;">
+              <button class="btn btn-outline btn-red" onclick="resetAllProgress()">Reset All Progress</button>
+            </div>
+
+            <!-- Ad at bottom of analytics -->
+            <div class="ad-container ad-inline" style="margin-top: 2rem;">
+              <div class="ad-placeholder">300 x 250<span>Medium Rectangle</span></div>
+            </div>
+          </div>
+
+          <aside class="sidebar">
+            <div class="ad-container ad-sidebar">
+              <div class="ad-placeholder">160 x 600<span>Skyscraper Ad</span></div>
+            </div>
+          </aside>
         </div>
       </div>
     </div>
   </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">🚗</span>
+        <span class="footer-name">Drive Your Test</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="index.html" onclick="goHome(); return false;">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+      <p class="footer-copy">© 2025 Drive Your Test. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <style>
+    .site-footer { background: linear-gradient(to right, #1e293b, #334155, #1e293b); color: #94a3b8; padding: 2rem 1rem; margin-top: 2rem; border-top: 1px solid rgb(51 65 85 / 0.5); }
+    .footer-content { max-width: 72rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+    .footer-brand { display: flex; align-items: center; gap: 0.5rem; }
+    .footer-logo { font-size: 1.5rem; }
+    .footer-name { font-size: 1.125rem; font-weight: 600; color: white; }
+    .footer-nav { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .footer-nav a { color: #94a3b8; text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .footer-nav a:hover { color: white; }
+    .footer-copy { font-size: 0.75rem; color: #64748b; }
+    @media (min-width: 768px) {
+      .footer-content { flex-direction: row; justify-content: space-between; text-align: left; }
+      .footer-nav { gap: 2.5rem; }
+    }
+  </style>
 
   <script>
 // ==================== DATA ====================
@@ -685,13 +896,10 @@ let session = {
   permitFlashcards: null
 };
 
-// Flashcard state
 let currentDeck = [...permitFlashcards];
 let currentCardIndex = 0;
 let isFlipped = false;
 let currentCategory = 'all';
-
-// Test state
 let testQuestions = [];
 let testIndex = 0;
 let testAnswers = [];
@@ -699,8 +907,6 @@ let testTime = 45 * 60;
 let testTimer = null;
 let selectedTestAnswer = null;
 let testFinished = false;
-
-// Scenario state
 let scenarioIndex = 0;
 let scenarioAnswers = [];
 let selectedScenarioAnswer = null;
@@ -727,37 +933,25 @@ function loadProgress() {
         lastSession: parsed.lastSession || new Date().toISOString()
       };
     }
-  } catch (e) {
-    console.log('Could not load progress');
-  }
+  } catch (e) {}
 }
 
 function saveProgress() {
   try {
     progress.lastSession = new Date().toISOString();
     localStorage.setItem('driveyourtest_progress', JSON.stringify(progress));
-  } catch (e) {
-    console.log('Could not save progress');
-  }
+  } catch (e) {}
 }
 
 function loadSession() {
   try {
     const saved = localStorage.getItem('driveyourtest_session');
-    if (saved) {
-      session = JSON.parse(saved);
-    }
-  } catch (e) {
-    console.log('Could not load session');
-  }
+    if (saved) session = JSON.parse(saved);
+  } catch (e) {}
 }
 
 function saveSession() {
-  try {
-    localStorage.setItem('driveyourtest_session', JSON.stringify(session));
-  } catch (e) {
-    console.log('Could not save session');
-  }
+  try { localStorage.setItem('driveyourtest_session', JSON.stringify(session)); } catch (e) {}
 }
 
 function clearSession() {
@@ -778,12 +972,9 @@ function goHome() {
 }
 
 function confirmExit() {
-  if (confirm('Are you sure you want to exit? Your progress will be saved.')) {
-    goHome();
-  }
+  if (confirm('Are you sure you want to exit? Your progress will be saved.')) goHome();
 }
 
-// ==================== HOME PROGRESS ====================
 function updateHomeProgress() {
   const seenCount = progress.permitFlashcards.seen.length;
   const knownCount = progress.permitFlashcards.known.length;
@@ -792,14 +983,10 @@ function updateHomeProgress() {
   document.getElementById('flashcard-progress').textContent = flashcardPct + '%';
   document.getElementById('flashcard-badge').textContent = flashcardPct + '%';
   document.getElementById('flashcard-bar').style.width = flashcardPct + '%';
-  
   document.getElementById('permit-tests').textContent = progress.permitTest.testsTaken;
   document.getElementById('best-score').textContent = progress.permitTest.highScore > 0 ? progress.permitTest.highScore + '%' : '-';
-  
   document.getElementById('scenario-tests').textContent = progress.scenarioTest.testsTaken;
   document.getElementById('scenario-best').textContent = progress.scenarioTest.highScore > 0 ? progress.scenarioTest.highScore + '%' : '-';
-  
-  // Analytics
   document.getElementById('stat-flashcards-seen').textContent = seenCount;
   document.getElementById('stat-flashcards-known').textContent = knownCount;
   document.getElementById('stat-avg-score').textContent = progress.permitTest.averageScore > 0 ? Math.round(progress.permitTest.averageScore) + '%' : '-';
@@ -812,23 +999,16 @@ function checkResumeSession() {
 }
 
 function clearSessionAndRefresh() {
-  if (confirm('Clear your in-progress session and start fresh?')) {
-    clearSession();
-    checkResumeSession();
-  }
+  if (confirm('Clear your in-progress session and start fresh?')) { clearSession(); checkResumeSession(); }
 }
 
 // ==================== FLASHCARDS ====================
 function startFlashcards() {
-  // Check for existing session
   if (session.permitFlashcards) {
     currentDeck = session.permitFlashcards.deck;
     currentCardIndex = session.permitFlashcards.index;
     currentCategory = session.permitFlashcards.category;
-  } else {
-    selectCategory('all');
-  }
-  
+  } else { selectCategory('all'); }
   showView('flashcards');
   updateCardDisplay();
 }
@@ -837,18 +1017,8 @@ function selectCategory(category) {
   currentCategory = category;
   currentCardIndex = 0;
   isFlipped = false;
-  
-  if (category === 'all') {
-    currentDeck = [...permitFlashcards];
-  } else {
-    currentDeck = permitFlashcards.filter(c => c.category === category);
-  }
-  
-  // Update category buttons
-  document.querySelectorAll('.category-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.category === category);
-  });
-  
+  currentDeck = category === 'all' ? [...permitFlashcards] : permitFlashcards.filter(c => c.category === category);
+  document.querySelectorAll('.category-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.category === category));
   document.getElementById('card-total').textContent = currentDeck.length;
   updateCardDisplay();
   saveFlashcardSession();
@@ -861,81 +1031,41 @@ function flipCard() {
 
 function updateCardDisplay() {
   if (currentDeck.length === 0) return;
-  
   const card = currentDeck[currentCardIndex];
   document.getElementById('card-category').textContent = card.category;
   document.getElementById('card-front').textContent = card.front;
   document.getElementById('card-back').textContent = card.back;
   document.getElementById('card-index').textContent = currentCardIndex + 1;
-  
-  // Reset flip state
   isFlipped = false;
   document.getElementById('flashcard').classList.remove('flipped');
-  
-  // Update nav buttons
   document.getElementById('prev-btn').disabled = currentCardIndex === 0;
   document.getElementById('next-btn').disabled = currentCardIndex === currentDeck.length - 1;
 }
 
-function prevCard() {
-  if (currentCardIndex > 0) {
-    currentCardIndex--;
-    updateCardDisplay();
-    saveFlashcardSession();
-  }
-}
-
-function nextCard() {
-  if (currentCardIndex < currentDeck.length - 1) {
-    currentCardIndex++;
-    updateCardDisplay();
-    saveFlashcardSession();
-  }
-}
+function prevCard() { if (currentCardIndex > 0) { currentCardIndex--; updateCardDisplay(); saveFlashcardSession(); } }
+function nextCard() { if (currentCardIndex < currentDeck.length - 1) { currentCardIndex++; updateCardDisplay(); saveFlashcardSession(); } }
 
 function rateCard(rating) {
   const card = currentDeck[currentCardIndex];
-  
-  // Add to seen
-  if (!progress.permitFlashcards.seen.includes(card.id)) {
-    progress.permitFlashcards.seen.push(card.id);
-  }
-  
-  // Update rating
+  if (!progress.permitFlashcards.seen.includes(card.id)) progress.permitFlashcards.seen.push(card.id);
   if (rating === 'known') {
-    if (!progress.permitFlashcards.known.includes(card.id)) {
-      progress.permitFlashcards.known.push(card.id);
-    }
+    if (!progress.permitFlashcards.known.includes(card.id)) progress.permitFlashcards.known.push(card.id);
     progress.permitFlashcards.needsPractice = progress.permitFlashcards.needsPractice.filter(id => id !== card.id);
   } else {
-    if (!progress.permitFlashcards.needsPractice.includes(card.id)) {
-      progress.permitFlashcards.needsPractice.push(card.id);
-    }
+    if (!progress.permitFlashcards.needsPractice.includes(card.id)) progress.permitFlashcards.needsPractice.push(card.id);
     progress.permitFlashcards.known = progress.permitFlashcards.known.filter(id => id !== card.id);
   }
-  
   saveProgress();
-  
-  // Move to next card
-  if (currentCardIndex < currentDeck.length - 1) {
-    currentCardIndex++;
-    updateCardDisplay();
-    saveFlashcardSession();
-  }
+  if (currentCardIndex < currentDeck.length - 1) { currentCardIndex++; updateCardDisplay(); saveFlashcardSession(); }
 }
 
 function saveFlashcardSession() {
-  session.permitFlashcards = {
-    deck: currentDeck,
-    index: currentCardIndex,
-    category: currentCategory
-  };
+  session.permitFlashcards = { deck: currentDeck, index: currentCardIndex, category: currentCategory };
   saveSession();
 }
 
 // ==================== PERMIT TEST ====================
 function startPermitTest() {
-  // Check for existing session
   if (session.permitTest?.active) {
     testQuestions = session.permitTest.questions;
     testIndex = session.permitTest.index;
@@ -949,16 +1079,13 @@ function startPermitTest() {
     testTime = 45 * 60;
     selectedTestAnswer = null;
   }
-  
   testFinished = false;
-  
   showView('permit-test');
   document.getElementById('test-results').classList.add('hidden');
   document.getElementById('test-question-card').classList.remove('hidden');
   document.getElementById('test-actions').classList.remove('hidden');
-  
+  document.getElementById('test-end-ad').style.display = 'none';
   document.getElementById('test-total').textContent = testQuestions.length;
-  
   displayTestQuestion();
   startTimer();
   saveTestSession();
@@ -966,71 +1093,39 @@ function startPermitTest() {
 
 function displayTestQuestion() {
   const q = testQuestions[testIndex];
-  
   document.getElementById('test-category').textContent = q.category;
   document.getElementById('test-question').textContent = q.question;
   document.getElementById('test-index').textContent = testIndex + 1;
-  
-  // Update progress bar
-  const pct = ((testIndex + 1) / testQuestions.length) * 100;
-  document.getElementById('test-progress-bar').style.width = pct + '%';
-  
-  // Display options
+  document.getElementById('test-progress-bar').style.width = ((testIndex + 1) / testQuestions.length) * 100 + '%';
   const optionsContainer = document.getElementById('test-options');
   optionsContainer.innerHTML = '';
-  
   const isAnswered = testAnswers[testIndex] !== null;
-  
   q.options.forEach((opt, i) => {
     const item = document.createElement('div');
     item.className = 'option-item';
-    
     if (isAnswered) {
       item.classList.add('disabled');
       if (i === q.correctIndex) item.classList.add('correct');
       else if (i === testAnswers[testIndex]) item.classList.add('incorrect');
-    } else if (selectedTestAnswer === i) {
-      item.classList.add('selected');
-    }
-    
-    item.innerHTML = `
-      <div class="option-radio"></div>
-      <span class="option-text">${opt}</span>
-    `;
-    
-    if (!isAnswered) {
-      item.onclick = () => selectTestOption(i);
-    }
-    
+    } else if (selectedTestAnswer === i) item.classList.add('selected');
+    item.innerHTML = `<div class="option-radio"></div><span class="option-text">${opt}</span>`;
+    if (!isAnswered) item.onclick = () => selectTestOption(i);
     optionsContainer.appendChild(item);
   });
-  
-  // Show explanation if answered
-  let explanation = optionsContainer.querySelector('.explanation');
   if (isAnswered) {
-    if (!explanation) {
-      explanation = document.createElement('div');
-      explanation.className = 'explanation';
-      optionsContainer.appendChild(explanation);
-    }
+    const explanation = document.createElement('div');
+    explanation.className = 'explanation';
     explanation.innerHTML = `<div class="explanation-title">Explanation</div><div class="explanation-text">${q.explanation}</div>`;
+    optionsContainer.appendChild(explanation);
   }
-  
-  // Update buttons
   document.getElementById('submit-btn').classList.toggle('hidden', isAnswered);
   document.getElementById('submit-btn').disabled = selectedTestAnswer === null && !isAnswered;
   document.getElementById('next-question-btn').classList.toggle('hidden', !isAnswered);
-  
-  if (testIndex === testQuestions.length - 1 && isAnswered) {
-    document.getElementById('next-question-btn').textContent = 'See Results →';
-  } else {
-    document.getElementById('next-question-btn').textContent = 'Next Question →';
-  }
+  document.getElementById('next-question-btn').textContent = testIndex === testQuestions.length - 1 && isAnswered ? 'See Results →' : 'Next Question →';
 }
 
 function selectTestOption(index) {
   if (testAnswers[testIndex] !== null) return;
-  
   selectedTestAnswer = index;
   displayTestQuestion();
   saveTestSession();
@@ -1038,7 +1133,6 @@ function selectTestOption(index) {
 
 function submitTestAnswer() {
   if (selectedTestAnswer === null) return;
-  
   testAnswers[testIndex] = selectedTestAnswer;
   displayTestQuestion();
   saveTestSession();
@@ -1050,24 +1144,12 @@ function nextTestQuestion() {
     selectedTestAnswer = testAnswers[testIndex];
     displayTestQuestion();
     saveTestSession();
-  } else {
-    finishTest();
-  }
+  } else { finishTest(); }
 }
 
 function startTimer() {
   if (testTimer) clearInterval(testTimer);
-  
-  testTimer = setInterval(() => {
-    testTime--;
-    updateTimerDisplay();
-    
-    if (testTime <= 0) {
-      clearInterval(testTimer);
-      finishTest();
-    }
-  }, 1000);
-  
+  testTimer = setInterval(() => { testTime--; updateTimerDisplay(); if (testTime <= 0) { clearInterval(testTimer); finishTest(); } }, 1000);
   updateTimerDisplay();
 }
 
@@ -1082,29 +1164,20 @@ function updateTimerDisplay() {
 function finishTest() {
   if (testTimer) clearInterval(testTimer);
   testFinished = true;
-  
-  // Calculate score
   const correct = testAnswers.filter((a, i) => a === testQuestions[i].correctIndex).length;
   const score = Math.round((correct / testQuestions.length) * 100);
   const passed = score >= 80;
-  
-  // Update progress
   progress.permitTest.testsTaken++;
   if (passed) progress.permitTest.passedTests++;
   progress.permitTest.averageScore = ((progress.permitTest.averageScore * (progress.permitTest.testsTaken - 1)) + score) / progress.permitTest.testsTaken;
   progress.permitTest.highScore = Math.max(progress.permitTest.highScore, score);
-  
   saveProgress();
-  
-  // Clear session
   session.permitTest = null;
   saveSession();
-  
-  // Show results
   document.getElementById('test-question-card').classList.add('hidden');
   document.getElementById('test-actions').classList.add('hidden');
   document.getElementById('test-results').classList.remove('hidden');
-  
+  document.getElementById('test-end-ad').style.display = 'block';
   document.getElementById('results-icon').textContent = passed ? '🎉' : '📚';
   document.getElementById('results-title').textContent = passed ? 'Congratulations!' : 'Keep Practicing!';
   document.getElementById('results-score').textContent = score + '%';
@@ -1114,20 +1187,12 @@ function finishTest() {
 }
 
 function saveTestSession() {
-  session.permitTest = {
-    active: !testFinished,
-    questions: testQuestions,
-    index: testIndex,
-    answers: testAnswers,
-    time: testTime,
-    selectedAnswer: selectedTestAnswer
-  };
+  session.permitTest = { active: !testFinished, questions: testQuestions, index: testIndex, answers: testAnswers, time: testTime, selectedAnswer: selectedTestAnswer };
   saveSession();
 }
 
 // ==================== SCENARIOS ====================
 function startScenarios() {
-  // Check for existing session
   if (session.scenarioTest?.active) {
     scenarioIndex = session.scenarioTest.index;
     scenarioAnswers = session.scenarioTest.answers;
@@ -1137,91 +1202,56 @@ function startScenarios() {
     scenarioAnswers = new Array(scenarioQuestions.length).fill(null);
     selectedScenarioAnswer = null;
   }
-  
   scenarioFinished = false;
-  
   showView('scenarios');
   document.getElementById('scenario-results').classList.add('hidden');
   document.getElementById('scenario-card').classList.remove('hidden');
   document.getElementById('scenario-question-card').classList.remove('hidden');
   document.getElementById('scenario-actions').classList.remove('hidden');
-  
+  document.getElementById('scenario-end-ad').style.display = 'none';
   document.getElementById('scenario-total').textContent = scenarioQuestions.length;
-  
   displayScenarioQuestion();
   saveScenarioSession();
 }
 
 function displayScenarioQuestion() {
   const s = scenarioQuestions[scenarioIndex];
-  
   document.getElementById('scenario-topic').textContent = s.topic;
   document.getElementById('scenario-difficulty').textContent = s.difficulty;
   document.getElementById('scenario-difficulty').className = 'difficulty-badge difficulty-' + s.difficulty;
   document.getElementById('scenario-text').textContent = s.scenario;
   document.getElementById('scenario-question').textContent = s.question;
   document.getElementById('scenario-index').textContent = scenarioIndex + 1;
-  
-  // Update progress bar
-  const pct = ((scenarioIndex + 1) / scenarioQuestions.length) * 100;
-  document.getElementById('scenario-progress-bar').style.width = pct + '%';
-  
-  // Display options
+  document.getElementById('scenario-progress-bar').style.width = ((scenarioIndex + 1) / scenarioQuestions.length) * 100 + '%';
   const optionsContainer = document.getElementById('scenario-options');
   optionsContainer.innerHTML = '';
-  
   const isAnswered = scenarioAnswers[scenarioIndex] !== null;
-  
   s.options.forEach((opt, i) => {
     const item = document.createElement('div');
     item.className = 'option-item';
-    
     if (isAnswered) {
       item.classList.add('disabled');
       if (i === s.correctIndex) item.classList.add('correct');
       else if (i === scenarioAnswers[scenarioIndex]) item.classList.add('incorrect');
-    } else if (selectedScenarioAnswer === i) {
-      item.classList.add('selected');
-    }
-    
-    item.innerHTML = `
-      <div class="option-radio"></div>
-      <span class="option-text">${opt}</span>
-    `;
-    
-    if (!isAnswered) {
-      item.onclick = () => selectScenarioOption(i);
-    }
-    
+    } else if (selectedScenarioAnswer === i) item.classList.add('selected');
+    item.innerHTML = `<div class="option-radio"></div><span class="option-text">${opt}</span>`;
+    if (!isAnswered) item.onclick = () => selectScenarioOption(i);
     optionsContainer.appendChild(item);
   });
-  
-  // Show explanation if answered
-  let explanation = optionsContainer.querySelector('.explanation');
   if (isAnswered) {
-    if (!explanation) {
-      explanation = document.createElement('div');
-      explanation.className = 'explanation';
-      optionsContainer.appendChild(explanation);
-    }
+    const explanation = document.createElement('div');
+    explanation.className = 'explanation';
     explanation.innerHTML = `<div class="explanation-title">Explanation</div><div class="explanation-text">${s.explanation}</div>`;
+    optionsContainer.appendChild(explanation);
   }
-  
-  // Update buttons
   document.getElementById('scenario-submit-btn').classList.toggle('hidden', isAnswered);
   document.getElementById('scenario-submit-btn').disabled = selectedScenarioAnswer === null && !isAnswered;
   document.getElementById('next-scenario-btn').classList.toggle('hidden', !isAnswered);
-  
-  if (scenarioIndex === scenarioQuestions.length - 1 && isAnswered) {
-    document.getElementById('next-scenario-btn').textContent = 'See Results →';
-  } else {
-    document.getElementById('next-scenario-btn').textContent = 'Next Scenario →';
-  }
+  document.getElementById('next-scenario-btn').textContent = scenarioIndex === scenarioQuestions.length - 1 && isAnswered ? 'See Results →' : 'Next Scenario →';
 }
 
 function selectScenarioOption(index) {
   if (scenarioAnswers[scenarioIndex] !== null) return;
-  
   selectedScenarioAnswer = index;
   displayScenarioQuestion();
   saveScenarioSession();
@@ -1229,7 +1259,6 @@ function selectScenarioOption(index) {
 
 function submitScenarioAnswer() {
   if (selectedScenarioAnswer === null) return;
-  
   scenarioAnswers[scenarioIndex] = selectedScenarioAnswer;
   displayScenarioQuestion();
   saveScenarioSession();
@@ -1241,37 +1270,26 @@ function nextScenario() {
     selectedScenarioAnswer = scenarioAnswers[scenarioIndex];
     displayScenarioQuestion();
     saveScenarioSession();
-  } else {
-    finishScenarios();
-  }
+  } else { finishScenarios(); }
 }
 
 function finishScenarios() {
   scenarioFinished = true;
-  
-  // Calculate score
   const correct = scenarioAnswers.filter((a, i) => a === scenarioQuestions[i].correctIndex).length;
   const score = Math.round((correct / scenarioQuestions.length) * 100);
   const passed = score >= 80;
-  
-  // Update progress
   progress.scenarioTest.testsTaken++;
   if (passed) progress.scenarioTest.passedTests++;
   progress.scenarioTest.averageScore = ((progress.scenarioTest.averageScore * (progress.scenarioTest.testsTaken - 1)) + score) / progress.scenarioTest.testsTaken;
   progress.scenarioTest.highScore = Math.max(progress.scenarioTest.highScore, score);
-  
   saveProgress();
-  
-  // Clear session
   session.scenarioTest = null;
   saveSession();
-  
-  // Show results
   document.getElementById('scenario-card').classList.add('hidden');
   document.getElementById('scenario-question-card').classList.add('hidden');
   document.getElementById('scenario-actions').classList.add('hidden');
   document.getElementById('scenario-results').classList.remove('hidden');
-  
+  document.getElementById('scenario-end-ad').style.display = 'block';
   document.getElementById('scenario-results-icon').textContent = passed ? '🎉' : '📚';
   document.getElementById('scenario-results-title').textContent = passed ? 'Great Job!' : 'Keep Learning!';
   document.getElementById('scenario-results-score').textContent = score + '%';
@@ -1281,12 +1299,7 @@ function finishScenarios() {
 }
 
 function saveScenarioSession() {
-  session.scenarioTest = {
-    active: !scenarioFinished,
-    index: scenarioIndex,
-    answers: scenarioAnswers,
-    selectedAnswer: selectedScenarioAnswer
-  };
+  session.scenarioTest = { active: !scenarioFinished, index: scenarioIndex, answers: scenarioAnswers, selectedAnswer: selectedScenarioAnswer };
   saveSession();
 }
 
@@ -1301,13 +1314,7 @@ function shuffleArray(array) {
 
 function resetAllProgress() {
   if (confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) {
-    progress = {
-      permitFlashcards: { seen: [], known: [], needsPractice: [] },
-      permitTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
-      scenarioTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
-      totalStudyTime: 0,
-      lastSession: new Date().toISOString()
-    };
+    progress = { permitFlashcards: { seen: [], known: [], needsPractice: [] }, permitTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 }, scenarioTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 }, totalStudyTime: 0, lastSession: new Date().toISOString() };
     clearSession();
     saveProgress();
     updateHomeProgress();
