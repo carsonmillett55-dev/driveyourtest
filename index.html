@@ -15,128 +15,94 @@
     :root {
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       --radius: 0.75rem;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
     }
-    body { font-family: var(--font-sans); background: linear-gradient(to bottom right, #f8fafc, #ffffff, #f1f5f9); min-height: 100vh; color: #1e293b; line-height: 1.5; }
+    body { font-family: var(--font-sans); background: linear-gradient(to bottom right, #f8fafc, #fff, #f1f5f9); min-height: 100vh; color: #1e293b; line-height: 1.5; }
+    
+    /* Header */
     .header { position: sticky; top: 0; z-index: 50; background: linear-gradient(to right, #1e293b, #334155, #1e293b); color: white; box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); border-bottom: 1px solid rgb(51 65 85 / 0.5); }
     .header-content { max-width: 72rem; margin: 0 auto; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
     .logo { display: flex; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; font-size: 1rem; }
     .logo:hover { opacity: 0.9; }
-    .logo-icon { font-size: 1.5rem; transition: transform 0.2s; }
-    .logo:hover .logo-icon { transform: scale(1.1); }
+    .logo-icon { font-size: 1.5rem; }
     .logo-text { font-size: 1.25rem; font-weight: 700; background: linear-gradient(to right, #60a5fa, #c084fc, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .header-btn { padding: 0.5rem; background: transparent; border: none; border-radius: 9999px; cursor: pointer; color: white; transition: background 0.2s; }
-    .header-btn:hover { background: rgb(255 255 255 / 0.1); }
+    
+    /* Layout */
     .main { padding-bottom: 2rem; }
     .container { max-width: 72rem; margin: 0 auto; padding: 0 1rem; }
-    
-    /* Layout with sidebar */
     .page-layout { display: flex; gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
     .main-content { flex: 1; min-width: 0; }
     .sidebar { width: 160px; flex-shrink: 0; display: none; }
     @media (min-width: 1024px) { .sidebar { display: block; } }
     
-    /* Ad Styles */
-    .ad-container { 
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
-      border: 2px dashed #cbd5e1; 
-      border-radius: 0.75rem; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      position: relative;
-      overflow: hidden;
-    }
-    .ad-container::before {
-      content: 'Advertisement';
-      position: absolute;
-      top: 4px;
-      left: 8px;
-      font-size: 0.625rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .ad-placeholder {
-      color: #94a3b8;
-      font-size: 0.875rem;
-      text-align: center;
-      padding: 0.5rem;
-    }
-    .ad-placeholder span {
-      display: block;
-      font-size: 0.75rem;
-      margin-top: 0.25rem;
-    }
+    /* View Container */
+    .view-container { display: none; }
+    .view-container.active { display: block; }
     
-    /* Ad Sizes */
-    .ad-banner { width: 100%; height: 90px; margin-bottom: 1.5rem; }
-    .ad-banner-large { width: 100%; height: 100px; margin: 1.5rem 0; }
-    .ad-sidebar { width: 160px; height: 600px; position: sticky; top: 80px; }
-    .ad-inline { width: 100%; max-width: 300px; height: 250px; margin: 1rem auto; }
-    .ad-mobile-banner { width: 100%; height: 60px; margin: 1rem 0; }
-    .ad-footer { width: 100%; height: 80px; margin-top: 2rem; }
-    .ad-between-cards { width: 100%; height: 70px; margin: 1rem 0; }
-    
-    @media (max-width: 768px) {
-      .ad-banner { height: 60px; }
-      .ad-sidebar { display: none; }
-    }
-    
+    /* Hero */
     .hero { text-align: center; padding: 2rem 0; }
-    .hero-title { font-size: 2.5rem; font-weight: 700; background: linear-gradient(to right, #1e293b, #475569, #1e293b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; }
+    .hero-title { font-size: 2.5rem; font-weight: 700; background: linear-gradient(to right, #1e293b, #475569); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.75rem; }
     .hero-subtitle { color: #64748b; font-size: 1.125rem; }
+    
+    /* Cards */
     .card { background: white; border-radius: var(--radius); border: 1px solid #e2e8f0; box-shadow: var(--shadow-xl); overflow: hidden; }
     .card-header { padding: 1.5rem; }
     .card-title { font-size: 1.125rem; font-weight: 600; color: #1e293b; display: flex; align-items: center; gap: 0.5rem; }
     .card-content { padding: 0 1.5rem 1.5rem; }
     .card-footer { padding: 1.5rem; border-top: 1px solid #f1f5f9; }
+    
+    /* Progress */
     .progress-card { background: linear-gradient(to bottom right, #f8fafc, #f1f5f9); }
     .progress-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     @media (min-width: 768px) { .progress-grid { grid-template-columns: repeat(5, 1fr); } }
     .progress-item { text-align: center; }
     .progress-value { font-size: 1.875rem; font-weight: 700; }
     .progress-label { font-size: 0.875rem; color: #64748b; }
-    .gradient-emerald { background: linear-gradient(to right, #059669, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .gradient-blue { background: linear-gradient(to right, #2563eb, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .gradient-purple { background: linear-gradient(to right, #9333ea, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gradient-emerald { background: linear-gradient(to right, #059669, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .gradient-blue { background: linear-gradient(to right, #2563eb, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .gradient-purple { background: linear-gradient(to right, #9333ea, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .progress-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; margin-bottom: 1rem; }
+    .progress-fill { height: 100%; border-radius: 9999px; transition: width 0.3s; }
+    .progress-fill-emerald { background: linear-gradient(to right, #059669, #0d9488); }
+    
+    /* Mode Cards */
     .modes-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     @media (min-width: 768px) { .modes-grid { grid-template-columns: repeat(3, 1fr); } }
-    .mode-card { cursor: pointer; transition: all 0.5s; border: 2px solid transparent; position: relative; }
-    .mode-card:hover { box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); border-color: rgb(100 116 139 / 0.3); }
+    .mode-card { cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
+    .mode-card:hover { box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); transform: translateY(-2px); }
     .mode-card-emerald:hover { border-color: rgb(52 211 153 / 0.5); }
     .mode-card-blue:hover { border-color: rgb(96 165 250 / 0.5); }
     .mode-card-purple:hover { border-color: rgb(192 132 252 / 0.5); }
-    .mode-card-bar { height: 4px; transition: height 0.2s; }
-    .mode-card:hover .mode-card-bar { height: 8px; }
+    .mode-card-bar { height: 4px; }
     .bar-emerald { background: linear-gradient(to right, #34d399, #2dd4bf); }
     .bar-blue { background: linear-gradient(to right, #60a5fa, #22d3ee); }
     .bar-purple { background: linear-gradient(to right, #c084fc, #f472b6); }
     .mode-card-bg-emerald { background: linear-gradient(to bottom right, white, rgb(236 253 245 / 0.3)); }
     .mode-card-bg-blue { background: linear-gradient(to bottom right, white, rgb(239 246 255 / 0.3)); }
     .mode-card-bg-purple { background: linear-gradient(to bottom right, white, rgb(250 245 255 / 0.3)); }
-    .mode-icon { font-size: 3rem; margin-bottom: 0.75rem; transition: transform 0.2s; }
-    .mode-card:hover .mode-icon { transform: scale(1.1); }
+    .mode-icon { font-size: 3rem; margin-bottom: 0.75rem; }
     .mode-header { display: flex; justify-content: space-between; align-items: flex-start; }
     .mode-title { font-weight: 600; font-size: 1.25rem; }
-    .title-emerald { background: linear-gradient(to right, #047857, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .title-blue { background: linear-gradient(to right, #1d4ed8, #0891b2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .title-purple { background: linear-gradient(to right, #7c3aed, #be185d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .title-emerald { background: linear-gradient(to right, #047857, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .title-blue { background: linear-gradient(to right, #1d4ed8, #0891b2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .title-purple { background: linear-gradient(to right, #7c3aed, #be185d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .mode-desc { font-size: 0.875rem; color: #64748b; }
+    
+    /* Badges */
     .badge { display: inline-flex; align-items: center; justify-content: center; border-radius: 0.375rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; font-weight: 500; }
     .badge-emerald { background: linear-gradient(to right, #059669, #0d9488); color: white; box-shadow: var(--shadow-lg); }
     .badge-blue { background: linear-gradient(to right, #2563eb, #06b6d4); color: white; box-shadow: var(--shadow-lg); }
     .badge-purple { background: linear-gradient(to right, #9333ea, #ec4899); color: white; box-shadow: var(--shadow-lg); }
-    .badge-outline-blue { border: 1px solid #93c5fd; color: #1d4ed8; font-size: 0.75rem; }
-    .badge-outline-purple { border: 1px solid #d8b4fe; color: #7c3aed; font-size: 0.75rem; }
-    .progress-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; margin-bottom: 1rem; }
-    .progress-fill { height: 100%; border-radius: 9999px; transition: width 0.3s; }
-    .progress-fill-emerald { background: linear-gradient(to right, #059669, #0d9488); }
+    .badge-outline-blue { border: 1px solid #93c5fd; color: #1d4ed8; }
+    .badge-outline-purple { border: 1px solid #d8b4fe; color: #7c3aed; }
+    
+    /* Tags */
     .tags { display: flex; flex-wrap: wrap; gap: 0.25rem; font-size: 0.75rem; color: #64748b; }
     .tag { padding: 0.25rem 0.5rem; background: rgb(236 253 245); border-radius: 0.25rem; }
+    
+    /* Buttons */
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; border-radius: 0.375rem; border: none; cursor: pointer; transition: all 0.2s; width: 100%; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-emerald { background: linear-gradient(to right, #059669, #0d9488); color: white; box-shadow: var(--shadow-lg); }
@@ -147,101 +113,137 @@
     .btn-purple:hover:not(:disabled) { background: linear-gradient(to right, #7c3aed, #be185d); }
     .btn-outline { background: white; border: 1px solid #e2e8f0; color: #475569; }
     .btn-outline:hover:not(:disabled) { background: #f8fafc; }
-    .btn-red { color: #dc2626; border-color: #fca5a5; }
-    .btn-red:hover:not(:disabled) { background: #fef2f2; }
     .btn-sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; width: auto; }
-    .view-container { display: none; }
-    .view-container.active { display: block; }
+    
+    /* Back Header */
     .back-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-    .back-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; font-size: 0.875rem; color: #475569; transition: all 0.2s; }
-    .back-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .back-btn { padding: 0.5rem 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; font-size: 0.875rem; color: #64748b; transition: all 0.2s; }
+    .back-btn:hover { background: #f8fafc; color: #1e293b; }
     .view-title { font-size: 1.5rem; font-weight: 700; }
+    
+    /* Flashcards */
     .category-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .category-btn { padding: 0.5rem 1rem; font-size: 0.875rem; border-radius: 9999px; border: 1px solid #e2e8f0; background: white; cursor: pointer; transition: all 0.2s; }
-    .category-btn:hover { background: #f8fafc; }
-    .category-btn.active { background: #1e293b; color: white; border-color: #1e293b; }
+    .category-btn { padding: 0.5rem 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; color: #64748b; transition: all 0.2s; }
+    .category-btn:hover, .category-btn.active { background: #059669; color: white; border-color: #059669; }
     .flashcard-container { perspective: 1000px; margin-bottom: 1.5rem; }
-    .flashcard { position: relative; width: 100%; height: 300px; cursor: pointer; transition: transform 0.6s; transform-style: preserve-3d; }
+    .flashcard { width: 100%; height: 280px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
     .flashcard.flipped { transform: rotateY(180deg); }
-    .flashcard-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; border-radius: var(--radius); text-align: center; }
-    .flashcard-front { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; box-shadow: var(--shadow-xl); }
-    .flashcard-back { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; transform: rotateY(180deg); box-shadow: var(--shadow-xl); }
-    .flashcard-category { font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.5rem; }
-    .flashcard-text { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
-    .flashcard-hint { position: absolute; bottom: 1rem; font-size: 0.75rem; opacity: 0.7; }
+    .flashcard-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; box-shadow: var(--shadow-xl); }
+    .flashcard-front { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 2px solid #6ee7b7; }
+    .flashcard-back { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid #86efac; transform: rotateY(180deg); }
+    .flashcard-category { font-size: 0.75rem; color: #059669; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .flashcard-text { font-size: 1.125rem; color: #1e293b; line-height: 1.6; }
+    .flashcard-hint { font-size: 0.75rem; color: #64748b; margin-top: 1rem; }
     .card-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
-    .card-counter { font-size: 0.875rem; color: #64748b; }
-    .nav-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #e2e8f0; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-    .nav-btn:hover:not(:disabled) { background: #f8fafc; border-color: #cbd5e1; }
-    .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .rating-buttons { display: flex; gap: 0.5rem; justify-content: center; }
-    .rating-btn { padding: 0.5rem 1rem; border-radius: 0.5rem; border: none; cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; }
-    .rating-know { background: #dcfce7; color: #166534; }
+    .nav-btn { width: 48px; height: 48px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; cursor: pointer; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .nav-btn:hover { background: #f1f5f9; }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .card-counter { font-size: 0.875rem; color: #64748b; min-width: 60px; text-align: center; }
+    .rating-buttons { display: flex; gap: 1rem; justify-content: center; }
+    .rating-btn { padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.2s; }
+    .rating-know { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
     .rating-know:hover { background: #bbf7d0; }
-    .rating-practice { background: #fef3c7; color: #92400e; }
+    .rating-practice { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
     .rating-practice:hover { background: #fde68a; }
+    
+    /* Test Styles */
     .test-progress { margin-bottom: 1.5rem; }
     .test-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-    .test-timer { font-size: 1.25rem; font-weight: 600; color: #1e293b; }
-    .test-timer.warning { color: #dc2626; }
+    .test-timer { font-size: 1.25rem; font-weight: 700; color: #2563eb; }
     .question-counter { font-size: 0.875rem; color: #64748b; }
-    .question-card { background: white; border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); }
-    .question-category { display: inline-block; padding: 0.25rem 0.75rem; background: #f1f5f9; border-radius: 9999px; font-size: 0.75rem; color: #64748b; margin-bottom: 1rem; }
-    .question-text { font-size: 1.125rem; font-weight: 500; color: #1e293b; margin-bottom: 1.5rem; }
+    .question-card { background: white; border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow-lg); }
+    .question-category { font-size: 0.75rem; color: #2563eb; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; display: inline-block; background: #eff6ff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; }
+    .question-text { font-size: 1.125rem; font-weight: 600; color: #1e293b; margin-bottom: 1.5rem; line-height: 1.6; }
     .options-list { display: flex; flex-direction: column; gap: 0.75rem; }
-    .option-item { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; }
-    .option-item:hover { border-color: #cbd5e1; background: #f8fafc; }
+    .option-item { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .option-item:hover { border-color: #93c5fd; background: #eff6ff; }
     .option-item.selected { border-color: #3b82f6; background: #eff6ff; }
     .option-item.correct { border-color: #22c55e; background: #f0fdf4; }
     .option-item.incorrect { border-color: #ef4444; background: #fef2f2; }
-    .option-item.disabled { cursor: not-allowed; }
-    .option-item.disabled:hover { background: inherit; border-color: inherit; }
-    .option-radio { width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .option-item.selected .option-radio { border-color: #3b82f6; }
-    .option-item.selected .option-radio::after { content: ''; width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; }
-    .option-item.correct .option-radio { border-color: #22c55e; background: #22c55e; }
-    .option-item.correct .option-radio::after { content: '✓'; color: white; font-size: 12px; }
-    .option-item.incorrect .option-radio { border-color: #ef4444; background: #ef4444; }
-    .option-item.incorrect .option-radio::after { content: '✗'; color: white; font-size: 12px; }
+    .option-item.disabled { cursor: default; }
+    .option-radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #cbd5e1; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .option-item.selected .option-radio { border-color: #3b82f6; background: #3b82f6; }
+    .option-item.selected .option-radio::after { content: ''; width: 8px; height: 8px; background: white; border-radius: 50%; }
     .option-text { font-size: 0.9375rem; color: #334155; }
-    .explanation { margin-top: 1rem; padding: 1rem; background: #f0f9ff; border-radius: 0.5rem; border-left: 4px solid #3b82f6; }
-    .explanation-title { font-weight: 600; color: #1e40af; margin-bottom: 0.25rem; }
-    .explanation-text { font-size: 0.875rem; color: #1e40af; }
-    .test-actions { display: flex; gap: 1rem; justify-content: center; }
-    .test-actions .btn { width: auto; min-width: 120px; }
+    .test-actions { display: flex; gap: 1rem; }
+    .hidden { display: none !important; }
+    
+    /* Explanation */
+    .explanation { margin-top: 1rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem; border-left: 4px solid #22c55e; }
+    .explanation-title { font-weight: 600; color: #166534; margin-bottom: 0.5rem; font-size: 0.875rem; }
+    .explanation-text { color: #15803d; font-size: 0.875rem; line-height: 1.6; }
+    
+    /* Results */
     .results-card { text-align: center; padding: 2rem; }
     .results-icon { font-size: 4rem; margin-bottom: 1rem; }
-    .results-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .results-score { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
-    .results-score.pass { color: #22c55e; }
-    .results-score.fail { color: #ef4444; }
+    .results-title { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem; }
+    .results-score { font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem; }
     .results-stats { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
     .stat-item { text-align: center; }
-    .stat-value { font-size: 1.5rem; font-weight: 600; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: #1e293b; }
     .stat-label { font-size: 0.75rem; color: #64748b; }
-    .results-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .resume-banner { background: linear-gradient(to right, #fef3c7, #fde68a); border: 1px solid #fcd34d; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .resume-text { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; color: #92400e; }
-    .resume-actions { display: flex; gap: 0.5rem; }
-    .scenario-card { background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .scenario-topic { display: inline-block; padding: 0.25rem 0.75rem; background: #7c3aed; color: white; border-radius: 9999px; font-size: 0.75rem; margin-bottom: 0.75rem; }
-    .scenario-text { font-size: 1rem; color: #334155; font-style: italic; margin-bottom: 1rem; }
-    .difficulty-badge { display: inline-block; padding: 0.125rem 0.5rem; border-radius: 0.25rem; font-size: 0.625rem; text-transform: uppercase; font-weight: 600; margin-left: 0.5rem; }
+    .results-actions { display: flex; gap: 1rem; justify-content: center; }
+    
+    /* Scenario Card */
+    .scenario-card { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 2px solid #d8b4fe; border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; position: relative; }
+    .scenario-topic { font-size: 0.75rem; color: #7c3aed; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .scenario-text { font-size: 1rem; color: #1e293b; line-height: 1.6; margin-top: 0.75rem; }
+    .difficulty-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.625rem; padding: 0.25rem 0.5rem; border-radius: 9999px; font-weight: 600; text-transform: uppercase; }
     .difficulty-easy { background: #dcfce7; color: #166534; }
     .difficulty-medium { background: #fef3c7; color: #92400e; }
     .difficulty-hard { background: #fee2e2; color: #991b1b; }
-    .analytics-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-    @media (min-width: 768px) { .analytics-grid { grid-template-columns: repeat(2, 1fr); } }
-    .stat-card { padding: 1.5rem; }
-    .stat-card-title { font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem; }
-    .stat-card-value { font-size: 2rem; font-weight: 700; color: #1e293b; }
-    .hidden { display: none !important; }
     
-    /* Ad test view layout */
-    .test-layout { display: flex; gap: 1rem; align-items: flex-start; }
-    .test-main { flex: 1; min-width: 0; }
-    .test-sidebar-ad { width: 160px; flex-shrink: 0; display: none; }
-    @media (min-width: 1100px) { .test-sidebar-ad { display: block; } }
+    /* Resume Banner */
+    .resume-banner { background: linear-gradient(to right, #eff6ff, #f0f9ff); border: 1px solid #93c5fd; border-radius: 0.5rem; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .resume-text { font-size: 0.875rem; color: #1d4ed8; }
+    .resume-actions { display: flex; gap: 0.5rem; }
+    
+    /* Analytics */
+    .analytics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    @media (min-width: 640px) { .analytics-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card { padding: 1.5rem; text-align: center; }
+    .stat-card-title { font-size: 0.75rem; color: #64748b; margin-bottom: 0.5rem; }
+    .stat-card-value { font-size: 2rem; font-weight: 700; color: #1e293b; }
+    
+    /* Footer */
+    .site-footer { background: linear-gradient(to right, #1e293b, #334155, #1e293b); color: #94a3b8; padding: 2rem 1rem; margin-top: 2rem; border-top: 1px solid rgb(51 65 85 / 0.5); }
+    .footer-content { max-width: 72rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+    .footer-brand { display: flex; align-items: center; gap: 0.5rem; }
+    .footer-logo { font-size: 1.5rem; }
+    .footer-name { font-size: 1.125rem; font-weight: 600; color: white; }
+    .footer-nav { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .footer-nav a { color: #94a3b8; text-decoration: none; font-size: 0.875rem; transition: color 0.2s; cursor: pointer; }
+    .footer-nav a:hover { color: white; }
+    .footer-copy { font-size: 0.75rem; color: #64748b; }
+    @media (min-width: 768px) { .footer-content { flex-direction: row; justify-content: space-between; } }
+    
+    /* Privacy & Contact Pages */
+    .page-content { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .page-subtitle { color: #64748b; margin-bottom: 2rem; }
+    .section-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0; }
+    .content-section { margin-bottom: 2rem; }
+    .content-section p, .content-section li { color: #475569; margin-bottom: 0.75rem; line-height: 1.7; }
+    .content-section ul { padding-left: 1.5rem; }
+    .highlight-box { background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .highlight-box p { color: #1e40af; margin: 0; }
+    
+    /* Form Styles */
+    .form-group { margin-bottom: 1.5rem; }
+    .form-label { display: block; font-weight: 500; color: #334155; margin-bottom: 0.5rem; font-size: 0.875rem; }
+    .form-input, .form-textarea, .form-select { width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; background: white; transition: all 0.2s; font-family: inherit; }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { outline: none; border-color: #3b82f6; }
+    .form-textarea { min-height: 150px; resize: vertical; }
+    .form-hint { font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; }
+    .submit-btn { width: 100%; padding: 1rem; font-size: 1rem; font-weight: 600; color: white; background: linear-gradient(to right, #2563eb, #06b6d4); border: none; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .submit-btn:hover { background: linear-gradient(to right, #1d4ed8, #0891b2); }
+    
+    /* Info Cards */
+    .info-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .info-card { background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; text-align: center; border: 1px solid #e2e8f0; }
+    .info-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .info-title { font-weight: 600; color: #1e293b; margin-bottom: 0.25rem; }
+    .info-text { font-size: 0.875rem; color: #64748b; }
   </style>
 </head>
 <body>
@@ -251,25 +253,15 @@
         <span class="logo-icon">🚗</span>
         <span class="logo-text">driveyourtest.com</span>
       </button>
-      <button class="header-btn" onclick="showView('analytics')" title="View Analytics">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-        </svg>
-      </button>
     </div>
   </header>
 
   <main class="main">
-    <!-- Home View -->
+    <!-- ==================== HOME VIEW ==================== -->
     <div id="home-view" class="view-container active">
       <!-- Ad: Top of Content -->
       <div class="container" style="padding-top: 1rem;">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6924346257512616"
-             data-ad-slot="YOUR_AD_SLOT_1"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6924346257512616" data-ad-slot="YOUR_AD_SLOT_1" data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
 
@@ -318,12 +310,7 @@
           </div>
 
           <!-- Ad: Mid Content -->
-          <ins class="adsbygoogle"
-               style="display:block; margin: 1.5rem 0;"
-               data-ad-client="ca-pub-6924346257512616"
-               data-ad-slot="YOUR_AD_SLOT_2"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
+          <ins class="adsbygoogle" style="display:block; margin: 1.5rem 0;" data-ad-client="ca-pub-6924346257512616" data-ad-slot="YOUR_AD_SLOT_2" data-ad-format="auto" data-full-width-responsive="true"></ins>
           <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
           <div class="modes-grid">
@@ -402,22 +389,15 @@
 
         <!-- Ad: Sidebar (Desktop Only) -->
         <aside class="sidebar">
-          <ins class="adsbygoogle"
-               style="display:block; width: 160px; height: 600px;"
-               data-ad-client="ca-pub-6924346257512616"
-               data-ad-slot="YOUR_AD_SLOT_3"
-               data-ad-format="vertical"></ins>
+          <ins class="adsbygoogle" style="display:block; width: 160px; height: 600px;" data-ad-client="ca-pub-6924346257512616" data-ad-slot="YOUR_AD_SLOT_3" data-ad-format="vertical"></ins>
           <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </aside>
       </div>
     </div>
 
-    <!-- Flashcards View -->
+    <!-- ==================== FLASHCARDS VIEW ==================== -->
     <div id="flashcards-view" class="view-container">
       <div class="container">
-        <!-- Top Banner Ad -->
-        
-
         <div class="back-header">
           <button class="back-btn" onclick="goHome()">← Back</button>
           <h2 class="view-title">Permit Flash Cards</h2>
@@ -431,50 +411,36 @@
           <button class="category-btn" data-category="Safe Driving" onclick="selectCategory('Safe Driving')">Safe Driving (25)</button>
         </div>
 
-        <div class="page-layout">
-          <div class="main-content">
-            <div class="flashcard-container">
-              <div class="flashcard" id="flashcard" onclick="flipCard()">
-                <div class="flashcard-face flashcard-front">
-                  <div class="flashcard-category" id="card-category">Category</div>
-                  <div class="flashcard-text" id="card-front">Question</div>
-                  <div class="flashcard-hint">Click to flip</div>
-                </div>
-                <div class="flashcard-face flashcard-back">
-                  <div class="flashcard-text" id="card-back">Answer</div>
-                  <div class="flashcard-hint">Click to flip back</div>
-                </div>
-              </div>
+        <div class="flashcard-container">
+          <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="flashcard-face flashcard-front">
+              <div class="flashcard-category" id="card-category">Category</div>
+              <div class="flashcard-text" id="card-front">Question</div>
+              <div class="flashcard-hint">Click to flip</div>
             </div>
-
-            <div class="card-nav">
-              <button class="nav-btn" id="prev-btn" onclick="prevCard()">←</button>
-              <span class="card-counter"><span id="card-index">1</span> / <span id="card-total">100</span></span>
-              <button class="nav-btn" id="next-btn" onclick="nextCard()">→</button>
+            <div class="flashcard-face flashcard-back">
+              <div class="flashcard-text" id="card-back">Answer</div>
+              <div class="flashcard-hint">Click to flip back</div>
             </div>
-
-            <div class="rating-buttons" id="rating-buttons">
-              <button class="rating-btn rating-know" onclick="rateCard('known')">✓ I Know This</button>
-              <button class="rating-btn rating-practice" onclick="rateCard('practice')">→ Needs Practice</button>
-            </div>
-
-            <!-- Ad below flashcards -->
-            
           </div>
+        </div>
 
-          <aside class="sidebar">
-            
-          </aside>
+        <div class="card-nav">
+          <button class="nav-btn" id="prev-btn" onclick="prevCard()">←</button>
+          <span class="card-counter"><span id="card-index">1</span> / <span id="card-total">100</span></span>
+          <button class="nav-btn" id="next-btn" onclick="nextCard()">→</button>
+        </div>
+
+        <div class="rating-buttons" id="rating-buttons">
+          <button class="rating-btn rating-know" onclick="rateCard('known')">✓ I Know This</button>
+          <button class="rating-btn rating-practice" onclick="rateCard('practice')">→ Needs Practice</button>
         </div>
       </div>
     </div>
 
-    <!-- Permit Test View -->
+    <!-- ==================== PERMIT TEST VIEW ==================== -->
     <div id="permit-test-view" class="view-container">
       <div class="container">
-        <!-- Top Banner Ad -->
-        
-
         <div class="back-header">
           <button class="back-btn" onclick="confirmExit()">← Exit Test</button>
           <h2 class="view-title">Permit Practice Test</h2>
@@ -522,24 +488,14 @@
                 <button class="btn btn-blue" onclick="startPermitTest()">Retake Test</button>
               </div>
             </div>
-
-            <!-- Ad after test -->
-            
           </div>
-
-          <aside class="sidebar">
-            
-          </aside>
         </div>
       </div>
     </div>
 
-    <!-- Scenarios View -->
+    <!-- ==================== SCENARIOS VIEW ==================== -->
     <div id="scenarios-view" class="view-container">
       <div class="container">
-        <!-- Top Banner Ad -->
-        
-
         <div class="back-header">
           <button class="back-btn" onclick="confirmExit()">← Exit Test</button>
           <h2 class="view-title">Driving Scenarios</h2>
@@ -592,219 +548,176 @@
                 <button class="btn btn-purple" onclick="startScenarios()">Retake Test</button>
               </div>
             </div>
-
-            <!-- Ad after scenarios -->
-            
           </div>
-
-          <aside class="sidebar">
-            
-          </aside>
         </div>
       </div>
     </div>
 
-    <!-- Analytics View -->
-    <div id="analytics-view" class="view-container">
-      <div class="container">
-        <!-- Top Banner Ad -->
-        
-
-        <div class="back-header">
-          <button class="back-btn" onclick="goHome()">← Back</button>
-          <h2 class="view-title">Your Analytics</h2>
-        </div>
-
-        <div class="page-layout">
-          <div class="main-content">
-            <div class="analytics-grid">
-              <div class="card stat-card">
-                <div class="stat-card-title">Total Flashcards Seen</div>
-                <div class="stat-card-value" id="stat-flashcards-seen">0</div>
-              </div>
-              <div class="card stat-card">
-                <div class="stat-card-title">Flashcards Known</div>
-                <div class="stat-card-value" id="stat-flashcards-known">0</div>
-              </div>
-              <div class="card stat-card">
-                <div class="stat-card-title">Average Test Score</div>
-                <div class="stat-card-value" id="stat-avg-score">-</div>
-              </div>
-              <div class="card stat-card">
-                <div class="stat-card-title">Tests Passed</div>
-                <div class="stat-card-value" id="stat-tests-passed">0</div>
-              </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 2rem;">
-              <button class="btn btn-outline btn-red" onclick="resetAllProgress()">Reset All Progress</button>
-            </div>
-
-            <!-- Ad at bottom of analytics -->
-            
-          </div>
-
-          <aside class="sidebar">
-            
-          </aside>
-        </div>
-      </div>
-    </div>
-
-    <!-- Privacy Policy View -->
+    <!-- ==================== PRIVACY VIEW ==================== -->
     <div id="privacy-view" class="view-container">
-      <div class="container" style="max-width: 800px;">
+      <div class="page-content">
         <div class="back-header">
           <button class="back-btn" onclick="goHome()">← Back to Home</button>
         </div>
 
         <div class="card" style="padding: 2rem;">
-          <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Privacy Policy</h1>
+          <h1 class="page-title">Privacy Policy</h1>
           <p style="color: #64748b; font-size: 0.875rem; margin-bottom: 2rem;">Last updated: February 21, 2025</p>
 
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">Introduction</h2>
-            <p style="color: #475569; margin-bottom: 1rem;">Welcome to Drive Your Test ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website driveyourtest.com.</p>
-            <p style="color: #475569;">Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.</p>
+          <div class="content-section">
+            <h2 class="section-title">Introduction</h2>
+            <p>Welcome to Drive Your Test ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website driveyourtest.com.</p>
           </div>
 
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">Information We Collect</h2>
-            <p style="color: #475569; margin-bottom: 1rem;">We collect information that you provide directly to us, information we obtain automatically when you visit our site, and information from third-party sources.</p>
-            <h3 style="font-size: 1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #334155;">Information You Provide</h3>
-            <ul style="color: #475569; margin-bottom: 1rem; padding-left: 1.5rem;">
-              <li style="margin-bottom: 0.5rem;"><strong>Contact Information:</strong> When you use our contact form, we collect your name, email address, and message content.</li>
-              <li style="margin-bottom: 0.5rem;"><strong>Learning Progress:</strong> We store your quiz scores, flashcard progress, and test results locally on your device to enhance your learning experience.</li>
-            </ul>
-            <h3 style="font-size: 1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #334155;">Information Collected Automatically</h3>
-            <ul style="color: #475569; padding-left: 1.5rem;">
-              <li style="margin-bottom: 0.5rem;"><strong>Device Information:</strong> Browser type, operating system, device type</li>
-              <li style="margin-bottom: 0.5rem;"><strong>Usage Data:</strong> Pages visited, time spent on pages, features used</li>
-              <li style="margin-bottom: 0.5rem;"><strong>Location Data:</strong> General geographic location based on IP address</li>
+          <div class="content-section">
+            <h2 class="section-title">Information We Collect</h2>
+            <p>We collect information that you provide directly to us, information we obtain automatically when you visit our site.</p>
+            <ul>
+              <li><strong>Contact Information:</strong> When you use our contact form, we collect your name, email address, and message content.</li>
+              <li><strong>Learning Progress:</strong> We store your quiz scores, flashcard progress, and test results locally on your device.</li>
+              <li><strong>Device Information:</strong> Browser type, operating system, device type</li>
+              <li><strong>Usage Data:</strong> Pages visited, time spent on pages, features used</li>
             </ul>
           </div>
 
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">How We Use Your Information</h2>
-            <p style="color: #475569; margin-bottom: 1rem;">We use the information we collect for the following purposes:</p>
-            <ul style="color: #475569; padding-left: 1.5rem;">
-              <li style="margin-bottom: 0.5rem;">To provide, operate, and maintain our educational services</li>
-              <li style="margin-bottom: 0.5rem;">To improve, personalize, and expand our website</li>
-              <li style="margin-bottom: 0.5rem;">To respond to your inquiries and provide customer support</li>
-              <li style="margin-bottom: 0.5rem;">To detect and prevent fraud and technical issues</li>
-              <li style="margin-bottom: 0.5rem;">To comply with legal obligations</li>
+          <div class="content-section">
+            <h2 class="section-title">Cookies and Tracking Technologies</h2>
+            <p>We use cookies and similar tracking technologies to collect and track information and to improve our website.</p>
+            <ul>
+              <li><strong>Essential Cookies:</strong> Required for the website to function properly (e.g., saving your quiz progress)</li>
+              <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
+              <li><strong>Advertising Cookies:</strong> Used to deliver relevant advertisements</li>
             </ul>
           </div>
 
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">Cookies and Tracking Technologies</h2>
-            <p style="color: #475569; margin-bottom: 1rem;">We use cookies and similar tracking technologies to collect and track information and to improve our website. Cookies are small data files stored on your device.</p>
-            <p style="color: #475569;"><strong>Types of cookies we use:</strong></p>
-            <ul style="color: #475569; padding-left: 1.5rem;">
-              <li style="margin-bottom: 0.5rem;"><strong>Essential Cookies:</strong> Required for the website to function properly (e.g., saving your quiz progress)</li>
-              <li style="margin-bottom: 0.5rem;"><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
-              <li style="margin-bottom: 0.5rem;"><strong>Advertising Cookies:</strong> Used to deliver relevant advertisements</li>
-            </ul>
-          </div>
-
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">Third-Party Advertising (Google AdSense)</h2>
-            <div style="background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;">
-              <p style="margin: 0; color: #1e40af;"><strong>Important:</strong> We use Google AdSense to display advertisements on our website. Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites.</p>
+          <div class="content-section">
+            <h2 class="section-title">Third-Party Advertising (Google AdSense)</h2>
+            <div class="highlight-box">
+              <p><strong>Important:</strong> We use Google AdSense to display advertisements on our website. Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites.</p>
             </div>
-            <p style="color: #475569;">Google's use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" style="color: #2563eb;">Google Ads Settings</a>.</p>
+            <p>You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" style="color: #2563eb;">Google Ads Settings</a>.</p>
           </div>
 
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">Data Storage and Security</h2>
-            <p style="color: #475569;">Your learning progress (quiz scores, flashcard progress, test results) is stored locally on your device using your browser's localStorage feature. This data never leaves your device unless you explicitly contact us through our contact form.</p>
+          <div class="content-section">
+            <h2 class="section-title">Data Storage and Security</h2>
+            <p>Your learning progress is stored locally on your device using your browser's localStorage feature. This data never leaves your device unless you explicitly contact us through our contact form.</p>
           </div>
 
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">Children's Privacy</h2>
-            <p style="color: #475569;">Our website is intended for users of all ages who are learning to drive. We do not knowingly collect personal information from children under 13 years of age without parental consent.</p>
+          <div class="content-section">
+            <h2 class="section-title">Children's Privacy</h2>
+            <p>Our website is intended for users of all ages who are learning to drive. We do not knowingly collect personal information from children under 13 years of age without parental consent.</p>
           </div>
 
-          <div style="margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0;">Contact Us</h2>
-            <p style="color: #475569;">If you have questions or concerns about this Privacy Policy, please contact us at <a href="mailto:driveyourtest@gmail.com" style="color: #2563eb;">driveyourtest@gmail.com</a></p>
+          <div class="content-section">
+            <h2 class="section-title">Contact Us</h2>
+            <p>If you have questions or concerns about this Privacy Policy, please contact us at <a href="mailto:driveyourtest@gmail.com" style="color: #2563eb;">driveyourtest@gmail.com</a></p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Contact View -->
+    <!-- ==================== CONTACT VIEW ==================== -->
     <div id="contact-view" class="view-container">
-      <div class="container" style="max-width: 700px;">
+      <div class="page-content">
         <div class="back-header">
           <button class="back-btn" onclick="goHome()">← Back to Home</button>
         </div>
 
-        <h1 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem;">Contact Us</h1>
-        <p style="color: #64748b; text-align: center; margin-bottom: 2rem;">Have a question, suggestion, or feedback? We'd love to hear from you!</p>
+        <h1 class="page-title" style="text-align: center;">Contact Us</h1>
+        <p class="page-subtitle" style="text-align: center;">Have a question, suggestion, or feedback? We'd love to hear from you!</p>
 
         <div class="card" style="padding: 2rem;">
-          <form id="contact-form" action="https://formsubmit.co/driveyourtest@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="New Contact Form Submission - Drive Your Test">
+          <form action="https://formsubmit.co/driveyourtest@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Contact Form - Drive Your Test">
             <input type="hidden" name="_captcha" value="true">
             <input type="hidden" name="_template" value="table">
-            
-            <div style="margin-bottom: 1.5rem;">
-              <label style="display: block; font-weight: 500; color: #334155; margin-bottom: 0.5rem; font-size: 0.875rem;">Full Name <span style="color: #dc2626;">*</span></label>
-              <input type="text" name="name" required style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; background: white;" placeholder="John Doe">
+
+            <div class="form-group">
+              <label class="form-label">Full Name <span style="color: #dc2626;">*</span></label>
+              <input type="text" name="name" class="form-input" placeholder="John Doe" required>
             </div>
 
-            <div style="margin-bottom: 1.5rem;">
-              <label style="display: block; font-weight: 500; color: #334155; margin-bottom: 0.5rem; font-size: 0.875rem;">Email Address <span style="color: #dc2626;">*</span></label>
-              <input type="email" name="email" required style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; background: white;" placeholder="john@example.com">
-              <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">We'll never share your email with anyone else.</p>
+            <div class="form-group">
+              <label class="form-label">Email Address <span style="color: #dc2626;">*</span></label>
+              <input type="email" name="email" class="form-input" placeholder="john@example.com" required>
+              <p class="form-hint">We'll never share your email with anyone else.</p>
             </div>
 
-            <div style="margin-bottom: 1.5rem;">
-              <label style="display: block; font-weight: 500; color: #334155; margin-bottom: 0.5rem; font-size: 0.875rem;">Subject <span style="color: #dc2626;">*</span></label>
-              <select name="subject" required style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; background: white; cursor: pointer;">
+            <div class="form-group">
+              <label class="form-label">Subject <span style="color: #dc2626;">*</span></label>
+              <select name="subject" class="form-select" required>
                 <option value="">Select a topic...</option>
                 <option value="General Question">General Question</option>
                 <option value="Technical Support">Technical Support</option>
                 <option value="Content Suggestion">Content Suggestion</option>
                 <option value="Bug Report">Bug Report</option>
-                <option value="Partnership Inquiry">Partnership Inquiry</option>
-                <option value="Advertising Inquiry">Advertising Inquiry</option>
                 <option value="Other">Other</option>
               </select>
             </div>
 
-            <div style="margin-bottom: 1.5rem;">
-              <label style="display: block; font-weight: 500; color: #334155; margin-bottom: 0.5rem; font-size: 0.875rem;">Message <span style="color: #dc2626;">*</span></label>
-              <textarea name="message" required style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; background: white; min-height: 150px; resize: vertical;" placeholder="How can we help you?"></textarea>
-              <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">Please provide as much detail as possible.</p>
+            <div class="form-group">
+              <label class="form-label">Message <span style="color: #dc2626;">*</span></label>
+              <textarea name="message" class="form-textarea" placeholder="How can we help you?" required></textarea>
+              <p class="form-hint">Please provide as much detail as possible.</p>
             </div>
 
-            <button type="submit" style="width: 100%; padding: 1rem; font-size: 1rem; font-weight: 600; color: white; background: linear-gradient(to right, #2563eb, #06b6d4); border: none; border-radius: 0.5rem; cursor: pointer;">Send Message</button>
+            <button type="submit" class="submit-btn">Send Message</button>
 
-            <div style="background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 1rem; margin-top: 1.5rem; border-radius: 0 0.5rem 0.5rem 0; font-size: 0.875rem; color: #1e40af;">
-              By submitting this form, you agree to our <a href="#" onclick="showView('privacy'); return false;" style="color: #1d4ed8;">Privacy Policy</a>. We collect your name and email solely to respond to your inquiry.
+            <div class="highlight-box" style="margin-top: 1.5rem;">
+              By submitting this form, you agree to our <a href="#" onclick="showView('privacy'); return false;" style="color: #1d4ed8;">Privacy Policy</a>.
             </div>
           </form>
         </div>
 
-        <!-- Contact Info Cards -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem;">
-          <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; text-align: center; border: 1px solid #e2e8f0;">
-            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📧</div>
-            <div style="font-weight: 600; color: #1e293b; margin-bottom: 0.25rem;">Email Us</div>
-            <p style="font-size: 0.875rem; color: #64748b;">driveyourtest@gmail.com</p>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon">📧</div>
+            <div class="info-title">Email Us</div>
+            <p class="info-text">driveyourtest@gmail.com</p>
           </div>
-          <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; text-align: center; border: 1px solid #e2e8f0;">
-            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏰</div>
-            <div style="font-weight: 600; color: #1e293b; margin-bottom: 0.25rem;">Response Time</div>
-            <p style="font-size: 0.875rem; color: #64748b;">Within 24-48 hours</p>
+          <div class="info-card">
+            <div class="info-icon">⏰</div>
+            <div class="info-title">Response Time</div>
+            <p class="info-text">Within 24-48 hours</p>
           </div>
-          <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; text-align: center; border: 1px solid #e2e8f0;">
-            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
-            <div style="font-weight: 600; color: #1e293b; margin-bottom: 0.25rem;">Your Privacy</div>
-            <p style="font-size: 0.875rem; color: #64748b;">Your data is secure</p>
+          <div class="info-card">
+            <div class="info-icon">🔒</div>
+            <div class="info-title">Your Privacy</div>
+            <p class="info-text">Your data is secure</p>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ANALYTICS VIEW ==================== -->
+    <div id="analytics-view" class="view-container">
+      <div class="container">
+        <div class="back-header">
+          <button class="back-btn" onclick="goHome()">← Back</button>
+          <h2 class="view-title">Your Analytics</h2>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="card stat-card">
+            <div class="stat-card-title">Total Flashcards Seen</div>
+            <div class="stat-card-value" id="stat-flashcards-seen">0</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-title">Flashcards Known</div>
+            <div class="stat-card-value" id="stat-flashcards-known">0</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-title">Average Test Score</div>
+            <div class="stat-card-value" id="stat-avg-score">-</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-card-title">Tests Passed</div>
+            <div class="stat-card-value" id="stat-tests-passed">0</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+          <button class="btn btn-outline" style="color: #dc2626; border-color: #fca5a5;" onclick="resetAllProgress()">Reset All Progress</button>
         </div>
       </div>
     </div>
@@ -818,34 +731,17 @@
         <span class="footer-name">Drive Your Test</span>
       </div>
       <nav class="footer-nav">
-        <a href="#" onclick="goHome(); return false;">Home</a>
-        <a href="#" onclick="showView('privacy'); return false;">Privacy Policy</a>
-        <a href="#" onclick="showView('contact'); return false;">Contact Us</a>
+        <a onclick="goHome()">Home</a>
+        <a onclick="showView('privacy')">Privacy Policy</a>
+        <a onclick="showView('contact')">Contact Us</a>
       </nav>
       <p class="footer-copy">© 2025 Drive Your Test. All rights reserved.</p>
     </div>
   </footer>
 
-  <style>
-    .site-footer { background: linear-gradient(to right, #1e293b, #334155, #1e293b); color: #94a3b8; padding: 2rem 1rem; margin-top: 2rem; border-top: 1px solid rgb(51 65 85 / 0.5); }
-    .footer-content { max-width: 72rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
-    .footer-brand { display: flex; align-items: center; gap: 0.5rem; }
-    .footer-logo { font-size: 1.5rem; }
-    .footer-name { font-size: 1.125rem; font-weight: 600; color: white; }
-    .footer-nav { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-    .footer-nav a { color: #94a3b8; text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
-    .footer-nav a:hover { color: white; }
-    .footer-copy { font-size: 0.75rem; color: #64748b; }
-    @media (min-width: 768px) {
-      .footer-content { flex-direction: row; justify-content: space-between; text-align: left; }
-      .footer-nav { gap: 2.5rem; }
-    }
-  </style>
-
   <script>
-// ==================== DATA ====================
+// ==================== FLASHCARD DATA ====================
 const permitFlashcards = [
-  // ROAD SIGNS (25 cards)
   { id: 'pf1', category: 'Road Signs', front: '🛑 What does a red octagonal sign mean?', back: 'STOP - You must come to a complete stop behind the stop line or crosswalk, then proceed when safe.', difficulty: 'easy' },
   { id: 'pf2', category: 'Road Signs', front: '⚠️ What does a yellow diamond-shaped sign indicate?', back: 'Warning sign - alerts drivers to potential hazards, curves, intersections, or road conditions ahead.', difficulty: 'easy' },
   { id: 'pf3', category: 'Road Signs', front: '🚸 What does a pentagon-shaped sign indicate?', back: 'School zone or school crossing - watch for children and reduce speed during school hours.', difficulty: 'easy' },
@@ -871,13 +767,11 @@ const permitFlashcards = [
   { id: 'pf23', category: 'Road Signs', front: 'What does a sign showing a car with wavy lines behind it mean?', back: 'Slippery when wet - road surface is slippery when wet, reduce speed.', difficulty: 'easy' },
   { id: 'pf24', category: 'Road Signs', front: 'What does a sign with a person digging mean?', back: 'Construction/work zone ahead - watch for workers and equipment.', difficulty: 'easy' },
   { id: 'pf25', category: 'Road Signs', front: 'What does a sign showing a deer mean?', back: 'Deer crossing area - watch for deer, especially at dawn and dusk.', difficulty: 'easy' },
-  
-  // TRAFFIC LAWS (30 cards)
   { id: 'pf26', category: 'Traffic Laws', front: 'What is the legal blood alcohol concentration (BAC) limit for drivers 21 and over?', back: '0.08% in most states. For commercial drivers, it\'s 0.04%. For drivers under 21, any detectable amount is illegal.', difficulty: 'easy' },
   { id: 'pf27', category: 'Traffic Laws', front: 'How far should you stop from a railroad crossing?', back: 'At least 15 feet but no more than 50 feet from the nearest rail.', difficulty: 'medium' },
   { id: 'pf28', category: 'Traffic Laws', front: 'What is the speed limit in a school zone?', back: 'Usually 15-25 mph when children are present or during school hours. Always check posted signs.', difficulty: 'easy' },
   { id: 'pf29', category: 'Traffic Laws', front: 'When must you use your turn signal?', back: 'At least 100 feet before turning or changing lanes in most states (200 feet in some states).', difficulty: 'easy' },
-  { id: 'pf30', category: 'Traffic Laws', front: 'What is the "Move Over" law?', back: 'You must move over one lane or slow down significantly when passing emergency vehicles, tow trucks, or construction vehicles with flashing lights.', difficulty: 'medium' },
+  { id: 'pf30', category: 'Traffic Laws', front: 'What is the "Move Over" law?', back: 'You must move over one lane or slow down significantly when passing emergency vehicles with flashing lights.', difficulty: 'medium' },
   { id: 'pf31', category: 'Traffic Laws', front: 'What is the speed limit in a business or residential district unless posted?', back: 'Usually 25 mph, but always check for posted speed limit signs.', difficulty: 'easy' },
   { id: 'pf32', category: 'Traffic Laws', front: 'What is the speed limit in an alley unless posted?', back: 'Usually 15 mph unless otherwise posted.', difficulty: 'medium' },
   { id: 'pf33', category: 'Traffic Laws', front: 'How far must you stop from a school bus with flashing red lights?', back: 'At least 20 feet from the bus on undivided roads, in both directions.', difficulty: 'easy' },
@@ -903,8 +797,6 @@ const permitFlashcards = [
   { id: 'pf53', category: 'Traffic Laws', front: 'When can you drive in a bike lane?', back: 'Only when making a turn, entering or leaving a roadway, or parking where permitted.', difficulty: 'medium' },
   { id: 'pf54', category: 'Traffic Laws', front: 'What is the speed limit on most rural interstates?', back: 'Usually 70-75 mph, but varies by state. Always check posted speed limits.', difficulty: 'easy' },
   { id: 'pf55', category: 'Traffic Laws', front: 'What does a flashing red light mean?', back: 'Treat it like a stop sign - come to a complete stop, then proceed when safe.', difficulty: 'easy' },
-  
-  // RIGHT-OF-WAY (20 cards)
   { id: 'pf56', category: 'Right-of-Way', front: 'At a four-way stop, who goes first?', back: 'The first vehicle to arrive and stop goes first. If tied, the vehicle on the right goes first.', difficulty: 'medium' },
   { id: 'pf57', category: 'Right-of-Way', front: 'Who has right-of-way at an uncontrolled intersection?', back: 'The vehicle on the right when two vehicles arrive at the same time.', difficulty: 'medium' },
   { id: 'pf58', category: 'Right-of-Way', front: 'When must you yield to pedestrians?', back: 'Always, especially in crosswalks, school zones, and when pedestrians have a walk signal.', difficulty: 'easy' },
@@ -917,86 +809,86 @@ const permitFlashcards = [
   { id: 'pf65', category: 'Right-of-Way', front: 'When two vehicles arrive at opposite sides of an intersection, who goes first?', back: 'If both are going straight, they can proceed simultaneously. If one is turning, that driver yields.', difficulty: 'hard' },
   { id: 'pf66', category: 'Right-of-Way', front: 'Who has right-of-way on a narrow mountain road?', back: 'The vehicle going downhill must yield by backing up to a wider space.', difficulty: 'hard' },
   { id: 'pf67', category: 'Right-of-Way', front: 'At a malfunctioning traffic signal, what should you do?', back: 'Treat the intersection as a four-way stop. First to arrive goes first.', difficulty: 'medium' },
-  { id: 'pf68', category: 'Right-of-Way', front: 'When entering traffic from a private driveway, who must you yield to?', back: 'Yield to all traffic and pedestrians on the roadway.', difficulty: 'easy' },
-  { id: 'pf69', category: 'Right-of-Way', front: 'Who has right-of-way at a yield sign?', back: 'Cross traffic and oncoming traffic have right-of-way. Slow down and prepare to stop.', difficulty: 'easy' },
-  { id: 'pf70', category: 'Right-of-Way', front: 'When parallel parking, who has right-of-way?', back: 'Passing traffic has right-of-way. Wait for a safe gap before backing in.', difficulty: 'medium' },
-  { id: 'pf71', category: 'Right-of-Way', front: 'When backing out of a driveway, who must you yield to?', back: 'All traffic and pedestrians on the sidewalk and roadway.', difficulty: 'easy' },
-  { id: 'pf72', category: 'Right-of-Way', front: 'Who has right-of-way at an intersection with a green arrow?', back: 'You have right-of-way in the direction of the arrow. Oncoming traffic has a red light.', difficulty: 'easy' },
-  { id: 'pf73', category: 'Right-of-Way', front: 'When two cars arrive at a four-way stop at the exact same time, who goes?', back: 'The car on the right goes first. If directly across, proceed if going straight.', difficulty: 'medium' },
-  { id: 'pf74', category: 'Right-of-Way', front: 'At a crosswalk with a crossing guard, who has right-of-way?', back: 'Pedestrians and the crossing guard\'s directions take precedence.', difficulty: 'easy' },
-  { id: 'pf75', category: 'Right-of-Way', front: 'Who has right-of-way when a lane is ending?', back: 'Traffic in the continuing lane has right-of-way. Merging vehicles must yield.', difficulty: 'medium' },
-  
-  // SAFE DRIVING (25 cards)
-  { id: 'pf76', category: 'Safe Driving', front: 'What is the proper following distance in normal conditions?', back: 'The 3-second rule - pick a fixed object and count at least 3 seconds after the car ahead passes it.', difficulty: 'easy' },
-  { id: 'pf77', category: 'Safe Driving', front: 'What should you do if your car starts to hydroplane?', back: 'Ease off the gas pedal, don\'t brake suddenly, and steer straight until tires regain traction.', difficulty: 'hard' },
-  { id: 'pf78', category: 'Safe Driving', front: 'When driving at night, how should you use your headlights?', back: 'Use low beams within 500 feet of oncoming traffic and 300 feet when following another vehicle.', difficulty: 'medium' },
-  { id: 'pf79', category: 'Safe Driving', front: 'What is the proper hand position on the steering wheel?', back: '9 and 3 o\'clock positions (or 8 and 4). This provides optimal control and keeps hands away from airbags.', difficulty: 'easy' },
-  { id: 'pf80', category: 'Safe Driving', front: 'How do you recover from a skid?', back: 'Take your foot off the gas, don\'t brake, steer in the direction you want to go, and look where you want to go.', difficulty: 'hard' },
-  { id: 'pf81', category: 'Safe Driving', front: 'What is distracted driving?', back: 'Any activity diverting attention from driving - texting, eating, adjusting controls. It significantly increases crash risk.', difficulty: 'easy' },
-  { id: 'pf82', category: 'Safe Driving', front: 'When should you increase your following distance?', back: 'When following motorcycles, in bad weather, when towing, behind large vehicles, or at night.', difficulty: 'easy' },
-  { id: 'pf83', category: 'Safe Driving', front: 'What should you do in heavy rain?', back: 'Reduce speed, increase following distance, use low beams, and watch for hydroplaning.', difficulty: 'easy' },
-  { id: 'pf84', category: 'Safe Driving', front: 'What should you do if your brakes fail?', back: 'Pump the brake pedal, gradually apply the parking brake, downshift to lower gear, and look for a safe stopping area.', difficulty: 'hard' },
-  { id: 'pf85', category: 'Safe Driving', front: 'What should you do if your gas pedal sticks?', back: 'Shift to neutral, apply steady brake pressure, and pull off the road safely. Don\'t turn off ignition while moving.', difficulty: 'hard' },
-  { id: 'pf86', category: 'Safe Driving', front: 'When backing up, what should you do?', back: 'Turn your head and look behind you, go slowly, check mirrors and blind spots, and be prepared to stop.', difficulty: 'easy' },
-  { id: 'pf87', category: 'Safe Driving', front: 'How do you properly enter a freeway?', back: 'Use the acceleration lane to match freeway speed, then merge smoothly into traffic when there\'s a safe gap.', difficulty: 'medium' },
-  { id: 'pf88', category: 'Safe Driving', front: 'What is defensive driving?', back: 'Being aware of your surroundings, anticipating hazards, and being prepared to react to other drivers\' mistakes.', difficulty: 'easy' },
-  { id: 'pf89', category: 'Safe Driving', front: 'When should you use hazard lights?', back: 'When stopped on the roadside, in an emergency, or when driving slowly could create a hazard.', difficulty: 'easy' },
-  { id: 'pf90', category: 'Safe Driving', front: 'What should you do if you have a tire blowout?', back: 'Grip the steering wheel firmly, ease off the gas, don\'t brake hard, and steer to a safe area before stopping.', difficulty: 'hard' },
-  { id: 'pf91', category: 'Safe Driving', front: 'How do you drive safely through a curve?', back: 'Slow down before entering the curve, then accelerate gently as you exit.', difficulty: 'medium' },
-  { id: 'pf92', category: 'Safe Driving', front: 'What is the proper response to an aggressive driver?', back: 'Avoid eye contact, don\'t respond to gestures, let them pass, and report dangerous behavior if necessary.', difficulty: 'easy' },
-  { id: 'pf93', category: 'Safe Driving', front: 'When should you check your blind spot?', back: 'Before changing lanes, merging, turning, or backing up. Look over your shoulder to check.', difficulty: 'easy' },
-  { id: 'pf94', category: 'Safe Driving', front: 'What should you do in fog?', back: 'Slow down, use low beam headlights (never high beams), use fog lights if available, and use road lines as guides.', difficulty: 'medium' },
-  { id: 'pf95', category: 'Safe Driving', front: 'When driving near large trucks, what should you avoid?', back: 'Avoid their blind spots (no-zones), don\'t cut them off, and don\'t linger beside them.', difficulty: 'medium' },
-  { id: 'pf96', category: 'Safe Driving', front: 'What is the proper way to make a turn?', back: 'Signal 100+ feet before, slow down before the turn, turn into the nearest lane, then accelerate after completing the turn.', difficulty: 'easy' },
-  { id: 'pf97', category: 'Safe Driving', front: 'What should you do when approaching a construction zone?', back: 'Slow down, expect the unexpected, watch for workers and flaggers, and follow temporary signs.', difficulty: 'easy' },
-  { id: 'pf98', category: 'Safe Driving', front: 'How do you safely pass another vehicle?', back: 'Check mirrors and blind spots, signal, accelerate to pass, and return to lane only when you can see both headlights.', difficulty: 'medium' },
-  { id: 'pf99', category: 'Safe Driving', front: 'What should you do before driving in winter conditions?', back: 'Clear snow and ice from all windows, lights, and mirrors. Check tire tread and pressure.', difficulty: 'easy' },
-  { id: 'pf100', category: 'Safe Driving', front: 'When should you use your mirrors?', back: 'Constantly - check mirrors every 5-8 seconds and before any change in speed or direction.', difficulty: 'easy' },
+  { id: 'pf68', category: 'Right-of-Way', front: 'When should you yield to blind pedestrians?', back: 'Always yield to blind pedestrians carrying a white cane or using a guide dog.', difficulty: 'easy' },
+  { id: 'pf69', category: 'Right-of-Way', front: 'At a crosswalk with a pedestrian signal, who has right-of-way?', back: 'Pedestrians have right-of-way when the walk signal is active, even if traffic has a green light.', difficulty: 'medium' },
+  { id: 'pf70', category: 'Right-of-Way', front: 'When backing out of a driveway, who must yield?', back: 'The driver backing out must yield to all traffic on the roadway.', difficulty: 'easy' },
+  { id: 'pf71', category: 'Right-of-Way', front: 'At an intersection with a yield sign, what should you do?', back: 'Slow down and yield to traffic on the through road. Stop if necessary.', difficulty: 'easy' },
+  { id: 'pf72', category: 'Right-of-Way', front: 'When should you yield to transit buses?', back: 'Yield to buses re-entering traffic from a bus stop in some states (check local laws).', difficulty: 'medium' },
+  { id: 'pf73', category: 'Right-of-Way', front: 'At an all-way stop, if two cars arrive at exactly the same time, who goes first?', back: 'The car on the right goes first. If facing each other, both can proceed if going straight.', difficulty: 'medium' },
+  { id: 'pf74', category: 'Right-of-Way', front: 'When must you stop for a stopped school bus?', back: 'On undivided roads, stop in both directions. On divided roads with median, only your direction stops.', difficulty: 'medium' },
+  { id: 'pf75', category: 'Right-of-Way', front: 'Who has right-of-way on a one-lane bridge?', back: 'The vehicle that reaches the bridge first has right-of-way, or the vehicle going uphill on a grade.', difficulty: 'hard' },
+  { id: 'pf76', category: 'Safe Driving', front: 'What is the 3-second rule?', back: 'Stay at least 3 seconds behind the vehicle ahead. Count when they pass a fixed object.', difficulty: 'easy' },
+  { id: 'pf77', category: 'Safe Driving', front: 'What should you do if you start to skid?', back: 'Take your foot off the gas and steer in the direction you want the front of the car to go.', difficulty: 'easy' },
+  { id: 'pf78', category: 'Safe Driving', front: 'What is defensive driving?', back: 'Anticipating potential hazards and being prepared to react to other drivers\' mistakes.', difficulty: 'easy' },
+  { id: 'pf79', category: 'Safe Driving', front: 'How do you avoid hydroplaning?', back: 'Slow down on wet roads, avoid standing water, and ensure tires have good tread.', difficulty: 'medium' },
+  { id: 'pf80', category: 'Safe Driving', front: 'What is the proper hand position on the steering wheel?', back: '9 and 3 o\'clock positions, or 8 and 4 o\'clock for airbag safety.', difficulty: 'easy' },
+  { id: 'pf81', category: 'Safe Driving', front: 'When should you use your hazard lights?', back: 'When stopped on the roadside, driving very slowly, or in hazardous conditions.', difficulty: 'easy' },
+  { id: 'pf82', category: 'Safe Driving', front: 'What should you do in dense fog?', back: 'Use low beams, slow down, use right edge line as guide, and consider waiting it out.', difficulty: 'medium' },
+  { id: 'pf83', category: 'Safe Driving', front: 'How do you drive safely in rain?', back: 'Reduce speed, increase following distance, use headlights, and avoid sudden movements.', difficulty: 'easy' },
+  { id: 'pf84', category: 'Safe Driving', front: 'What is target fixation?', back: 'Looking directly at an obstacle causes you to steer toward it. Look where you want to go instead.', difficulty: 'hard' },
+  { id: 'pf85', category: 'Safe Driving', front: 'How do you recover from going off the road?', back: 'Slow down gradually, steer straight, then ease back onto the road when safe.', difficulty: 'medium' },
+  { id: 'pf86', category: 'Safe Driving', front: 'What should you check before driving?', back: 'Tires, lights, mirrors, fuel, and adjust seat and mirrors properly.', difficulty: 'easy' },
+  { id: 'pf87', category: 'Safe Driving', front: 'How do you share the road with motorcycles?', back: 'Check blind spots, give full lane width, and be aware they may be closer than they appear.', difficulty: 'medium' },
+  { id: 'pf88', category: 'Safe Driving', front: 'What is the danger of driving while drowsy?', back: 'Drowsy driving impairs reaction time and judgment similar to alcohol. Pull over if tired.', difficulty: 'easy' },
+  { id: 'pf89', category: 'Safe Driving', front: 'How do you handle a tire blowout?', back: 'Grip the wheel, ease off gas, don\'t brake hard, and steer to the shoulder safely.', difficulty: 'hard' },
+  { id: 'pf90', category: 'Safe Driving', front: 'What should you do at a flashing yellow light?', back: 'Slow down and proceed with caution. You don\'t need to stop.', difficulty: 'easy' },
+  { id: 'pf91', category: 'Safe Driving', front: 'How do you share the road with large trucks?', back: 'Avoid blind spots (no-zones), don\'t cut them off, and give extra space for their turns.', difficulty: 'medium' },
+  { id: 'pf92', category: 'Safe Driving', front: 'What is the proper way to parallel park?', back: 'Align with front car, reverse while turning wheel, straighten when clear, adjust as needed.', difficulty: 'medium' },
+  { id: 'pf93', category: 'Safe Driving', front: 'When should you use high beams?', back: 'On dark roads with no oncoming traffic. Dim them within 500 feet of approaching vehicles.', difficulty: 'easy' },
+  { id: 'pf94', category: 'Safe Driving', front: 'How do you drive safely in snow or ice?', back: 'Reduce speed significantly, increase following distance, brake gently, and avoid sudden movements.', difficulty: 'easy' },
+  { id: 'pf95', category: 'Safe Driving', front: 'What should you do if your brakes fail?', back: 'Pump brakes if non-ABS, use parking brake slowly, shift to lower gear, find a safe place to stop.', difficulty: 'hard' },
+  { id: 'pf96', category: 'Safe Driving', front: 'How do you handle an aggressive driver?', back: 'Stay calm, don\'t engage, let them pass, avoid eye contact, and call police if threatened.', difficulty: 'medium' },
+  { id: 'pf97', category: 'Safe Driving', front: 'What is the proper following distance in bad weather?', back: 'Increase to 4-6 seconds or more, depending on conditions.', difficulty: 'easy' },
+  { id: 'pf98', category: 'Safe Driving', front: 'How do you navigate a roundabout?', back: 'Yield to circulating traffic, go counterclockwise, use turn signal when exiting.', difficulty: 'medium' },
+  { id: 'pf99', category: 'Safe Driving', front: 'What should you do if your car overheats?', back: 'Turn off AC, turn on heat to draw heat from engine, pull over safely, don\'t open radiator cap when hot.', difficulty: 'medium' },
+  { id: 'pf100', category: 'Safe Driving', front: 'What is the most important rule of driving?', back: 'Safety first - always be alert, follow traffic laws, and never drive impaired or distracted.', difficulty: 'easy' }
 ];
 
+// ==================== PERMIT TEST DATA ====================
 const permitTestQuestions = [
-  { id: 'pt1', question: 'What should you do when you see a school bus with flashing red lights?', options: ['Slow down and proceed with caution', 'Stop at least 20 feet away from the bus', 'Honk to alert children', 'Pass on the left side only'], correctIndex: 1, explanation: 'You must stop at least 20 feet away from a school bus with flashing red lights on undivided roads.', category: 'Traffic Laws' },
-  { id: 'pt2', question: 'What does a solid yellow line on your side of the road mean?', options: ['Passing is allowed', 'No passing zone', 'Two-way traffic ahead', 'Lane ends ahead'], correctIndex: 1, explanation: 'A solid yellow line on your side means no passing is allowed.', category: 'Road Signs' },
-  { id: 'pt3', question: 'When parallel parking, your vehicle should be how far from the curb?', options: ['Touching the curb', '6-18 inches', '24-36 inches', 'Within 3 feet'], correctIndex: 1, explanation: 'When parallel parking, your vehicle should be 6-18 inches from the curb.', category: 'Safe Driving' },
-  { id: 'pt4', question: 'What is the speed limit on most rural interstates?', options: ['55 mph', '65 mph', '70-75 mph', '80 mph'], correctIndex: 2, explanation: 'Most rural interstates have speed limits of 70-75 mph, though this varies by state.', category: 'Traffic Laws' },
-  { id: 'pt5', question: 'Before changing lanes, you should:', options: ['Signal and immediately move over', 'Check mirrors, signal, check blind spot, then change lanes', 'Speed up and merge quickly', 'Wait for someone to let you in'], correctIndex: 1, explanation: 'Proper lane change: Check mirrors, signal, check blind spot, then change lanes when safe.', category: 'Safe Driving' },
-  { id: 'pt6', question: 'What does a flashing yellow traffic light mean?', options: ['Stop and proceed when safe', 'Proceed with caution', 'Prepare to stop', 'Yield to all traffic'], correctIndex: 1, explanation: 'A flashing yellow light means proceed with caution. Slow down and be prepared to stop if necessary.', category: 'Road Signs' },
-  { id: 'pt7', question: 'How many feet before a turn should you signal?', options: ['50 feet', '100 feet', '150 feet', '200 feet'], correctIndex: 1, explanation: 'You should signal at least 100 feet before turning.', category: 'Traffic Laws' },
-  { id: 'pt8', question: 'When should you use your low beam headlights?', options: ['Only when it\'s raining', 'When following within 300 feet of another vehicle', 'Only in fog', 'During daytime only'], correctIndex: 1, explanation: 'Use low beams when following within 300 feet of another vehicle or within 500 feet of oncoming traffic.', category: 'Safe Driving' },
-  { id: 'pt9', question: 'What should you do if your brakes fail while driving?', options: ['Turn off the engine immediately', 'Pump the brake pedal, use parking brake gradually, shift to lower gear', 'Steer into oncoming traffic to stop', 'Jump out of the vehicle'], correctIndex: 1, explanation: 'If brakes fail: Pump the brake pedal, gradually apply parking brake, downshift, and look for a safe area to stop.', category: 'Safe Driving' },
-  { id: 'pt10', question: 'What is the proper action at a yield sign?', options: ['Stop completely', 'Proceed without slowing', 'Slow down and give right-of-way to cross traffic', 'Speed up to merge quickly'], correctIndex: 2, explanation: 'At a yield sign, slow down and be prepared to stop. Give right-of-way to vehicles in or approaching the intersection.', category: 'Road Signs' },
-  { id: 'pt11', question: 'When driving in fog, you should use:', options: ['High beam headlights', 'Low beam headlights', 'Parking lights only', 'No lights'], correctIndex: 1, explanation: 'Use low beam headlights in fog. High beams reflect off the fog and create glare that reduces visibility.', category: 'Safe Driving' },
-  { id: 'pt12', question: 'What does a white rectangular sign typically indicate?', options: ['Warning', 'Regulatory information', 'Construction zone', 'Tourist information'], correctIndex: 1, explanation: 'White rectangular signs are regulatory signs indicating traffic laws you must follow.', category: 'Road Signs' },
-  { id: 'pt13', question: 'The minimum insurance coverage most states require is:', options: ['Collision only', 'Liability coverage', 'Comprehensive only', 'Full coverage'], correctIndex: 1, explanation: 'Most states require minimum liability coverage to pay for injuries and damage you cause to others.', category: 'Traffic Laws' },
-  { id: 'pt14', question: 'When should you increase your following distance?', options: ['In good weather only', 'When following a motorcycle, in bad weather, or when towing', 'Only at night', 'Never - maintain the same distance'], correctIndex: 1, explanation: 'Increase following distance when following motorcycles, in bad weather, when towing, or behind large vehicles.', category: 'Safe Driving' },
-  { id: 'pt15', question: 'What is the proper way to enter a freeway?', options: ['Stop at the end of the ramp', 'Match freeway speed and merge smoothly', 'Enter slowly and speed up on the freeway', 'Wait for a gap then accelerate quickly'], correctIndex: 1, explanation: 'Use the acceleration lane to match freeway speed, then merge smoothly when a safe gap appears.', category: 'Safe Driving' },
-  { id: 'pt16', question: 'A red arrow traffic signal means:', options: ['Proceed with caution', 'Stop and remain stopped until a green light or arrow appears', 'Yield to oncoming traffic', 'The signal is broken'], correctIndex: 1, explanation: 'A red arrow means you must stop and remain stopped until a green arrow or light appears.', category: 'Road Signs' },
-  { id: 'pt17', question: 'When parking uphill with a curb, you should turn your wheels:', options: ['Toward the curb', 'Away from the curb', 'Keep wheels straight', 'Does not matter'], correctIndex: 1, explanation: 'When parking uphill with a curb, turn wheels away from the curb so if the car rolls, it rolls into the curb.', category: 'Safe Driving' },
-  { id: 'pt18', question: 'What is the "two-second rule" used for?', options: ['Determining speed', 'Maintaining safe following distance', 'Changing lanes', 'Passing another vehicle'], correctIndex: 1, explanation: 'The two-second rule helps maintain a safe following distance.', category: 'Safe Driving' },
-  { id: 'pt19', question: 'When must you stop your vehicle?', options: ['At a green light', 'At a flashing yellow light', 'At a solid red light or stop sign', 'Only when police direct you'], correctIndex: 2, explanation: 'You must stop at solid red lights, stop signs, when directed by police, at railroad crossings with signals, and for school buses with flashing red lights.', category: 'Traffic Laws' },
-  { id: 'pt20', question: 'What should you do when approaching a construction zone?', options: ['Speed up to get through quickly', 'Slow down and watch for workers and flaggers', 'Maintain normal speed', 'Use the shoulder to pass'], correctIndex: 1, explanation: 'Slow down in construction zones, watch for workers and flaggers, follow temporary signs.', category: 'Safe Driving' },
-  { id: 'pt21', question: 'What does a green arrow signal mean?', options: ['Yield to oncoming traffic', 'Proceed in the arrow direction - you have the right of way', 'Stop first, then proceed', 'Prepare to stop'], correctIndex: 1, explanation: 'A green arrow means you have the right-of-way in the direction shown.', category: 'Road Signs' },
-  { id: 'pt22', question: 'When is it legal to pass on the right?', options: ['Never', 'When a vehicle is turning left and there is room on the right', 'Anytime you want', 'Only on one-way streets'], correctIndex: 1, explanation: 'You may pass on the right when a vehicle ahead is turning left and there is sufficient space.', category: 'Traffic Laws' },
-  { id: 'pt23', question: 'What should you do if an oncoming vehicle crosses into your lane?', options: ['Speed up to pass quickly', 'Steer right, slow down, and sound horn', 'Flash your high beams', 'Stay in your lane and brace for impact'], correctIndex: 1, explanation: 'Steer to the right, slow down, sound your horn, and if necessary, drive off the road to avoid a collision.', category: 'Safe Driving' },
-  { id: 'pt24', question: 'When parking downhill with a curb, you should turn your wheels:', options: ['Away from the curb', 'Toward the curb', 'Keep wheels straight', 'Does not matter'], correctIndex: 1, explanation: 'When parking downhill with a curb, turn wheels toward the curb so if the car rolls, it rolls into the curb.', category: 'Safe Driving' },
-  { id: 'pt25', question: 'What is the speed limit in a business or residential district unless otherwise posted?', options: ['15 mph', '25 mph', '35 mph', '45 mph'], correctIndex: 1, explanation: 'The default speed limit in business and residential districts is typically 25 mph unless otherwise posted.', category: 'Traffic Laws' },
-  { id: 'pt26', question: 'What does a flashing red traffic light mean?', options: ['Proceed with caution', 'Stop completely, then proceed when safe', 'Yield to cross traffic', 'Prepare to stop'], correctIndex: 1, explanation: 'A flashing red light is treated like a stop sign. Come to a complete stop, yield, then proceed when safe.', category: 'Road Signs' },
-  { id: 'pt27', question: 'When making a right turn on red (where permitted), you must:', options: ['Proceed without stopping', 'Stop completely first, then yield to traffic and pedestrians', 'Only yield to vehicles', 'Wait for a green light'], correctIndex: 1, explanation: 'Even where right turn on red is permitted, you must come to a complete stop first, then yield to all traffic and pedestrians.', category: 'Traffic Laws' },
-  { id: 'pt28', question: 'What is the proper response to an aggressive driver?', options: ['Speed up to get away', 'Make eye contact and gesture', 'Avoid eye contact, don\'t respond, let them pass', 'Follow them closely'], correctIndex: 2, explanation: 'Avoid engaging with aggressive drivers. Don\'t make eye contact or gestures, allow them to pass.', category: 'Safe Driving' },
-  { id: 'pt29', question: 'How far should you stop from a school bus that has stopped to load or unload children?', options: ['5 feet', '10 feet', '20 feet', '50 feet'], correctIndex: 2, explanation: 'You must stop at least 20 feet from a stopped school bus on undivided roads.', category: 'Traffic Laws' },
-  { id: 'pt30', question: 'What does a "No Passing Zone" sign look like?', options: ['Yellow circle with black "P"', 'Pennant-shaped sign on the left side of road', 'White rectangle with text', 'Yellow diamond with arrows'], correctIndex: 1, explanation: 'A "No Passing Zone" sign is a pennant-shaped yellow sign placed on the left side of the road.', category: 'Road Signs' },
-  { id: 'pt31', question: 'When are you required to wear a seatbelt?', options: ['Only on highways', 'Only for long trips', 'At all times when the vehicle is in motion', 'Only for front seat passengers'], correctIndex: 2, explanation: 'All occupants must wear seatbelts at all times when the vehicle is in motion.', category: 'Traffic Laws' },
-  { id: 'pt32', question: 'What should you do at an intersection with a malfunctioning traffic signal?', options: ['Treat it as a green light', 'Treat it as a four-way stop', 'Speed through quickly', 'Wait for police'], correctIndex: 1, explanation: 'If a traffic signal is not working, treat the intersection as a four-way stop.', category: 'Traffic Laws' },
-  { id: 'pt33', question: 'What is the purpose of a diamond lane (HOV lane)?', options: ['For emergency vehicles only', 'For vehicles with two or more occupants', 'For passing slower traffic', 'For motorcycles only'], correctIndex: 1, explanation: 'HOV (High Occupancy Vehicle) lanes are reserved for vehicles with a minimum number of occupants, typically 2 or more.', category: 'Traffic Laws' },
-  { id: 'pt34', question: 'What should you do when you hear a siren but cannot see the emergency vehicle?', options: ['Speed up to clear the area', 'Pull over and stop until you can determine where it is', 'Continue normally', 'Stop immediately where you are'], correctIndex: 1, explanation: 'Pull over to the right and stop until you can determine where the emergency vehicle is coming from.', category: 'Safe Driving' },
-  { id: 'pt35', question: 'What does a red X above a lane mean?', options: ['Lane is ending', 'Lane is closed - do not drive in this lane', 'Merge left', 'Construction ahead'], correctIndex: 1, explanation: 'A red X means the lane is closed and you should not drive in it.', category: 'Road Signs' },
-  { id: 'pt36', question: 'When backing up, you should:', options: ['Rely only on your mirrors', 'Turn your head and look behind you', 'Back up quickly to avoid blocking traffic', 'Keep the steering wheel straight'], correctIndex: 1, explanation: 'Turn your head and look behind you when backing up. Don\'t rely solely on mirrors.', category: 'Safe Driving' },
-  { id: 'pt37', question: 'What is the meaning of a yellow painted curb?', options: ['Stop only long enough to load or unload', 'No stopping, standing, or parking', 'Parking permitted for limited time', 'Handicapped parking only'], correctIndex: 0, explanation: 'A yellow curb means stop only long enough to load or unload passengers or freight.', category: 'Traffic Laws' },
-  { id: 'pt38', question: 'What should you do if you miss your exit on a freeway?', options: ['Back up to the exit', 'Make a U-turn on the shoulder', 'Go to the next exit', 'Stop and ask for directions'], correctIndex: 2, explanation: 'Never back up on a freeway. Go to the next exit and turn around.', category: 'Safe Driving' },
-  { id: 'pt39', question: 'When driving through a curve, you should:', options: ['Accelerate through the curve', 'Brake during the curve', 'Slow down before entering the curve', 'Maintain your current speed'], correctIndex: 2, explanation: 'Slow down before entering a curve, then accelerate gently as you come out of it.', category: 'Safe Driving' },
-  { id: 'pt40', question: 'What is the legal limit for following distance behind a fire truck?', options: ['100 feet', '200 feet', '300 feet', '500 feet'], correctIndex: 3, explanation: 'You must stay at least 500 feet behind a fire truck responding to an emergency.', category: 'Traffic Laws' },
+  { id: 'pt1', category: 'Traffic Laws', question: 'What is the legal blood alcohol concentration (BAC) limit for drivers 21 and over?', options: ['0.04%', '0.08%', '0.10%', '0.12%'], correctIndex: 1, explanation: 'The legal BAC limit is 0.08% for drivers 21 and over in most states.' },
+  { id: 'pt2', category: 'Traffic Laws', question: 'When must you stop for a school bus with flashing red lights?', options: ['Only if children are visible', 'Only in your direction of travel', 'On both sides of undivided roads', 'Never on weekends'], correctIndex: 2, explanation: 'On undivided roads, you must stop in both directions when a school bus has flashing red lights.' },
+  { id: 'pt3', category: 'Road Signs', question: 'What does a red octagonal sign mean?', options: ['Yield', 'Stop', 'Speed limit', 'No entry'], correctIndex: 1, explanation: 'A red octagon is always a STOP sign.' },
+  { id: 'pt4', category: 'Right-of-Way', question: 'At a four-way stop, who has the right-of-way?', options: ['The largest vehicle', 'The vehicle on the left', 'The first vehicle to arrive and stop', 'The vehicle with the most passengers'], correctIndex: 2, explanation: 'At a four-way stop, the first vehicle to arrive and stop has the right-of-way.' },
+  { id: 'pt5', category: 'Traffic Laws', question: 'What is the speed limit in a school zone when children are present?', options: ['10 mph', '15-25 mph (posted)', '35 mph', '45 mph'], correctIndex: 1, explanation: 'School zone speed limits are typically 15-25 mph when children are present - always check posted signs.' },
+  { id: 'pt6', category: 'Safe Driving', question: 'What is the minimum following distance you should maintain behind another vehicle?', options: ['1 second', '2 seconds', '3 seconds', '5 seconds'], correctIndex: 2, explanation: 'The 3-second rule provides adequate stopping distance in normal conditions.' },
+  { id: 'pt7', category: 'Road Signs', question: 'What does a yellow diamond-shaped sign indicate?', options: ['Regulatory information', 'Warning of potential hazards', 'Guide information', 'Construction only'], correctIndex: 1, explanation: 'Yellow diamond-shaped signs warn of potential hazards ahead.' },
+  { id: 'pt8', category: 'Traffic Laws', question: 'When are headlights required?', options: ['Only at night', '30 min after sunset to 30 min before sunrise and when visibility is poor', 'Only in rain', 'Only on highways'], correctIndex: 1, explanation: 'Headlights are required from 30 minutes after sunset until 30 minutes before sunrise, and when visibility is less than 1000 feet.' },
+  { id: 'pt9', category: 'Right-of-Way', question: 'When making a left turn at an intersection, you must yield to:', options: ['Only pedestrians', 'Only oncoming traffic', 'Oncoming traffic and pedestrians', 'No one if you have a green light'], correctIndex: 2, explanation: 'When turning left, you must yield to oncoming traffic and pedestrians.' },
+  { id: 'pt10', category: 'Traffic Laws', question: 'What does a flashing red light mean?', options: ['Proceed with caution', 'Stop, then proceed when safe', 'Slow down', 'Road closed'], correctIndex: 1, explanation: 'A flashing red light is treated like a stop sign - come to a complete stop, then proceed when safe.' },
+  { id: 'pt11', category: 'Safe Driving', question: 'What should you do if your vehicle starts to hydroplane?', options: ['Brake hard immediately', 'Accelerate to gain traction', 'Ease off the gas and steer straight', 'Turn the wheel sharply'], correctIndex: 2, explanation: 'When hydroplaning, ease off the gas, don\'t brake, and steer straight until you regain traction.' },
+  { id: 'pt12', category: 'Road Signs', question: 'What does a pentagon-shaped sign indicate?', options: ['Construction zone', 'School zone or crossing', 'No passing zone', 'Railroad crossing'], correctIndex: 1, explanation: 'Pentagon-shaped signs indicate school zones or school crossings.' },
+  { id: 'pt13', category: 'Traffic Laws', question: 'What documents must you carry when driving?', options: ['Just your license', 'License and registration only', 'License, registration, and proof of insurance', 'No documents required for short trips'], correctIndex: 2, explanation: 'You must carry a valid driver\'s license, vehicle registration, and proof of insurance.' },
+  { id: 'pt14', category: 'Right-of-Way', question: 'Who has the right-of-way when entering a roundabout?', options: ['Entering traffic', 'Traffic already in the roundabout', 'Larger vehicles', 'Emergency vehicles only'], correctIndex: 1, explanation: 'Traffic already circulating in the roundabout has the right-of-way.' },
+  { id: 'pt15', category: 'Safe Driving', question: 'What should you do if you miss your exit on a highway?', options: ['Back up to the exit', 'Make a U-turn on the shoulder', 'Continue to the next exit', 'Stop and wait for help'], correctIndex: 2, explanation: 'Never back up or make U-turns on highways. Continue to the next exit.' },
+  { id: 'pt16', category: 'Traffic Laws', question: 'What is the implied consent law?', options: ['You agree to follow all traffic laws', 'You agree to submit to chemical testing if suspected of DUI', 'You consent to vehicle searches', 'You agree to pay all fines'], correctIndex: 1, explanation: 'Implied consent means by driving, you agree to submit to chemical testing if suspected of DUI.' },
+  { id: 'pt17', category: 'Road Signs', question: 'What does a red circle with a white horizontal bar mean?', options: ['Speed limit ahead', 'Do not enter', 'No parking', 'Yield ahead'], correctIndex: 1, explanation: 'A red circle with a white horizontal bar means DO NOT ENTER.' },
+  { id: 'pt18', category: 'Safe Driving', question: 'When driving in fog, you should use:', options: ['High beam headlights', 'Low beam headlights', 'Parking lights only', 'No lights'], correctIndex: 1, explanation: 'Use low beam headlights in fog - high beams reflect off the fog and reduce visibility.' },
+  { id: 'pt19', category: 'Right-of-Way', question: 'At an uncontrolled intersection (no signs or signals), who has the right-of-way?', options: ['The vehicle on the left', 'The vehicle on the right', 'The faster vehicle', 'The larger vehicle'], correctIndex: 1, explanation: 'At an uncontrolled intersection, the vehicle on the right has the right-of-way.' },
+  { id: 'pt20', category: 'Traffic Laws', question: 'When making a right turn on red, you must:', options: ['Just slow down and turn', 'Stop first, then yield to traffic and pedestrians before turning', 'Wait for the green light', 'Honk before turning'], correctIndex: 1, explanation: 'You must come to a complete stop, then yield to all traffic and pedestrians before turning right on red.' },
+  { id: 'pt21', category: 'Road Signs', question: 'What does an orange diamond-shaped sign indicate?', options: ['School zone', 'Construction or maintenance zone', 'No passing zone', 'Speed limit change'], correctIndex: 1, explanation: 'Orange diamond-shaped signs indicate construction or maintenance zones.' },
+  { id: 'pt22', category: 'Safe Driving', question: 'What is the proper hand position on the steering wheel?', options: ['10 and 2 o\'clock', '9 and 3 o\'clock (or 8 and 4)', 'One hand at 12 o\'clock', 'Both hands at 6 o\'clock'], correctIndex: 1, explanation: '9 and 3 o\'clock (or 8 and 4) is recommended for airbag safety and control.' },
+  { id: 'pt23', category: 'Traffic Laws', question: 'How far must you stop from a railroad crossing?', options: ['5-10 feet', '15-50 feet', '100 feet', '200 feet'], correctIndex: 1, explanation: 'You must stop at least 15 feet but no more than 50 feet from the nearest rail.' },
+  { id: 'pt24', category: 'Right-of-Way', question: 'When must you yield to emergency vehicles?', options: ['Only when they honk', 'Only at intersections', 'Always when they have sirens and/or flashing lights', 'Only on highways'], correctIndex: 2, explanation: 'Always yield to emergency vehicles with active sirens and/or flashing lights - pull over and stop.' },
+  { id: 'pt25', category: 'Road Signs', question: 'What does a green arrow traffic signal mean?', options: ['Yield to pedestrians', 'Proceed in the direction shown - protected turn', 'Slow down', 'Prepare to stop'], correctIndex: 1, explanation: 'A green arrow means you have a protected turn - proceed in the direction shown.' },
+  { id: 'pt26', category: 'Safe Driving', question: 'What is target fixation?', options: ['Focusing on your destination', 'Looking at an obstacle causes you to steer toward it', 'Checking your mirrors', 'Watching for police'], correctIndex: 1, explanation: 'Target fixation is when looking at an obstacle causes you to steer toward it - look where you want to go.' },
+  { id: 'pt27', category: 'Traffic Laws', question: 'What does a yellow curb mean?', options: ['No parking', 'Loading/unloading only', 'Disabled parking only', 'Short-term parking'], correctIndex: 1, explanation: 'A yellow curb means stop only long enough to load or unload passengers or freight.' },
+  { id: 'pt28', category: 'Right-of-Way', question: 'When two vehicles arrive at opposite sides of a four-way stop at the same time:', options: ['The larger vehicle goes first', 'Both can proceed simultaneously if going straight', 'The vehicle turning left goes first', 'The vehicle on the left goes first'], correctIndex: 1, explanation: 'If both vehicles are going straight, they can proceed simultaneously. If one is turning, that driver yields.' },
+  { id: 'pt29', category: 'Road Signs', question: 'What does a flashing yellow light mean?', options: ['Stop completely', 'Proceed with caution', 'Yield to all traffic', 'Road closed ahead'], correctIndex: 1, explanation: 'A flashing yellow light means slow down and proceed with caution.' },
+  { id: 'pt30', category: 'Safe Driving', question: 'How should you share the road with large trucks?', options: ['Pass quickly on the right', 'Stay in their blind spots', 'Avoid their blind spots and give extra space', 'Follow closely to draft'], correctIndex: 2, explanation: 'Avoid trucks\' blind spots (no-zones), don\'t cut them off, and give them extra space for turns.' },
+  { id: 'pt31', category: 'Traffic Laws', question: 'When must you use your turn signal?', options: ['Only on highways', 'Only when other cars are present', 'At least 100 feet before turning or changing lanes', 'Only at night'], correctIndex: 2, explanation: 'Signal at least 100 feet before turning or changing lanes in most states.' },
+  { id: 'pt32', category: 'Right-of-Way', question: 'When entering a highway from an on-ramp, you should:', options: ['Stop at the end of the ramp', 'Accelerate to match highway speed and merge smoothly', 'Expect traffic to yield to you', 'Drive on the shoulder until you find a gap'], correctIndex: 1, explanation: 'Use the acceleration lane to reach highway speed, then merge when safe.' },
+  { id: 'pt33', category: 'Road Signs', question: 'What does a brown sign with white text indicate?', options: ['Construction ahead', 'Recreational or cultural interest areas', 'Speed limit', 'Hospital ahead'], correctIndex: 1, explanation: 'Brown signs point to parks, historical sites, and other recreational/cultural attractions.' },
+  { id: 'pt34', category: 'Safe Driving', question: 'What should you do if your brakes fail?', options: ['Turn off the engine immediately', 'Pump the brakes, use parking brake slowly, shift to lower gear', 'Jump out of the car', 'Steer into oncoming traffic'], correctIndex: 1, explanation: 'Pump brakes (if non-ABS), use parking brake slowly, shift to lower gear, and find a safe place to stop.' },
+  { id: 'pt35', category: 'Traffic Laws', question: 'What is the "Move Over" law?', options: ['Move over for faster traffic', 'Move over or slow down for emergency vehicles with flashing lights', 'Move over for pedestrians', 'Move over in construction zones only'], correctIndex: 1, explanation: 'Move over one lane or slow down significantly when passing emergency vehicles with flashing lights.' },
+  { id: 'pt36', category: 'Right-of-Way', question: 'At a T-intersection with no signs, who has the right-of-way?', options: ['The vehicle turning', 'Traffic on the through road (top of T)', 'The vehicle arriving first', 'The vehicle on the left'], correctIndex: 1, explanation: 'At a T-intersection, traffic on the through road has the right-of-way.' },
+  { id: 'pt37', category: 'Road Signs', question: 'What does a circular sign typically indicate?', options: ['Speed limit', 'Railroad crossing ahead', 'School zone', 'Construction zone'], correctIndex: 1, explanation: 'Circular signs typically indicate railroad crossings ahead.' },
+  { id: 'pt38', category: 'Safe Driving', question: 'What should you do if you start to skid?', options: ['Brake hard immediately', 'Accelerate to regain control', 'Take foot off gas and steer in the direction you want to go', 'Turn the wheel in the opposite direction of the skid'], correctIndex: 2, explanation: 'Take your foot off the gas, don\'t brake, and steer in the direction you want the front of the car to go.' },
+  { id: 'pt39', category: 'Traffic Laws', question: 'What is the minimum age for a learner\'s permit in most states?', options: ['14 years old', '15-16 years old', '17 years old', '18 years old'], correctIndex: 1, explanation: 'Most states allow you to get a learner\'s permit at age 15 or 16, with requirements varying by state.' },
+  { id: 'pt40', category: 'Right-of-Way', question: 'At a malfunctioning traffic signal, what should you do?', options: ['Proceed cautiously without stopping', 'Treat it as a four-way stop', 'Assume you have the right-of-way', 'Wait for police to arrive'], correctIndex: 1, explanation: 'Treat a malfunctioning traffic signal as a four-way stop - first to arrive, first to go.' }
 ];
 
+// ==================== SCENARIO DATA ====================
 const scenarioQuestions = [
   { id: 'sq1', topic: 'Parallel Parking', scenario: 'You need to parallel park between two cars on a busy street. There\'s about 1.5 car lengths of space.', question: 'What is your first step after stopping beside the front car?', options: ['Turn wheel sharply right and reverse immediately', 'Align your rear bumper with the front car\'s rear bumper, then reverse slowly', 'Signal and drive forward to find a bigger space', 'Wait for traffic to clear before starting'], correctIndex: 1, explanation: 'Align your rear bumper with the front car\'s rear bumper, about 2-3 feet away from it, before beginning to reverse.', difficulty: 'medium' },
   { id: 'sq2', topic: 'Parallel Parking', scenario: 'During parallel parking, you\'ve backed in but are 24 inches from the curb - too far.', question: 'What should you do?', options: ['Start over from the beginning', 'Pull forward slightly while turning right, then reverse while turning left to adjust', 'Open your door to check the distance', 'Accept the parking job as is'], correctIndex: 1, explanation: 'You can adjust by pulling forward slightly while turning toward the curb, then reversing while turning away from it.', difficulty: 'medium' },
@@ -1017,7 +909,7 @@ const scenarioQuestions = [
   { id: 'sq17', topic: 'Emergency Vehicles', scenario: 'You hear a siren approaching from behind but can\'t see the emergency vehicle yet.', question: 'What should you do?', options: ['Continue at your current speed', 'Pull over to the right and stop immediately', 'Speed up to get out of the way', 'Stop in your current lane'], correctIndex: 1, explanation: 'Pull over to the right and stop. Wait until you can determine where the vehicle is coming from.', difficulty: 'easy' },
   { id: 'sq18', topic: 'Emergency Vehicles', scenario: 'An ambulance is stopped with lights flashing in the lane next to you on a two-lane road.', question: 'What should you do?', options: ['Continue at normal speed', 'Slow down and pass carefully', 'Move over a lane if possible, or slow down significantly', 'Stop and wait for them to leave'], correctIndex: 2, explanation: 'Move over law requires you to change lanes if possible, or slow down significantly when passing emergency vehicles.', difficulty: 'easy' },
   { id: 'sq19', topic: 'School Zones', scenario: 'You approach a school zone with flashing yellow lights and children are present.', question: 'What should you do?', options: ['Continue at the normal speed limit', 'Reduce speed to the posted school zone limit', 'Only slow down if children are in the road', 'Speed up to pass through quickly'], correctIndex: 1, explanation: 'Always reduce speed to the posted limit when school zone lights are flashing and children are present.', difficulty: 'easy' },
-  { id: 'sq20', topic: 'School Zones', scenario: 'A school bus has stopped with red lights flashing on the opposite side of a divided highway with a median.', question: 'Do you need to stop?', options: ['Yes, always stop for school buses', 'No, you can proceed with caution', 'Only stop if children are crossing', 'Stop only if the bus driver signals you'], correctIndex: 1, explanation: 'On a divided highway with a median, you don\'t need to stop, but proceed with caution.', difficulty: 'medium' },
+  { id: 'sq20', topic: 'School Zones', scenario: 'A school bus has stopped with red lights flashing on the opposite side of a divided highway with a median.', question: 'Do you need to stop?', options: ['Yes, always stop for school buses', 'No, you can proceed with caution', 'Only stop if children are crossing', 'Stop only if the bus driver signals you'], correctIndex: 1, explanation: 'On a divided highway with a median, you don\'t need to stop, but proceed with caution.', difficulty: 'medium' }
 ];
 
 // ==================== STATE ====================
@@ -1056,46 +948,47 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProgress();
   loadSession();
   updateHomeProgress();
-  checkResumeSession();
+  checkResumeBanner();
 });
 
 function loadProgress() {
-  try {
-    const saved = localStorage.getItem('driveyourtest_progress');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      progress = {
-        permitFlashcards: parsed.permitFlashcards || { seen: [], known: [], needsPractice: [] },
-        permitTest: parsed.permitTest || { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
-        scenarioTest: parsed.scenarioTest || { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 },
-        totalStudyTime: parsed.totalStudyTime || 0,
-        lastSession: parsed.lastSession || new Date().toISOString()
-      };
-    }
-  } catch (e) {}
+  const saved = localStorage.getItem('driveyourtest_progress');
+  if (saved) {
+    progress = { ...progress, ...JSON.parse(saved) };
+  }
 }
 
 function saveProgress() {
-  try {
-    progress.lastSession = new Date().toISOString();
-    localStorage.setItem('driveyourtest_progress', JSON.stringify(progress));
-  } catch (e) {}
+  progress.lastSession = new Date().toISOString();
+  localStorage.setItem('driveyourtest_progress', JSON.stringify(progress));
 }
 
 function loadSession() {
-  try {
-    const saved = localStorage.getItem('driveyourtest_session');
-    if (saved) session = JSON.parse(saved);
-  } catch (e) {}
+  const saved = localStorage.getItem('driveyourtest_session');
+  if (saved) {
+    session = { ...session, ...JSON.parse(saved) };
+  }
 }
 
 function saveSession() {
-  try { localStorage.setItem('driveyourtest_session', JSON.stringify(session)); } catch (e) {}
+  localStorage.setItem('driveyourtest_session', JSON.stringify(session));
 }
 
 function clearSession() {
   session = { permitTest: null, scenarioTest: null, permitFlashcards: null };
   localStorage.removeItem('driveyourtest_session');
+}
+
+function clearSessionAndRefresh() {
+  clearSession();
+  location.reload();
+}
+
+function checkResumeBanner() {
+  const banner = document.getElementById('resume-banner');
+  if (session.permitTest?.active || session.scenarioTest?.active) {
+    banner.classList.remove('hidden');
+  }
 }
 
 // ==================== NAVIGATION ====================
@@ -1120,47 +1013,64 @@ function updateHomeProgress() {
   const flashcardPct = Math.round((knownCount / 100) * 100);
   
   document.getElementById('flashcard-progress').textContent = flashcardPct + '%';
-  document.getElementById('flashcard-badge').textContent = flashcardPct + '%';
   document.getElementById('flashcard-bar').style.width = flashcardPct + '%';
+  document.getElementById('flashcard-badge').textContent = flashcardPct + '%';
+  
   document.getElementById('permit-tests').textContent = progress.permitTest.testsTaken;
   document.getElementById('best-score').textContent = progress.permitTest.highScore > 0 ? progress.permitTest.highScore + '%' : '-';
+  
   document.getElementById('scenario-tests').textContent = progress.scenarioTest.testsTaken;
   document.getElementById('scenario-best').textContent = progress.scenarioTest.highScore > 0 ? progress.scenarioTest.highScore + '%' : '-';
-  document.getElementById('stat-flashcards-seen').textContent = seenCount;
-  document.getElementById('stat-flashcards-known').textContent = knownCount;
-  document.getElementById('stat-avg-score').textContent = progress.permitTest.averageScore > 0 ? Math.round(progress.permitTest.averageScore) + '%' : '-';
-  document.getElementById('stat-tests-passed').textContent = progress.permitTest.passedTests;
-}
-
-function checkResumeSession() {
-  const hasSession = session.permitTest?.active || session.scenarioTest?.active || session.permitFlashcards;
-  document.getElementById('resume-banner').classList.toggle('hidden', !hasSession);
-}
-
-function clearSessionAndRefresh() {
-  if (confirm('Clear your in-progress session and start fresh?')) { clearSession(); checkResumeSession(); }
 }
 
 // ==================== FLASHCARDS ====================
 function startFlashcards() {
   if (session.permitFlashcards) {
-    currentDeck = session.permitFlashcards.deck;
-    currentCardIndex = session.permitFlashcards.index;
-    currentCategory = session.permitFlashcards.category;
-  } else { selectCategory('all'); }
+    currentCategory = session.permitFlashcards.category || 'all';
+    currentCardIndex = session.permitFlashcards.index || 0;
+  } else {
+    currentCategory = 'all';
+    currentCardIndex = 0;
+  }
+  
+  selectCategory(currentCategory);
   showView('flashcards');
-  updateCardDisplay();
 }
 
 function selectCategory(category) {
   currentCategory = category;
-  currentCardIndex = 0;
-  isFlipped = false;
-  currentDeck = category === 'all' ? [...permitFlashcards] : permitFlashcards.filter(c => c.category === category);
-  document.querySelectorAll('.category-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.category === category));
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === category);
+  });
+  
+  if (category === 'all') {
+    currentDeck = [...permitFlashcards];
+  } else {
+    currentDeck = permitFlashcards.filter(c => c.category === category);
+  }
+  
+  if (currentCardIndex >= currentDeck.length) currentCardIndex = 0;
+  
   document.getElementById('card-total').textContent = currentDeck.length;
-  updateCardDisplay();
+  isFlipped = false;
+  updateFlashcard();
   saveFlashcardSession();
+}
+
+function updateFlashcard() {
+  const card = currentDeck[currentCardIndex];
+  const flashcard = document.getElementById('flashcard');
+  
+  flashcard.classList.remove('flipped');
+  isFlipped = false;
+  
+  document.getElementById('card-category').textContent = card.category;
+  document.getElementById('card-front').textContent = card.front;
+  document.getElementById('card-back').textContent = card.back;
+  document.getElementById('card-index').textContent = currentCardIndex + 1;
+  
+  document.getElementById('prev-btn').disabled = currentCardIndex === 0;
+  document.getElementById('next-btn').disabled = currentCardIndex === currentDeck.length - 1;
 }
 
 function flipCard() {
@@ -1168,38 +1078,55 @@ function flipCard() {
   document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
 }
 
-function updateCardDisplay() {
-  if (currentDeck.length === 0) return;
-  const card = currentDeck[currentCardIndex];
-  document.getElementById('card-category').textContent = card.category;
-  document.getElementById('card-front').textContent = card.front;
-  document.getElementById('card-back').textContent = card.back;
-  document.getElementById('card-index').textContent = currentCardIndex + 1;
-  isFlipped = false;
-  document.getElementById('flashcard').classList.remove('flipped');
-  document.getElementById('prev-btn').disabled = currentCardIndex === 0;
-  document.getElementById('next-btn').disabled = currentCardIndex === currentDeck.length - 1;
+function prevCard() {
+  if (currentCardIndex > 0) {
+    currentCardIndex--;
+    isFlipped = false;
+    updateFlashcard();
+    saveFlashcardSession();
+  }
 }
 
-function prevCard() { if (currentCardIndex > 0) { currentCardIndex--; updateCardDisplay(); saveFlashcardSession(); } }
-function nextCard() { if (currentCardIndex < currentDeck.length - 1) { currentCardIndex++; updateCardDisplay(); saveFlashcardSession(); } }
+function nextCard() {
+  if (currentCardIndex < currentDeck.length - 1) {
+    currentCardIndex++;
+    isFlipped = false;
+    updateFlashcard();
+    saveFlashcardSession();
+  }
+}
 
 function rateCard(rating) {
   const card = currentDeck[currentCardIndex];
-  if (!progress.permitFlashcards.seen.includes(card.id)) progress.permitFlashcards.seen.push(card.id);
+  
+  if (!progress.permitFlashcards.seen.includes(card.id)) {
+    progress.permitFlashcards.seen.push(card.id);
+  }
+  
   if (rating === 'known') {
-    if (!progress.permitFlashcards.known.includes(card.id)) progress.permitFlashcards.known.push(card.id);
+    if (!progress.permitFlashcards.known.includes(card.id)) {
+      progress.permitFlashcards.known.push(card.id);
+    }
     progress.permitFlashcards.needsPractice = progress.permitFlashcards.needsPractice.filter(id => id !== card.id);
   } else {
-    if (!progress.permitFlashcards.needsPractice.includes(card.id)) progress.permitFlashcards.needsPractice.push(card.id);
+    if (!progress.permitFlashcards.needsPractice.includes(card.id)) {
+      progress.permitFlashcards.needsPractice.push(card.id);
+    }
     progress.permitFlashcards.known = progress.permitFlashcards.known.filter(id => id !== card.id);
   }
+  
   saveProgress();
-  if (currentCardIndex < currentDeck.length - 1) { currentCardIndex++; updateCardDisplay(); saveFlashcardSession(); }
+  
+  if (currentCardIndex < currentDeck.length - 1) {
+    currentCardIndex++;
+    isFlipped = false;
+    updateFlashcard();
+    saveFlashcardSession();
+  }
 }
 
 function saveFlashcardSession() {
-  session.permitFlashcards = { deck: currentDeck, index: currentCardIndex, category: currentCategory };
+  session.permitFlashcards = { category: currentCategory, index: currentCardIndex };
   saveSession();
 }
 
@@ -1209,25 +1136,47 @@ function startPermitTest() {
     testQuestions = session.permitTest.questions;
     testIndex = session.permitTest.index;
     testAnswers = session.permitTest.answers;
-    testTime = session.permitTest.time;
     selectedTestAnswer = session.permitTest.selectedAnswer;
+    testTime = session.permitTest.timeLeft;
+    testFinished = false;
   } else {
-    testQuestions = shuffleArray([...permitTestQuestions]).slice(0, 40);
+    testQuestions = [...permitTestQuestions].sort(() => Math.random() - 0.5);
     testIndex = 0;
     testAnswers = new Array(testQuestions.length).fill(null);
     testTime = 45 * 60;
     selectedTestAnswer = null;
+    testFinished = false;
   }
-  testFinished = false;
+  
   showView('permit-test');
   document.getElementById('test-results').classList.add('hidden');
   document.getElementById('test-question-card').classList.remove('hidden');
   document.getElementById('test-actions').classList.remove('hidden');
-  document.getElementById('test-end-ad').style.display = 'none';
   document.getElementById('test-total').textContent = testQuestions.length;
-  displayTestQuestion();
+  
+  updateTimerDisplay();
   startTimer();
+  displayTestQuestion();
   saveTestSession();
+}
+
+function startTimer() {
+  if (testTimer) clearInterval(testTimer);
+  testTimer = setInterval(() => {
+    testTime--;
+    updateTimerDisplay();
+    saveTestSession();
+    if (testTime <= 0) {
+      clearInterval(testTimer);
+      finishTest();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const mins = Math.floor(testTime / 60);
+  const secs = testTime % 60;
+  document.getElementById('test-timer').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 function displayTestQuestion() {
@@ -1236,9 +1185,12 @@ function displayTestQuestion() {
   document.getElementById('test-question').textContent = q.question;
   document.getElementById('test-index').textContent = testIndex + 1;
   document.getElementById('test-progress-bar').style.width = ((testIndex + 1) / testQuestions.length) * 100 + '%';
+  
   const optionsContainer = document.getElementById('test-options');
   optionsContainer.innerHTML = '';
+  
   const isAnswered = testAnswers[testIndex] !== null;
+  
   q.options.forEach((opt, i) => {
     const item = document.createElement('div');
     item.className = 'option-item';
@@ -1246,17 +1198,21 @@ function displayTestQuestion() {
       item.classList.add('disabled');
       if (i === q.correctIndex) item.classList.add('correct');
       else if (i === testAnswers[testIndex]) item.classList.add('incorrect');
-    } else if (selectedTestAnswer === i) item.classList.add('selected');
+    } else if (selectedTestAnswer === i) {
+      item.classList.add('selected');
+    }
     item.innerHTML = `<div class="option-radio"></div><span class="option-text">${opt}</span>`;
     if (!isAnswered) item.onclick = () => selectTestOption(i);
     optionsContainer.appendChild(item);
   });
+  
   if (isAnswered) {
     const explanation = document.createElement('div');
     explanation.className = 'explanation';
     explanation.innerHTML = `<div class="explanation-title">Explanation</div><div class="explanation-text">${q.explanation}</div>`;
     optionsContainer.appendChild(explanation);
   }
+  
   document.getElementById('submit-btn').classList.toggle('hidden', isAnswered);
   document.getElementById('submit-btn').disabled = selectedTestAnswer === null && !isAnswered;
   document.getElementById('next-question-btn').classList.toggle('hidden', !isAnswered);
@@ -1283,50 +1239,51 @@ function nextTestQuestion() {
     selectedTestAnswer = testAnswers[testIndex];
     displayTestQuestion();
     saveTestSession();
-  } else { finishTest(); }
-}
-
-function startTimer() {
-  if (testTimer) clearInterval(testTimer);
-  testTimer = setInterval(() => { testTime--; updateTimerDisplay(); if (testTime <= 0) { clearInterval(testTimer); finishTest(); } }, 1000);
-  updateTimerDisplay();
-}
-
-function updateTimerDisplay() {
-  const mins = Math.floor(testTime / 60);
-  const secs = testTime % 60;
-  const timerEl = document.getElementById('test-timer');
-  timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-  timerEl.classList.toggle('warning', testTime < 300);
+  } else {
+    finishTest();
+  }
 }
 
 function finishTest() {
   if (testTimer) clearInterval(testTimer);
   testFinished = true;
+  
   const correct = testAnswers.filter((a, i) => a === testQuestions[i].correctIndex).length;
-  const score = Math.round((correct / testQuestions.length) * 100);
+  const total = testQuestions.length;
+  const score = Math.round((correct / total) * 100);
   const passed = score >= 80;
-  progress.permitTest.testsTaken++;
-  if (passed) progress.permitTest.passedTests++;
-  progress.permitTest.averageScore = ((progress.permitTest.averageScore * (progress.permitTest.testsTaken - 1)) + score) / progress.permitTest.testsTaken;
-  progress.permitTest.highScore = Math.max(progress.permitTest.highScore, score);
-  saveProgress();
-  session.permitTest = null;
-  saveSession();
+  
   document.getElementById('test-question-card').classList.add('hidden');
   document.getElementById('test-actions').classList.add('hidden');
   document.getElementById('test-results').classList.remove('hidden');
-  document.getElementById('test-end-ad').style.display = 'block';
+  
   document.getElementById('results-icon').textContent = passed ? '🎉' : '📚';
   document.getElementById('results-title').textContent = passed ? 'Congratulations!' : 'Keep Practicing!';
+  document.getElementById('results-title').style.color = passed ? '#059669' : '#dc2626';
   document.getElementById('results-score').textContent = score + '%';
-  document.getElementById('results-score').className = 'results-score ' + (passed ? 'pass' : 'fail');
+  document.getElementById('results-score').style.color = passed ? '#059669' : '#dc2626';
   document.getElementById('correct-count').textContent = correct;
-  document.getElementById('incorrect-count').textContent = testQuestions.length - correct;
+  document.getElementById('incorrect-count').textContent = total - correct;
+  
+  progress.permitTest.testsTaken++;
+  progress.permitTest.averageScore = Math.round((progress.permitTest.averageScore * (progress.permitTest.testsTaken - 1) + score) / progress.permitTest.testsTaken);
+  if (score > progress.permitTest.highScore) progress.permitTest.highScore = score;
+  if (passed) progress.permitTest.passedTests++;
+  saveProgress();
+  
+  session.permitTest = null;
+  saveSession();
 }
 
 function saveTestSession() {
-  session.permitTest = { active: !testFinished, questions: testQuestions, index: testIndex, answers: testAnswers, time: testTime, selectedAnswer: selectedTestAnswer };
+  session.permitTest = {
+    active: !testFinished,
+    questions: testQuestions,
+    index: testIndex,
+    answers: testAnswers,
+    selectedAnswer: selectedTestAnswer,
+    timeLeft: testTime
+  };
   saveSession();
 }
 
@@ -1342,13 +1299,14 @@ function startScenarios() {
     selectedScenarioAnswer = null;
   }
   scenarioFinished = false;
+  
   showView('scenarios');
   document.getElementById('scenario-results').classList.add('hidden');
   document.getElementById('scenario-card').classList.remove('hidden');
   document.getElementById('scenario-question-card').classList.remove('hidden');
   document.getElementById('scenario-actions').classList.remove('hidden');
-  document.getElementById('scenario-end-ad').style.display = 'none';
   document.getElementById('scenario-total').textContent = scenarioQuestions.length;
+  
   displayScenarioQuestion();
   saveScenarioSession();
 }
@@ -1362,9 +1320,12 @@ function displayScenarioQuestion() {
   document.getElementById('scenario-question').textContent = s.question;
   document.getElementById('scenario-index').textContent = scenarioIndex + 1;
   document.getElementById('scenario-progress-bar').style.width = ((scenarioIndex + 1) / scenarioQuestions.length) * 100 + '%';
+  
   const optionsContainer = document.getElementById('scenario-options');
   optionsContainer.innerHTML = '';
+  
   const isAnswered = scenarioAnswers[scenarioIndex] !== null;
+  
   s.options.forEach((opt, i) => {
     const item = document.createElement('div');
     item.className = 'option-item';
@@ -1372,17 +1333,21 @@ function displayScenarioQuestion() {
       item.classList.add('disabled');
       if (i === s.correctIndex) item.classList.add('correct');
       else if (i === scenarioAnswers[scenarioIndex]) item.classList.add('incorrect');
-    } else if (selectedScenarioAnswer === i) item.classList.add('selected');
+    } else if (selectedScenarioAnswer === i) {
+      item.classList.add('selected');
+    }
     item.innerHTML = `<div class="option-radio"></div><span class="option-text">${opt}</span>`;
     if (!isAnswered) item.onclick = () => selectScenarioOption(i);
     optionsContainer.appendChild(item);
   });
+  
   if (isAnswered) {
     const explanation = document.createElement('div');
     explanation.className = 'explanation';
     explanation.innerHTML = `<div class="explanation-title">Explanation</div><div class="explanation-text">${s.explanation}</div>`;
     optionsContainer.appendChild(explanation);
   }
+  
   document.getElementById('scenario-submit-btn').classList.toggle('hidden', isAnswered);
   document.getElementById('scenario-submit-btn').disabled = selectedScenarioAnswer === null && !isAnswered;
   document.getElementById('next-scenario-btn').classList.toggle('hidden', !isAnswered);
@@ -1409,56 +1374,65 @@ function nextScenario() {
     selectedScenarioAnswer = scenarioAnswers[scenarioIndex];
     displayScenarioQuestion();
     saveScenarioSession();
-  } else { finishScenarios(); }
+  } else {
+    finishScenarios();
+  }
 }
 
 function finishScenarios() {
   scenarioFinished = true;
+  
   const correct = scenarioAnswers.filter((a, i) => a === scenarioQuestions[i].correctIndex).length;
-  const score = Math.round((correct / scenarioQuestions.length) * 100);
+  const total = scenarioQuestions.length;
+  const score = Math.round((correct / total) * 100);
   const passed = score >= 80;
-  progress.scenarioTest.testsTaken++;
-  if (passed) progress.scenarioTest.passedTests++;
-  progress.scenarioTest.averageScore = ((progress.scenarioTest.averageScore * (progress.scenarioTest.testsTaken - 1)) + score) / progress.scenarioTest.testsTaken;
-  progress.scenarioTest.highScore = Math.max(progress.scenarioTest.highScore, score);
-  saveProgress();
-  session.scenarioTest = null;
-  saveSession();
+  
   document.getElementById('scenario-card').classList.add('hidden');
   document.getElementById('scenario-question-card').classList.add('hidden');
   document.getElementById('scenario-actions').classList.add('hidden');
   document.getElementById('scenario-results').classList.remove('hidden');
-  document.getElementById('scenario-end-ad').style.display = 'block';
+  
   document.getElementById('scenario-results-icon').textContent = passed ? '🎉' : '📚';
-  document.getElementById('scenario-results-title').textContent = passed ? 'Great Job!' : 'Keep Learning!';
+  document.getElementById('scenario-results-title').textContent = passed ? 'Great Job!' : 'Keep Practicing!';
+  document.getElementById('scenario-results-title').style.color = passed ? '#7c3aed' : '#dc2626';
   document.getElementById('scenario-results-score').textContent = score + '%';
-  document.getElementById('scenario-results-score').className = 'results-score ' + (passed ? 'pass' : 'fail');
+  document.getElementById('scenario-results-score').style.color = passed ? '#7c3aed' : '#dc2626';
   document.getElementById('scenario-correct-count').textContent = correct;
-  document.getElementById('scenario-incorrect-count').textContent = scenarioQuestions.length - correct;
-}
-
-function saveScenarioSession() {
-  session.scenarioTest = { active: !scenarioFinished, index: scenarioIndex, answers: scenarioAnswers, selectedAnswer: selectedScenarioAnswer };
+  document.getElementById('scenario-incorrect-count').textContent = total - correct;
+  
+  progress.scenarioTest.testsTaken++;
+  progress.scenarioTest.averageScore = Math.round((progress.scenarioTest.averageScore * (progress.scenarioTest.testsTaken - 1) + score) / progress.scenarioTest.testsTaken);
+  if (score > progress.scenarioTest.highScore) progress.scenarioTest.highScore = score;
+  if (passed) progress.scenarioTest.passedTests++;
+  saveProgress();
+  
+  session.scenarioTest = null;
   saveSession();
 }
 
-// ==================== UTILITIES ====================
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
+function saveScenarioSession() {
+  session.scenarioTest = {
+    active: !scenarioFinished,
+    index: scenarioIndex,
+    answers: scenarioAnswers,
+    selectedAnswer: selectedScenarioAnswer
+  };
+  saveSession();
+}
+
+// ==================== ANALYTICS ====================
+function updateAnalytics() {
+  document.getElementById('stat-flashcards-seen').textContent = progress.permitFlashcards.seen.length;
+  document.getElementById('stat-flashcards-known').textContent = progress.permitFlashcards.known.length;
+  document.getElementById('stat-avg-score').textContent = progress.permitTest.averageScore > 0 ? progress.permitTest.averageScore + '%' : '-';
+  document.getElementById('stat-tests-passed').textContent = progress.permitTest.passedTests + progress.scenarioTest.passedTests;
 }
 
 function resetAllProgress() {
-  if (confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) {
-    progress = { permitFlashcards: { seen: [], known: [], needsPractice: [] }, permitTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 }, scenarioTest: { testsTaken: 0, passedTests: 0, averageScore: 0, highScore: 0 }, totalStudyTime: 0, lastSession: new Date().toISOString() };
-    clearSession();
-    saveProgress();
-    updateHomeProgress();
-    checkResumeSession();
-    goHome();
+  if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+    localStorage.removeItem('driveyourtest_progress');
+    localStorage.removeItem('driveyourtest_session');
+    location.reload();
   }
 }
   </script>
