@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Drive Your Test</title>
+  <meta name="description" content="Contact Drive Your Test - We'd love to hear from you! Send us your questions, feedback, or suggestions.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --radius: 0.75rem;
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+    body { font-family: var(--font-sans); background: linear-gradient(to bottom right, #f8fafc, #ffffff, #f1f5f9); min-height: 100vh; color: #1e293b; line-height: 1.7; display: flex; flex-direction: column; }
+    .header { position: sticky; top: 0; z-index: 50; background: linear-gradient(to right, #1e293b, #334155, #1e293b); color: white; box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); border-bottom: 1px solid rgb(51 65 85 / 0.5); }
+    .header-content { max-width: 72rem; margin: 0 auto; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; font-size: 1rem; text-decoration: none; }
+    .logo:hover { opacity: 0.9; }
+    .logo-icon { font-size: 1.5rem; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; background: linear-gradient(to right, #60a5fa, #c084fc, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem 4rem; flex: 1; }
+    .page-title { font-size: 2rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; text-align: center; }
+    .page-subtitle { color: #64748b; font-size: 1.125rem; margin-bottom: 2rem; text-align: center; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: #64748b; text-decoration: none; font-size: 0.875rem; }
+    .back-link:hover { color: #1e293b; }
+    .content-card { background: white; border-radius: var(--radius); border: 1px solid #e2e8f0; box-shadow: var(--shadow-xl); padding: 2rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-label { display: block; font-weight: 500; color: #334155; margin-bottom: 0.5rem; font-size: 0.875rem; }
+    .form-label .required { color: #dc2626; }
+    .form-input, .form-textarea, .form-select { width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 0.5rem; background: white; transition: all 0.2s; font-family: inherit; }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1); }
+    .form-input::placeholder, .form-textarea::placeholder { color: #94a3b8; }
+    .form-textarea { min-height: 150px; resize: vertical; }
+    .form-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem; }
+    .form-hint { font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; }
+    .form-error { color: #dc2626; font-size: 0.75rem; margin-top: 0.25rem; display: none; }
+    .form-group.error .form-input, .form-group.error .form-textarea, .form-group.error .form-select { border-color: #dc2626; }
+    .form-group.error .form-error { display: block; }
+    .submit-btn { width: 100%; padding: 1rem; font-size: 1rem; font-weight: 600; color: white; background: linear-gradient(to right, #2563eb, #06b6d4); border: none; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-lg); }
+    .submit-btn:hover { background: linear-gradient(to right, #1d4ed8, #0891b2); transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .submit-btn:active { transform: translateY(0); }
+    .success-message { display: none; text-align: center; padding: 2rem; }
+    .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .success-title { font-size: 1.5rem; font-weight: 700; color: #059669; margin-bottom: 0.5rem; }
+    .success-text { color: #64748b; margin-bottom: 1.5rem; }
+    .success-btn { display: inline-block; padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; color: white; background: linear-gradient(to right, #059669, #0d9488); border: none; border-radius: 0.5rem; cursor: pointer; text-decoration: none; }
+    .info-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .info-card { background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; text-align: center; border: 1px solid #e2e8f0; }
+    .info-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .info-title { font-weight: 600; color: #1e293b; margin-bottom: 0.25rem; }
+    .info-text { font-size: 0.875rem; color: #64748b; }
+    .info-text a { color: #2563eb; text-decoration: none; }
+    .info-text a:hover { text-decoration: underline; }
+    .privacy-notice { background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 1rem; margin-top: 1.5rem; border-radius: 0 0.5rem 0.5rem 0; font-size: 0.875rem; color: #1e40af; }
+    .privacy-notice a { color: #1d4ed8; }
+    .footer { background: #1e293b; color: #94a3b8; padding: 2rem 1rem; text-align: center; margin-top: auto; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .footer-links a { color: #94a3b8; text-decoration: none; font-size: 0.875rem; }
+    .footer-links a:hover { color: white; }
+    .footer-copy { font-size: 0.75rem; }
+    @media (max-width: 640px) { .content-card { padding: 1.5rem; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🚗</span>
+        <span class="logo-text">driveyourtest.com</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    
+    <h1 class="page-title">Contact Us</h1>
+    <p class="page-subtitle">Have a question, suggestion, or feedback? We'd love to hear from you!</p>
+
+    <div class="content-card">
+      <form id="contact-form" action="https://formsubmit.co/driveyourtest@gmail.com" method="POST">
+        <!-- FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="New Contact Form Submission - Drive Your Test">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="">
+        
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+          <p class="form-error">Please enter your name</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+          <p class="form-error">Please enter a valid email address</p>
+          <p class="form-hint">We'll never share your email with anyone else.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subject">Subject <span class="required">*</span></label>
+          <select id="subject" name="subject" class="form-select" required>
+            <option value="">Select a topic...</option>
+            <option value="General Question">General Question</option>
+            <option value="Technical Support">Technical Support</option>
+            <option value="Content Suggestion">Content Suggestion</option>
+            <option value="Bug Report">Bug Report</option>
+            <option value="Partnership Inquiry">Partnership Inquiry</option>
+            <option value="Advertising Inquiry">Advertising Inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="form-error">Please select a subject</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">Message <span class="required">*</span></label>
+          <textarea id="message" name="message" class="form-textarea" placeholder="How can we help you?" required></textarea>
+          <p class="form-error">Please enter your message (minimum 10 characters)</p>
+          <p class="form-hint">Please provide as much detail as possible.</p>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">
+          Send Message
+        </button>
+
+        <div class="privacy-notice">
+          By submitting this form, you agree to our <a href="privacy.html">Privacy Policy</a>. We collect your name and email solely to respond to your inquiry.
+        </div>
+      </form>
+
+      <div class="success-message" id="success-message">
+        <div class="success-icon">✉️</div>
+        <h2 class="success-title">Message Sent!</h2>
+        <p class="success-text">Thank you for reaching out. We'll get back to you within 24-48 hours.</p>
+        <a href="index.html" class="success-btn">Return to Home</a>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-card">
+        <div class="info-icon">📧</div>
+        <div class="info-title">Email Us</div>
+        <p class="info-text"><a href="mailto:driveyourtest@gmail.com">driveyourtest@gmail.com</a></p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">⏰</div>
+        <div class="info-title">Response Time</div>
+        <p class="info-text">Within 24-48 hours</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🔒</div>
+        <div class="info-title">Your Privacy</div>
+        <p class="info-text">Your data is secure with us</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <p class="footer-copy">© 2025 Drive Your Test. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Form validation and submission
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('success-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    // Set the redirect URL dynamically
+    const nextInput = form.querySelector('input[name="_next"]');
+    nextInput.value = window.location.href.split('?')[0] + '?success=true';
+
+    // Check for success on page load
+    if (new URLSearchParams(window.location.search).get('success') === 'true') {
+      form.style.display = 'none';
+      successMessage.style.display = 'block';
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    // Client-side validation
+    form.addEventListener('submit', function(e) {
+      let isValid = true;
+      const groups = form.querySelectorAll('.form-group');
+      
+      groups.forEach(group => {
+        const input = group.querySelector('input, textarea, select');
+        if (input && input.hasAttribute('required')) {
+          if (!input.value.trim() || (input.id === 'message' && input.value.trim().length < 10)) {
+            group.classList.add('error');
+            isValid = false;
+          } else {
+            group.classList.remove('error');
+          }
+        }
+      });
+
+      // Email validation
+      const emailInput = document.getElementById('email');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value)) {
+        emailInput.closest('.form-group').classList.add('error');
+        isValid = false;
+      }
+
+      if (!isValid) {
+        e.preventDefault();
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+    });
+
+    // Remove error on input
+    form.querySelectorAll('input, textarea, select').forEach(input => {
+      input.addEventListener('input', function() {
+        this.closest('.form-group').classList.remove('error');
+      });
+    });
+  </script>
+</body>
+</html>
