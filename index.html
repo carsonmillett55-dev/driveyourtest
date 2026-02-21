@@ -3,21 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Drive Your Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .flashcard {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Drive Your Test</h1>
     </header>
-    <main>
-        <form id="testForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <button type="submit">Submit</button>
-        </form>
-        <div id="result"></div>
-    </main>
-    <script src="script.js"></script>
+    <div class="container">
+        <div id="flashcards">
+            <div class="flashcard">
+                <h2>Flashcard Question Here</h2>
+                <p>Flashcard answer here.</p>
+                <button onclick="nextFlashcard()">Next</button>
+            </div>
+        </div>
+        <div id="permit-test">
+            <h2>Permit Test</h2>
+            <button onclick="startPermitTest()">Start Permit Test</button>
+        </div>
+        <div id="scenario-questions">
+            <h2>Scenario Questions</h2>
+            <button onclick="nextScenario()">Next Scenario Question</button>
+        </div>
+    </div>
+    <script>
+        function nextFlashcard() {
+            alert('Next flashcard functionality to be implemented.');
+        }
+        function startPermitTest() {
+            alert('Starting Permit Test functionality to be implemented.');
+        }
+        function nextScenario() {
+            alert('Next scenario functionality to be implemented.');
+        }
+    </script>
 </body>
 </html>
